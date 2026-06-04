@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>404 — FRAM NTNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FDC82F; --blue:#2E86C1; --red:#E85A5A; --teal:#3FC4A3; --charcoal:#3A3A3A;
+    --bg:#FAF7F2; --bg-soft:#F2EDE3; --ink:#2A2A2A; --ink-soft:#555; --muted:#8A8A8A;
+    --line:#E6E0D5; --card:#FFFFFF; --accent:var(--blue);
+    --radius-l:28px; --radius-m:18px; --radius-s:12px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+  .wrap{max-width:1360px; margin:0 auto; padding:0 48px;}
+
+  /* ---- NAV (same as main site) ---- */
+  nav.top{
+    position:sticky; top:0; z-index:50;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:82px;}
+  .logo-img{height:38px; width:auto; display:block;}
+  .nav-links{display:flex; gap:32px; align-items:center; font-size:14px; font-weight:500;}
+  .nav-links a{
+    color:var(--ink-soft); text-decoration:none; padding:6px 0;
+    position:relative; transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-4px; height:3px;
+    background:var(--accent); border-radius:2px;
+    transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:12px;
+    background: linear-gradient(135deg, var(--blue) 0%, #1a4d7a 100%);
+    color:#fff; text-decoration:none; font-size:14px; font-weight:700;
+    transition:all .25s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 8px 20px -4px rgba(46,134,193,.35), inset 0 1px 0 rgba(255,255,255,.15);
+  }
+  .nav-cta:hover{transform:translateY(-3px) scale(1.02);}
+
+  /* ---- 404 CONTENT ---- */
+  main{
+    display:flex; align-items:center; justify-content:center;
+    min-height: calc(100vh - 82px);
+    padding: 80px 48px;
+  }
+  .error-inner{
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center; max-width:560px; gap:0;
+  }
+
+  .error-chip{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:8px 18px; border-radius:999px;
+    border:1px solid var(--line); background:var(--card);
+    font-size:12px; font-weight:500; color:var(--ink-soft);
+    margin-bottom:36px;
+  }
+
+  .error-num{
+    font-size:clamp(120px, 18vw, 220px);
+    font-weight:900; line-height:.85; letter-spacing:-.05em;
+    margin-bottom:28px;
+  }
+  .error-num .n4a{color:var(--yellow);}
+  .error-num .n0 {color:var(--blue);}
+  .error-num .n4b{color:var(--red);}
+
+  .error-title{
+    font-size:clamp(22px,3vw,32px);
+    font-weight:700; letter-spacing:-.02em;
+    margin-bottom:14px;
+  }
+  .error-sub{
+    font-size:15px; line-height:1.65; color:var(--ink-soft);
+    margin-bottom:48px;
+  }
+
+  .divider{
+    width:100%; height:1px; background:var(--line);
+    margin-bottom:40px;
+  }
+
+  .pivot-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:16px;
+  }
+
+  .pivot-btn{
+    display:inline-flex; align-items:center; gap:12px;
+    padding:16px 32px; border-radius:14px;
+    background:var(--ink); color:var(--bg);
+    font-size:16px; font-weight:700; text-decoration:none;
+    transition:transform .2s, background .2s;
+    margin-bottom:16px;
+  }
+  .pivot-btn:hover{transform:translateY(-2px);}
+
+  .back-link{
+    font-size:14px; color:var(--muted); text-decoration:none;
+    transition:color .2s;
+  }
+  .back-link:hover{color:var(--ink);}
+
+  /* ---- TANGRAM BACKGROUND (logo style) ---- */
+  .origami-bg{
+    position:fixed; inset:0; z-index:0;
+    overflow:hidden; pointer-events:none;
+  }
+  .piece{
+    position:absolute; opacity:.55;
+    animation: floaty 12s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes floaty{
+    from{ transform: translateY(0)     rotate(var(--rot,0deg)); }
+    to  { transform: translateY(-20px) rotate(calc(var(--rot,0deg) + 3deg)); }
+  }
+  nav.top, main{ position:relative; z-index:1; }
+  @media (prefers-reduced-motion: reduce){
+    .piece{ animation:none; }
+  }
+</style>
+<style>
+/* Konsepter-dropdown i nav */
+.nav-dd{ position:relative; display:inline-flex; align-items:center; }
+.nav-dd-btn{
+  display:inline-flex; align-items:center; gap:6px;
+  background:none; border:0; cursor:pointer; font-family:inherit;
+  font-size:14px; font-weight:500; color:var(--ink-soft);
+  padding:6px 0; transition:color .2s;
+}
+.nav-dd-btn .dd-caret{ font-size:10px; transition:transform .2s; }
+.nav-dd:hover .nav-dd-btn, .nav-dd-btn.active{ color:var(--ink); }
+.nav-dd:hover .dd-caret{ transform:rotate(180deg); }
+.nav-dd::after{ content:''; position:absolute; top:100%; left:0; right:0; height:14px; }
+.nav-dd-menu{
+  position:absolute; top:100%; left:50%; transform:translateX(-50%) translateY(10px);
+  min-width:190px; background:var(--card,#fff); border:1px solid var(--line,#E6E0D5);
+  border-radius:14px; padding:8px; display:flex; flex-direction:column; gap:2px;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.28);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease; z-index:60;
+}
+.nav-dd:hover .nav-dd-menu{ opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(8px); }
+.nav-dd-menu a{
+  display:block; padding:10px 14px; border-radius:9px;
+  font-size:14px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+  white-space:nowrap; transition:background .15s, color .15s;
+}
+.nav-dd-menu a::after{ display:none !important; }
+.nav-dd-menu a:hover{ background:var(--bg-soft,#F2EDE3); color:var(--ink); }
+</style>
+
+<!-- ===== SEO / sosial deling (lagt til ved produksjonsklargjøring) ===== -->
+<meta name="description" content="Siden finnes ikke."/>
+<meta name="robots" content="noindex,follow"/>
+<meta name="theme-color" content="#FAF7F2"/>
+<meta name="author" content="FRAM NTNU"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="FRAM NTNU"/>
+<meta property="og:locale" content="nb_NO"/>
+<meta property="og:title" content="404 — Siden finnes ikke · FRAM NTNU"/>
+<meta property="og:description" content="Siden finnes ikke."/>
+<meta property="og:url" content="https://www.framntnu.no/404.html"/>
+<meta property="og:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="404 — Siden finnes ikke · FRAM NTNU"/>
+<meta name="twitter:description" content="Siden finnes ikke."/>
+<meta name="twitter:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/webp" href="assets/fram-symbol.webp"/>
+<link rel="apple-touch-icon" href="assets/favicon-180.png"/>
+<link rel="stylesheet" href="assets/site.css"/>
+</head>
+<body>
+
+<!-- origami paper planes: folded-paper facets (light/mid/shadow) in brand colors -->
+<div class="origami-bg" aria-hidden="true">
+
+  <!-- blue plane, top-left -->
+  <svg class="piece" viewBox="0 0 200 140" style="top:9%; left:4%; width:165px; --rot:-12deg; animation-delay:-.4s;">
+    <polygon points="190,70 10,16 58,74"  fill="#6FB2E0"/>
+    <polygon points="190,70 10,124 58,74" fill="#2E86C1"/>
+    <polygon points="58,74 10,124 46,104" fill="#1E5C86"/>
+  </svg>
+
+  <!-- yellow plane, mid-left -->
+  <svg class="piece" viewBox="0 0 200 140" style="top:40%; left:8%; width:150px; --rot:14deg; animation-delay:-3.1s;">
+    <polygon points="190,70 10,16 58,74"  fill="#FFD968"/>
+    <polygon points="190,70 10,124 58,74" fill="#FDC82F"/>
+    <polygon points="58,74 10,124 46,104" fill="#E0A300"/>
+  </svg>
+
+  <!-- teal plane, bottom-left -->
+  <svg class="piece" viewBox="0 0 200 140" style="bottom:9%; left:5%; width:158px; --rot:200deg; animation-delay:-5.8s;">
+    <polygon points="190,70 10,16 58,74"  fill="#6FD9C0"/>
+    <polygon points="190,70 10,124 58,74" fill="#3FC4A3"/>
+    <polygon points="58,74 10,124 46,104" fill="#2A9A7F"/>
+  </svg>
+
+  <!-- red plane, top-right -->
+  <svg class="piece" viewBox="0 0 200 140" style="top:12%; right:5%; width:170px; --rot:168deg; animation-delay:-1.6s;">
+    <polygon points="190,70 10,16 58,74"  fill="#F08A8A"/>
+    <polygon points="190,70 10,124 58,74" fill="#E85A5A"/>
+    <polygon points="58,74 10,124 46,104" fill="#C13B3B"/>
+  </svg>
+
+  <!-- yellow plane, bottom-right -->
+  <svg class="piece" viewBox="0 0 200 140" style="bottom:13%; right:7%; width:160px; --rot:-22deg; animation-delay:-4.3s;">
+    <polygon points="190,70 10,16 58,74"  fill="#FFD968"/>
+    <polygon points="190,70 10,124 58,74" fill="#FDC82F"/>
+    <polygon points="58,74 10,124 46,104" fill="#E0A300"/>
+  </svg>
+
+</div>
+
+<nav class="top">
+  <div class="wrap nav-inner">
+    <a href="index.html" aria-label="FRAM NTNU"><img decoding="async" src="assets/fram-logo.webp" alt="FRAM" class="logo-img"/></a>
+    <div class="nav-links">
+      <a href="index.html#opplev">Opplev Fram</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button">Arrangementer <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="arrangementer.html">Alle arrangementer</a>
+          <a href="innovasjonsdagene.html">Innovasjonsdagene</a>
+          <a href="arrangementer.html#koble">Koble</a>
+        </div>
+      </div>
+      <a href="miljoer.html">Organisasjonene</a>
+      <a href="booking.html">Booking</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button">Konsepter <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="https://www.gruvantnu.no/" target="_blank" rel="noopener">Gruva</a>
+          <a href="idegarasjen.html">Idégarasjen</a>
+        </div>
+      </div>
+      <a href="om.html">Om Fram</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="error-inner">
+
+    <div class="error-chip">Side ikke funnet</div>
+
+    <div class="error-num">
+      <span class="n4a">4</span><span class="n0">0</span><span class="n4b">4</span>
+    </div>
+
+    <h1 class="error-title">Denne ideen skalerte ikke helt.</h1>
+    <p class="error-sub">MVP-en krasjet, traction uteble og runwayen tok slutt.</p>
+
+    <div class="divider"></div>
+
+    <div class="pivot-label">Pivot?</div>
+    <a href="index.html" class="pivot-btn">→ Ja, ta meg til noe som funker</a>
+    <a href="javascript:history.back()" class="back-link">← eller gå tilbake</a>
+
+  </div>
+</main>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

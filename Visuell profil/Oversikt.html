@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FRAM · Visuell profil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fram-gul:#FFD130; --fram-bla:#1385B3; --fram-korall:#E36672; --fram-turkis:#47B99F;
+    --bg:#FAF7F2; --bg-soft:#F2EDE3; --ink:#2A2A2A; --ink-soft:#555; --muted:#8A8A8A;
+    --line:#E6E0D5; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.55;
+  }
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  /* header */
+  header{padding:88px 0 56px; border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin:0 0 20px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .eyebrow::before{content:''; width:34px; height:34px; background:url('Ikon/fram-ikon.png') center/contain no-repeat;}
+  h1{font-size:clamp(40px,6vw,72px); font-weight:700; letter-spacing:-.03em; line-height:1; margin:0 0 22px;}
+  header p{font-size:18px; color:var(--ink-soft); max-width:620px; margin:0;}
+
+  /* sections */
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:34px;}
+  .sec-num{font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700; color:var(--muted); letter-spacing:.1em;}
+  h2{font-size:30px; font-weight:700; letter-spacing:-.02em; margin:0;}
+  .sec-head p{margin:6px 0 0; color:var(--ink-soft); font-size:15px;}
+
+  /* color grid */
+  .colors{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .swatch{
+    border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--card);
+    cursor:pointer; transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .swatch:hover{transform:translateY(-3px); box-shadow:0 16px 32px -22px rgba(0,0,0,.4);}
+  .swatch .chip{height:128px; display:flex; align-items:flex-end; padding:14px;}
+  .swatch .chip .copy{
+    font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.08em;
+    text-transform:uppercase; padding:5px 9px; border-radius:999px;
+    background:rgba(255,255,255,.85); color:#2A2A2A; opacity:0; transition:opacity .18s;
+  }
+  .swatch:hover .chip .copy{opacity:1;}
+  .swatch .body{padding:16px 18px 20px;}
+  .swatch .name{font-size:17px; font-weight:600; letter-spacing:-.01em; margin-bottom:10px;}
+  .swatch dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:5px 12px;}
+  .swatch dt{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);}
+  .swatch dd{margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink); text-align:right;}
+
+  /* logo grid */
+  .logos{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  .logo-card{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--card); display:flex; flex-direction:column;}
+  .logo-stage{height:200px; display:grid; place-items:center; padding:34px;}
+  .logo-stage img{max-width:100%; max-height:100%; object-fit:contain;}
+  .stage-light{background:var(--card);}
+  .stage-soft{background:var(--bg-soft);}
+  .stage-dark{background:var(--ink);}
+  .stage-blue{background:var(--fram-bla);}
+  .logo-meta{
+    padding:14px 18px; border-top:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .logo-meta .lbl{font-size:14px; font-weight:500;}
+  .logo-meta .file{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted);}
+
+  .files{margin-top:30px; border:1px solid var(--line); border-radius:14px; background:var(--card); overflow:hidden;}
+  .files .row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:13px 20px; border-top:1px solid var(--line);}
+  .files .row:first-child{border-top:none;}
+  .files .row .path{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--ink);}
+  .files .row .use{font-size:13px; color:var(--ink-soft);}
+
+  /* type */
+  .type-row{display:flex; flex-wrap:wrap; gap:40px; align-items:flex-end;}
+  .type-spec{flex:1; min-width:240px;}
+  .type-spec .big{font-size:30px; font-weight:700; letter-spacing:-.02em; margin:0 0 4px;}
+  .type-spec .k{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;}
+  .type-spec p{margin:0; color:var(--ink-soft); font-size:14px;}
+  .type-todo .big{color:var(--muted); font-weight:500; display:inline-flex; align-items:center; gap:12px;}
+  .type-todo .big::before{
+    content:''; width:13px; height:13px; border:2px dashed var(--muted); border-radius:4px;
+  }
+
+  /* download */
+  .dl{display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+    padding:13px 22px; border-radius:12px; background:var(--ink); color:var(--bg);
+    font-weight:600; font-size:14px; transition:transform .18s;}
+  .dl:hover{transform:translateY(-2px);}
+
+  footer{padding:48px 0 80px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:.04em;}
+
+  /* gruva sub-brand */
+  .subbrand{
+    background:var(--bg-soft); border-top:2px solid var(--ink); border-bottom:none;
+    margin-top:24px;
+  }
+  .subbrand-tag{
+    display:inline-flex; align-items:center; gap:9px; margin-bottom:24px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--ink);
+  }
+  .subbrand-tag::before{content:''; width:11px; height:11px; border-radius:3px; background:#374B44;}
+  .subbrand .sec-head{margin-bottom:34px;}
+  .gruva-intro{display:flex; flex-wrap:wrap; gap:14px 26px; align-items:center; margin-bottom:30px;}
+  .gruva-intro p{margin:0; max-width:560px; color:var(--ink-soft); font-size:15px;}
+  .gruva-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:26px;}
+  .ide-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-bottom:26px;}
+  .ide-grid .gruva-stage{height:150px; padding:30px 40px;}
+  .gruva-card{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--card); display:flex; flex-direction:column;}
+  .gruva-stage{height:128px; display:grid; place-items:center; padding:26px;}
+  .gruva-stage img{max-width:100%; max-height:100%; object-fit:contain;}
+  .gs-green{background:#374B44;}
+  .gs-navy{background:#212A35;}
+  .gs-light{background:#F3F1F0;}
+  .gs-pattern{padding:0; background:#F3F1F0;}
+  .gs-pattern img{width:100%; height:100%; object-fit:cover;}
+  .gruva-card .cap{padding:11px 15px; border-top:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted);}
+  .gruva-dots{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;}
+  .gruva-dots .d{display:flex; align-items:center; gap:7px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft); border:1px solid var(--line); border-radius:999px; padding:5px 11px 5px 6px;}
+  .gruva-dots .d::before{content:''; width:15px; height:15px; border-radius:50%; background:var(--c); box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);}
+  .gruva-meta{display:flex; flex-wrap:wrap; gap:30px 50px; align-items:flex-start; margin-top:24px;}
+  .gruva-meta .blk .k{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;}
+  .gruva-meta .blk p{margin:0; font-size:14px; color:var(--ink-soft);}
+
+  /* gruva sans — live skriftprøve */
+  @font-face{
+    font-family:'Gruva Sans';
+    src:url('Gruva/Font/Gruva Sans.ttf') format('truetype');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  .type-specimen{width:100%; font-family:'Gruva Sans','Poppins',sans-serif; color:var(--ink); text-align:left;}
+  .type-specimen .ts-big{font-size:clamp(40px,6vw,62px); line-height:1; margin:0 0 20px; letter-spacing:.01em;}
+  .type-specimen .ts-line{font-size:22px; line-height:1.55; color:var(--ink-soft); word-break:break-word;}
+  .type-specimen .ts-line + .ts-line{margin-top:2px;}
+
+  .toast{
+    position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--bg); padding:11px 20px; border-radius:999px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em;
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:760px){
+    .colors{grid-template-columns:repeat(2,1fr);}
+    .logos{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">FRAM · Visuell profil</p>
+    <h1>Merkevare<br/>&amp; fargepalett</h1>
+    <p>Logoer, ikon og de offisielle fargene til Fram, samlet for utviklere. Verdiene er hentet rett fra den grafiske profilen. Filene endres ikke av nettsiden — dette er kun referansemateriell.</p>
+  </div>
+</header>
+
+<!-- FARGER -->
+<section id="farger">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <div>
+        <h2>Farger</h2>
+        <p>Fire merkevarefarger. Klikk på en farge for å kopiere HEX-koden.</p>
+      </div>
+    </div>
+    <div class="colors" id="colorGrid">
+      <div class="swatch" data-hex="#FFD130">
+        <div class="chip" style="background:#FFD130;"><span class="copy">Kopier</span></div>
+        <div class="body">
+          <div class="name">Gul</div>
+          <dl>
+            <dt>HEX</dt><dd>#FFD130</dd>
+            <dt>RGB</dt><dd>255 · 209 · 48</dd>
+            <dt>CMYK</dt><dd>0·18·81·0</dd>
+            <dt>Var</dt><dd>--fram-gul</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="swatch" data-hex="#1385B3">
+        <div class="chip" style="background:#1385B3;"><span class="copy">Kopier</span></div>
+        <div class="body">
+          <div class="name">Blå</div>
+          <dl>
+            <dt>HEX</dt><dd>#1385B3</dd>
+            <dt>RGB</dt><dd>19 · 133 · 179</dd>
+            <dt>CMYK</dt><dd>89·26·0·30</dd>
+            <dt>Var</dt><dd>--fram-bla</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="swatch" data-hex="#E36672">
+        <div class="chip" style="background:#E36672;"><span class="copy">Kopier</span></div>
+        <div class="body">
+          <div class="name">Korall</div>
+          <dl>
+            <dt>HEX</dt><dd>#E36672</dd>
+            <dt>RGB</dt><dd>227 · 102 · 114</dd>
+            <dt>CMYK</dt><dd>86·48·0·60</dd>
+            <dt>Var</dt><dd>--fram-korall</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="swatch" data-hex="#47B99F">
+        <div class="chip" style="background:#47B99F;"><span class="copy">Kopier</span></div>
+        <div class="body">
+          <div class="name">Turkis</div>
+          <dl>
+            <dt>HEX</dt><dd>#47B99F</dd>
+            <dt>RGB</dt><dd>71 · 185 · 159</dd>
+            <dt>CMYK</dt><dd>62·0·14·27</dd>
+            <dt>Var</dt><dd>--fram-turkis</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="files" style="margin-top:26px;">
+      <div class="row">
+        <span class="path">farger.css</span>
+        <span class="use">CSS-variabler — importer og bruk <span class="mono">var(--fram-…)</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO -->
+<section id="logo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <div>
+        <h2>Logo</h2>
+        <p>Bruk vektor (SVG) der det er mulig. Sørg for nok luft rundt logoen.</p>
+      </div>
+    </div>
+    <div class="logos">
+      <div class="logo-card">
+        <div class="logo-stage stage-light"><img src="Logoer/fram-logo-farger.svg" alt="Fram logo i farger"/></div>
+        <div class="logo-meta"><span class="lbl">Hovedlogo · farger</span><span class="file mono">fram-logo-farger.svg</span></div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-stage stage-dark"><img src="Logoer/fram-logo-hvit.png" alt="Fram logo i hvitt"/></div>
+        <div class="logo-meta"><span class="lbl">Negativ · hvit</span><span class="file mono">fram-logo-hvit.png</span></div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-stage stage-soft"><img src="Logoer/fram-logo-enfarget.svg" alt="Fram logo enfarget"/></div>
+        <div class="logo-meta"><span class="lbl">Enfarget · sort</span><span class="file mono">fram-logo-enfarget.svg</span></div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-stage stage-light"><img src="Logoer/fram-logo-med-bakgrunn.png" alt="Fram logo med bakgrunn"/></div>
+        <div class="logo-meta"><span class="lbl">Med bakgrunn</span><span class="file mono">fram-logo-med-bakgrunn.png</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IKON -->
+<section id="ikon">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <div>
+        <h2>Ikon</h2>
+        <p>Tangram-merket alene — for favicon, app-ikon og avatarer.</p>
+      </div>
+    </div>
+    <div class="logos">
+      <div class="logo-card">
+        <div class="logo-stage stage-light"><img src="Ikon/fram-ikon.svg" alt="Fram ikon" style="max-height:120px;"/></div>
+        <div class="logo-meta"><span class="lbl">Ikon · farger (vektor)</span><span class="file mono">fram-ikon.svg</span></div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-stage stage-soft"><img src="Ikon/fram-ikon.png" alt="Fram ikon png" style="max-height:120px;"/></div>
+        <div class="logo-meta"><span class="lbl">Ikon · farger (PNG)</span><span class="file mono">fram-ikon.png</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAFI -->
+<section id="type">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <div>
+        <h2>Typografi</h2>
+        <p>Skrifter i merkevaren.</p>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec">
+        <div class="k">Logo-skrift</div>
+        <p class="big">Origram</p>
+        <p>Brukes kun i selve logoen.</p>
+      </div>
+      <div class="type-spec type-todo">
+        <div class="k">Brødtekst &amp; UI</div>
+        <p class="big">Ikke bestemt</p>
+        <p>Skrift for resten av nettsiden er ikke valgt ennå.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGINAL PROFIL (FRAM) -->
+<section id="kilde">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <div>
+        <h2>Original profil</h2>
+        <p>Full grafisk profil for Fram som PDF.</p>
+      </div>
+    </div>
+    <a class="dl" href="Grafiskprofil.pdf" target="_blank" rel="noopener">↓ &nbsp;Grafiskprofil.pdf</a>
+  </div>
+</section>
+
+<!-- GRUVA -->
+<section id="gruva" class="subbrand">
+  <div class="wrap">
+    <div class="subbrand-tag">Egen undermerkevare</div>
+    <div class="sec-head">
+      <div>
+        <h2>Gruva</h2>
+        <p>Egen undermerkevare med egen nettside. Her er kun det utvikleren trenger for å lenke til og gjenkjenne Gruva — full profil ligger i PDF-en.</p>
+      </div>
+    </div>
+
+    <div class="gruva-grid">
+      <div class="gruva-card">
+        <div class="gruva-stage gs-light"><img src="Gruva/Logoer/gruva-gronn.png" alt="Gruva hovedlogo grønn"/></div>
+        <div class="cap">Hovedlogo · gruva-gronn.svg</div>
+      </div>
+      <div class="gruva-card">
+        <div class="gruva-stage gs-green"><img src="Gruva/Logoer/gruva-hvit.png" alt="Gruva logo hvit"/></div>
+        <div class="cap">Negativ · gruva-hvit.svg</div>
+      </div>
+      <div class="gruva-card">
+        <div class="gruva-stage gs-light"><img src="Gruva/Monogram/g-gronn.png" alt="Gruva G-monogram" style="max-height:84px;"/></div>
+        <div class="cap">Monogram · g-gronn</div>
+      </div>
+    </div>
+
+    <div class="gruva-card" style="margin-bottom:24px;">
+      <div class="gruva-stage gs-pattern" style="height:96px;"><img src="Gruva/Monster/monster.png" alt="Gruva mønster"/></div>
+      <div class="cap">Mønster · monster.svg</div>
+    </div>
+
+    <div class="gruva-card" style="margin-bottom:24px;">
+      <div class="gruva-stage gs-light" style="height:auto; padding:34px 32px; place-items:start;">
+        <div class="type-specimen">
+          <div class="ts-big">Gruva Sans</div>
+          <div class="ts-line">ABCDEFGHIJKLMNOPQRSTUVWXYZ ÆØÅ</div>
+          <div class="ts-line">abcdefghijklmnopqrstuvwxyz æøå</div>
+          <div class="ts-line">0123456789 &amp; . , ? ! @ #</div>
+        </div>
+      </div>
+      <div class="cap">Skrift · Gruva Sans.ttf</div>
+    </div>
+
+    <div class="gruva-meta">
+      <div class="blk">
+        <div class="k">Farger</div>
+        <div class="gruva-dots">
+          <span class="d" style="--c:#374B44;">#374B44</span>
+          <span class="d" style="--c:#394C64;">#394C64</span>
+          <span class="d" style="--c:#212A35;">#212A35</span>
+          <span class="d" style="--c:#B1BCC9;">#B1BCC9</span>
+          <span class="d" style="--c:#F7D4B2;">#F7D4B2</span>
+          <span class="d" style="--c:#E58A40;">#E58A40</span>
+          <span class="d" style="--c:#F3F1F0;">#F3F1F0</span>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="k">Skrift</div>
+        <p>Gruva Sans<br/><span style="color:var(--muted);">Gruva/Font/Gruva Sans.ttf</span></p>
+      </div>
+      <div class="blk">
+        <div class="k">Filer</div>
+        <p>Logoer, monogram &amp; mønster<br/><span style="color:var(--muted);">i mappen Gruva/ (SVG + PNG)</span></p>
+      </div>
+    </div>
+
+    <a class="dl" href="Gruva/Profil.pdf" target="_blank" rel="noopener" style="margin-top:26px;">↓ &nbsp;Gruva grafisk profil (PDF)</a>
+  </div>
+</section>
+
+<!-- IDÉGARASJEN -->
+<section id="idegarasjen" class="subbrand">
+  <div class="wrap">
+    <div class="subbrand-tag" style="--tagc:#E58A40;">Egen undermerkevare</div>
+    <div class="sec-head">
+      <div>
+        <h2>Idégarasjen</h2>
+        <p>Undermerkevare for verkstedet. Bruker samme skrift som Gruva. Logoen finnes i fire farger — bruk grønn som hovedvariant.</p>
+      </div>
+    </div>
+
+    <div class="ide-grid">
+      <div class="gruva-card">
+        <div class="gruva-stage gs-light"><img src="Idegarasjen/Logoer/idegarasjen-gronn.png" alt="Idégarasjen logo grønn"/></div>
+        <div class="cap">Hovedlogo · idegarasjen-gronn.png</div>
+      </div>
+      <div class="gruva-card">
+        <div class="gruva-stage gs-navy"><img src="Idegarasjen/Logoer/idegarasjen-hvit.png" alt="Idégarasjen logo hvit"/></div>
+        <div class="cap">Negativ · idegarasjen-hvit.png</div>
+      </div>
+      <div class="gruva-card">
+        <div class="gruva-stage gs-light"><img src="Idegarasjen/Logoer/idegarasjen-bla.png" alt="Idégarasjen logo blå"/></div>
+        <div class="cap">Mørk · idegarasjen-bla.png</div>
+      </div>
+      <div class="gruva-card">
+        <div class="gruva-stage gs-light"><img src="Idegarasjen/Logoer/idegarasjen-oransje.png" alt="Idégarasjen logo oransje"/></div>
+        <div class="cap">Oransje · idegarasjen-oransje.png</div>
+      </div>
+    </div>
+
+    <div class="gruva-meta">
+      <div class="blk">
+        <div class="k">Farger</div>
+        <div class="gruva-dots">
+          <span class="d" style="--c:#374B44;">#374B44</span>
+          <span class="d" style="--c:#212A35;">#212A35</span>
+          <span class="d" style="--c:#E58A40;">#E58A40</span>
+          <span class="d" style="--c:#FFFFFF;">#FFFFFF</span>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="k">Skrift</div>
+        <p>Gruva Sans<br/><span style="color:var(--muted);">samme som Gruva — Gruva/Font/</span></p>
+      </div>
+      <div class="blk">
+        <div class="k">Filer</div>
+        <p>Logoer i fire farger<br/><span style="color:var(--muted);">i mappen Idegarasjen/ (PNG)</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">FRAM NTNU · Visuell profil · Referanse for utviklere</div>
+</footer>
+
+<div class="toast" id="toast">Kopiert</div>
+
+<script>
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> toast.classList.remove('show'), 1400);
+  }
+  document.querySelectorAll('.swatch').forEach(sw=>{
+    sw.addEventListener('click', ()=>{
+      const hex = sw.dataset.hex;
+      navigator.clipboard?.writeText(hex).then(
+        ()=> showToast(hex + ' kopiert'),
+        ()=> showToast(hex)
+      );
+    });
+  });
+</script>
+</body>
+</html>

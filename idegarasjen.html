@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"/>
+<title>Idégarasjen — FRAM NTNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FDC82F; --blue:#2E86C1; --red:#E85A5A; --teal:#3FC4A3;
+    --orange:#E58A3A;
+    --ink:#1A1A1A; --ink-soft:#555; --muted:#8a8a8a;
+    --bg:#FBF7F0; --bg-soft:#F4EFE5; --card:#FFFFFF; --line:#E9E2D3;
+    --radius-m:16px; --radius-l:22px; --radius-xl:28px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; padding:0; scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins',sans-serif; background:var(--bg); color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1360px; margin:0 auto; padding:0 48px;}
+  a{color:inherit; text-decoration:none}
+
+  /* ---------- NAV ---------- */
+  nav.top{
+    position:sticky; top:0; z-index:50;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px); border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:82px;}
+  .logo{display:flex; align-items:center; gap:10px;}
+  .logo-img{height:38px; width:auto; display:block;}
+  .nav-links{display:flex; gap:32px; align-items:center; font-size:14px; font-weight:500;}
+  .nav-links a{ color:var(--ink-soft); padding:6px 0; position:relative; transition:color .2s; }
+  .nav-links a:hover, .nav-links a.active{color:var(--ink);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-4px; height:3px;
+    background:var(--red); border-radius:2px;
+    transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after{transform:scaleX(1);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:12px;
+    background: linear-gradient(135deg, var(--blue) 0%, #1a4d7a 100%);
+    color:#fff; font-size:14px; font-weight:700;
+    transition:all .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 20px -4px rgba(46,134,193,.35), inset 0 1px 0 rgba(255,255,255,.15);
+  }
+  .nav-cta:hover{ transform:translateY(-3px) scale(1.02); }
+
+  /* ---------- CRUMBS ---------- */
+  .crumbs{
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted);
+    letter-spacing:.08em; padding:22px 0 22px;
+  }
+  .crumbs a:hover{color:var(--ink);}
+
+  /* ---------- HERO BANNER ---------- */
+  .hero-banner{
+    position:relative; width:100%;
+    height:min(62vh, 600px);
+    background:var(--ink);
+    overflow:hidden;
+  }
+  .hero-slot{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:2;
+    display:flex; align-items:flex-end;
+    padding-bottom:54px;
+    pointer-events:none;
+    background:linear-gradient(to top, rgba(18,16,12,.86) 0%, rgba(18,16,12,.34) 42%, rgba(18,16,12,.04) 72%);
+  }
+  .hero-eye{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:rgba(255,255,255,.78); margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eye .dot{width:7px; height:7px; border-radius:50%; background:var(--yellow);}
+  .hero-logo{
+    display:block; width:min(560px, 64%); height:auto;
+    margin:0 0 22px; filter:drop-shadow(0 8px 30px rgba(0,0,0,.45));
+  }
+  h1.big{
+    font-size: clamp(22px, 2vw, 30px); line-height:1.3; letter-spacing:-.01em;
+    font-weight:600; margin:0; color:rgba(255,255,255,.92); max-width:560px;
+  }
+  h1.big .y{color:var(--yellow);}
+
+  /* ---------- INTRO ---------- */
+  .intro{padding:80px 0 24px;}
+  .intro-grid{display:grid; grid-template-columns:1.25fr .9fr; gap:56px; align-items:start;}
+  .lead-statement{
+    font-size:clamp(28px,2.8vw,42px); font-weight:700; letter-spacing:-.02em;
+    line-height:1.15; margin:0;
+  }
+  .lead-statement .y{color:var(--yellow);}
+  .intro p{font-size:17px; line-height:1.66; color:var(--ink-soft); margin:0;}
+  .intro p + p{margin-top:16px;}
+  .finnes-card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius-l); padding:30px 32px;
+  }
+  .finnes-card .fc-kick{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted); margin:0 0 18px;
+  }
+  .finnes-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+  .finnes-list li{
+    display:flex; align-items:center; gap:14px;
+    padding:14px 0; font-size:18px; font-weight:600; letter-spacing:-.01em;
+    border-top:1px solid var(--line);
+  }
+  .finnes-list li:first-child{border-top:none;}
+  .finnes-list .fc-ic{
+    flex:none; width:30px; height:30px; border-radius:8px;
+    background:color-mix(in oklab, var(--yellow) 22%, var(--bg-soft));
+    color:#8a6400; display:flex; align-items:center; justify-content:center;
+  }
+  .finnes-list .fc-ic svg{width:17px; height:17px;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0;}
+  .sec-head{margin-bottom:44px; max-width:680px;}
+  .v-kick{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin-bottom:16px;}
+  h2.st{font-size:clamp(34px,3.6vw,56px); font-weight:800; letter-spacing:-.025em; line-height:1.03; margin:0 0 16px;}
+  h2.st .y{color:var(--yellow);}
+  .sec-head p{font-size:17px; line-height:1.6; color:var(--ink-soft); margin:0;}
+
+  /* ---------- EQUIPMENT ---------- */
+  .eq-photo--ph{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    background:repeating-linear-gradient(45deg, var(--bg-soft) 0 11px, color-mix(in oklab, var(--bg-soft) 55%, #fff) 11px 22px);
+    border-bottom:1px solid var(--line); color:var(--muted);
+  }
+  .eq-photo--ph span{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.08em;
+    text-transform:uppercase; padding:8px 14px;
+  }
+  .equip-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  .eq{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius-l); overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:border-color .2s, box-shadow .25s, transform .25s;
+  }
+  .eq:hover{transform:translateY(-3px); border-color:var(--ink); box-shadow:0 18px 40px -24px rgba(0,0,0,.32);}
+  .eq-photo{ width:100%; aspect-ratio:16/10; display:block; }
+  .eq-body{padding:28px 30px 30px; display:flex; flex-direction:column; gap:12px;}
+  .eq-tophdr{display:flex; align-items:center; gap:14px;}
+  .eq-num{
+    font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
+    color:#7a5c00; background:color-mix(in oklab, var(--yellow) 26%, var(--bg-soft));
+    padding:4px 10px; border-radius:100px;
+  }
+  .eq h4{font-size:23px; font-weight:700; letter-spacing:-.015em; margin:0;}
+  .eq p{font-size:14.5px; line-height:1.6; color:var(--ink-soft); margin:0;}
+  .eq-tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:4px;}
+  .eq-missing{
+    grid-column:1 / -1;
+    display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
+    background:color-mix(in oklab, var(--yellow) 14%, var(--bg-soft));
+    border:1px solid color-mix(in oklab, var(--yellow) 40%, var(--line));
+    border-radius:var(--radius-l); padding:32px 36px; margin-top:4px;
+  }
+  .eq-missing .em-l{display:flex; align-items:flex-start; gap:18px; flex:1 1 420px;}
+  .eq-missing .em-ic{
+    flex:none; width:46px; height:46px; border-radius:12px;
+    background:var(--yellow); color:#111;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .eq-missing .em-kick{font-family:'JetBrains Mono',monospace; font-size:11px; color:#7a5c00; letter-spacing:.1em; text-transform:uppercase; margin:0 0 6px;}
+  .eq-missing h4{font-size:21px; font-weight:700; letter-spacing:-.015em; margin:0 0 8px;}
+  .eq-missing p{font-size:14.5px; line-height:1.6; color:var(--ink-soft); margin:0; max-width:480px;}
+  .eq-missing .em-btns{flex:none; display:flex; flex-direction:column; gap:10px;}
+  .eq-missing .em-btn{
+    flex:none; display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    padding:14px 24px; border-radius:100px;
+    background:#111; color:#fff; font-weight:700; font-size:15px; white-space:nowrap;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .eq-missing .em-btn:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(0,0,0,.4);}
+  .eq-missing .em-btn-alt{
+    background:transparent; color:#111;
+    border:1.5px solid color-mix(in oklab, var(--ink) 28%, transparent);
+  }
+  .eq-missing .em-btn-alt:hover{border-color:var(--ink); box-shadow:none;}
+  @media(max-width:640px){ .eq-missing{padding:26px 24px;} .eq-missing .em-btns{width:100%;} }
+  .eq-tags span{
+    font-family:'JetBrains Mono',monospace; font-size:10px;
+    letter-spacing:.07em; text-transform:uppercase;
+    padding:5px 10px; border-radius:6px;
+    background:var(--bg-soft); color:var(--ink-soft); border:1px solid var(--line);
+  }
+
+  /* ---------- STEPS ---------- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .step{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius-l); padding:32px 30px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .step .n{
+    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600;
+    color:#111; background:var(--yellow);
+    width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step h4{font-size:20px; font-weight:700; letter-spacing:-.01em; margin:0;}
+  .step p{font-size:14.5px; line-height:1.58; color:var(--ink-soft); margin:0;}
+
+  /* ---------- MAP ---------- */
+  .map-slot{
+    width:100%; aspect-ratio:16/9;
+    border-radius:var(--radius-l); overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--bg-soft);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .map-slot iframe{width:100%; height:100%; border:0; display:block;}
+  .map-ph{
+    text-align:center; color:var(--ink-soft);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .map-ph i{font-size:40px; color:var(--muted);}
+  .map-ph .t{font-size:17px; font-weight:600; color:var(--ink);}
+  .map-ph .s{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.04em; color:var(--muted); max-width:360px; line-height:1.6;}
+  .map-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px;}
+  .map-actions a{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:13px 22px; border-radius:100px; font-weight:600; font-size:14px;
+    border:1px solid var(--ink); color:var(--ink); transition:background .2s, color .2s;
+  }
+  .map-actions a:hover{background:var(--ink); color:#fff;}
+
+  /* ---------- CONTACT CTA ---------- */
+  .ide-cta{
+    background:var(--ink); color:#fff;
+    border-radius:var(--radius-xl); padding:56px;
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  .ide-cta::before{
+    content:''; position:absolute; right:-90px; top:-90px;
+    width:380px; height:380px; border-radius:50%;
+    background:radial-gradient(circle, rgba(253,200,47,.16), transparent 70%);
+    pointer-events:none;
+  }
+  .ide-cta .l{position:relative; z-index:1;}
+  .ide-cta h3{font-size:clamp(28px,2.8vw,44px); font-weight:800; letter-spacing:-.02em; line-height:1.05; margin:0 0 16px;}
+  .ide-cta h3 .y{color:var(--yellow);}
+  .ide-cta p{font-size:16px; line-height:1.6; color:rgba(255,255,255,.74); margin:0 0 26px; max-width:440px;}
+  .ide-cta .cta-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-yellow{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 24px; border-radius:100px;
+    background:var(--yellow); color:#111; font-weight:700; font-size:15px;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .btn-yellow:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.4);}
+  .ide-cta .btn-ghost{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 24px; border-radius:100px;
+    border:1px solid rgba(255,255,255,.25); color:#fff; font-weight:600; font-size:15px;
+    transition:border-color .2s;
+  }
+  .ide-cta .btn-ghost:hover{border-color:#fff;}
+  .ide-person{
+    position:relative; z-index:1;
+    display:flex; align-items:center; gap:18px;
+    padding:24px; border-radius:var(--radius-l);
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+  }
+  .ide-face{ width:72px; height:72px; border-radius:50%; object-fit:cover; flex:none; border:2px solid rgba(253,200,47,.65); }
+  .ide-person .label{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:5px;}
+  .ide-person .nm{font-size:19px; font-weight:700; letter-spacing:-.01em; margin-bottom:6px;}
+  .ide-person a.email{color:var(--yellow); font-weight:600; font-size:14px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background: var(--bg); color: var(--ink);
+    border-top: 1px solid var(--line);
+    padding: 40px 0 32px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);
+    letter-spacing:.04em;
+  }
+  .foot-main{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:40px; flex-wrap:wrap; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--line);
+  }
+  .foot-left{ display:flex; flex-direction:column; gap:10px; }
+  .foot-brand{ display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+  .foot-brand img{ height:26px; width:auto; display:block; }
+  .foot-info{ line-height:1.9; }
+  .foot-info a{ color:var(--muted); transition:color .2s; }
+  .foot-info a:hover{ color:var(--ink); }
+  .foot-links{ display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap; }
+  .foot-group{ display:flex; flex-direction:column; gap:8px; }
+  .foot-group-label{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; font-weight:600; }
+  .foot-group a{ color:var(--ink-soft); font-size:12px; transition:color .2s; line-height:1.8; }
+  .foot-group a:hover{ color:var(--ink); }
+  .foot-socials{ display:flex; gap:10px; align-items:center; margin-top:4px; }
+  .foot-social{
+    display:flex; align-items:center; justify-content:center;
+    width:36px; height:36px; border-radius:10px;
+    border:1px solid var(--line); color:var(--muted);
+    transition:all .2s;
+  }
+  .foot-social:hover{ border-color:var(--ink); color:var(--ink); transform:translateY(-2px); }
+  .foot-social svg{ width:16px; height:16px; fill:currentColor; }
+  .foot-bot{ display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; }
+  .ntnu-line{ display:flex; align-items:center; gap:12px; }
+  .ntnu-label{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+  .ntnu-logo{ height:22px; width:auto; opacity:.75; }
+</style>
+<style>
+/* Konsepter-dropdown i nav */
+.nav-dd{ position:relative; display:inline-flex; align-items:center; }
+.nav-dd-btn{
+  display:inline-flex; align-items:center; gap:6px;
+  background:none; border:0; cursor:pointer; font-family:inherit;
+  font-size:14px; font-weight:500; color:var(--ink-soft);
+  padding:6px 0; transition:color .2s;
+}
+.nav-dd-btn .dd-caret{ font-size:10px; transition:transform .2s; }
+.nav-dd:hover .nav-dd-btn, .nav-dd-btn.active{ color:var(--ink); }
+.nav-dd:hover .dd-caret{ transform:rotate(180deg); }
+.nav-dd::after{ content:''; position:absolute; top:100%; left:0; right:0; height:14px; }
+.nav-dd-menu{
+  position:absolute; top:100%; left:50%; transform:translateX(-50%) translateY(10px);
+  min-width:190px; background:var(--card,#fff); border:1px solid var(--line,#E6E0D5);
+  border-radius:14px; padding:8px; display:flex; flex-direction:column; gap:2px;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.28);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease; z-index:60;
+}
+.nav-dd:hover .nav-dd-menu{ opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(8px); }
+.nav-dd-menu a{
+  display:block; padding:10px 14px; border-radius:9px;
+  font-size:14px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+  white-space:nowrap; transition:background .15s, color .15s;
+}
+.nav-dd-menu a::after{ display:none !important; }
+.nav-dd-menu a:hover{ background:var(--bg-soft,#F2EDE3); color:var(--ink); }
+</style>
+
+<!-- ===== SEO / sosial deling (lagt til ved produksjonsklargjøring) ===== -->
+<meta name="description" content="Idégarasjen — studentenes åpne innovasjonsverksted på FRAM NTNU med 3D-printere, laserkutter og prototypingsutstyr."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://www.framntnu.no/idegarasjen.html"/>
+<meta name="theme-color" content="#FAF7F2"/>
+<meta name="author" content="FRAM NTNU"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="FRAM NTNU"/>
+<meta property="og:locale" content="nb_NO"/>
+<meta property="og:title" content="Idégarasjen — FRAM NTNU"/>
+<meta property="og:description" content="Idégarasjen — studentenes åpne innovasjonsverksted på FRAM NTNU med 3D-printere, laserkutter og prototypingsutstyr."/>
+<meta property="og:url" content="https://www.framntnu.no/idegarasjen.html"/>
+<meta property="og:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Idégarasjen — FRAM NTNU"/>
+<meta name="twitter:description" content="Idégarasjen — studentenes åpne innovasjonsverksted på FRAM NTNU med 3D-printere, laserkutter og prototypingsutstyr."/>
+<meta name="twitter:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/webp" href="assets/fram-symbol.webp"/>
+<link rel="apple-touch-icon" href="assets/favicon-180.png"/>
+<link rel="stylesheet" href="assets/site.css"/>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="top">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo">
+      <img decoding="async" src="assets/fram-logo.webp" alt="Fram NTNU" class="logo-img"/>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#opplev">Opplev Fram</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button">Arrangementer <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="arrangementer.html">Alle arrangementer</a>
+          <a href="innovasjonsdagene.html">Innovasjonsdagene</a>
+          <a href="arrangementer.html#koble">Koble</a>
+        </div>
+      </div>
+      <a href="miljoer.html">Organisasjonene</a>
+      <a href="booking.html">Booking</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn active" type="button">Konsepter <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="https://www.gruvantnu.no/" target="_blank" rel="noopener">Gruva</a>
+          <a href="idegarasjen.html">Idégarasjen</a>
+        </div>
+      </div>
+      <a href="om.html">Om Fram</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO BANNER ============ -->
+<header class="hero-banner">
+  <img class="hero-slot" decoding="async" src="uploads/idegarasjenplecaholder.webp" alt="Idégarasjen — studentenes innovasjonsverksted"/>
+  <div class="hero-overlay">
+    <div class="wrap">
+      <img loading="lazy" decoding="async" src="assets/idegarasjen-logo-hvit.webp" alt="Idégarasjen" class="hero-logo"/>
+      <h1 class="big">Studentenes eget <span class="y">innovasjonsverksted.</span></h1>
+    </div>
+  </div>
+</header>
+
+<!-- ============ UTSTYR ============ -->
+<section id="utstyr" style="padding-top:88px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="st">Verktøy &amp; <span class="y">maskiner.</span></h2>
+      <p>Et utvalg av det du finner i Idégarasjen. Trenger du noe spesielt, eller opplæring på en maskin, spør verkstedansvarlig.</p>
+    </div>
+
+    <div class="equip-grid">
+
+      <article class="eq">
+        <div class="eq-photo eq-photo--ph"><span>Bilde av 3D-printerne</span></div>
+        <div class="eq-body">
+          <div class="eq-tophdr"><span class="eq-num">01</span><h4>3D-printere</h4></div>
+          <p>Bygg deler, fester og modeller lag for lag i plast. Perfekt for å teste form, passform og funksjon før du går videre — eller for å lage ting som rett og slett ikke finnes fra før.</p>
+        </div>
+      </article>
+
+      <article class="eq">
+        <div class="eq-photo eq-photo--ph"><span>Bilde av loddestasjonene</span></div>
+        <div class="eq-body">
+          <div class="eq-tophdr"><span class="eq-num">02</span><h4>Loddestasjoner</h4></div>
+          <p>Loddebolt, avtrekk og alt du trenger for å jobbe med elektronikk. Koble sammen komponenter, fest ledninger og bygg dine egne kretser — eller reparer noe som har røket.</p>
+        </div>
+      </article>
+
+      <article class="eq">
+        <div class="eq-photo eq-photo--ph"><span>Bilde av arbeidsplassen</span></div>
+        <div class="eq-body">
+          <div class="eq-tophdr"><span class="eq-num">03</span><h4>Arbeidsplass</h4></div>
+          <p>Romslige arbeidsbenker hvor du kan spre ut prosjektet, jobbe i fred og sette igjen ting mellom øktene. God plass, godt lys og strøm der du trenger det.</p>
+        </div>
+      </article>
+
+      <article class="eq">
+        <div class="eq-photo eq-photo--ph"><span>Bilde av plotteren</span></div>
+        <div class="eq-body">
+          <div class="eq-tophdr"><span class="eq-num">04</span><h4>Plotter</h4></div>
+          <p>Skjær vinyl og folie til klistremerker, logoer, stensiler og merking. Fint for å gi prototypen — eller laptopen — et profesjonelt preg.</p>
+        </div>
+      </article>
+
+      <article class="eq">
+        <div class="eq-photo eq-photo--ph"><span>Bilde av håndverktøyet</span></div>
+        <div class="eq-body">
+          <div class="eq-tophdr"><span class="eq-num">05</span><h4>Håndverktøy</h4></div>
+          <p>Det grunnleggende, alltid for hånden: skrutrekkere, tenger, sag, fil og måleverktøy. Ofte alt du trenger for å komme raskt i gang med et bygg.</p>
+        </div>
+      </article>
+
+      <article class="eq">
+        <div class="eq-photo eq-photo--ph"><span>Bilde av elverktøyet</span></div>
+        <div class="eq-body">
+          <div class="eq-tophdr"><span class="eq-num">06</span><h4>Elverktøy</h4></div>
+          <p>Drill, vinkelsliper, stikksag og slipemaskin for de tyngre byggene — når håndkraften ikke strekker til og du trenger litt mer trøkk.</p>
+        </div>
+      </article>
+
+      <!-- ====== MANGLER DU NOE? — bytt # under med lenke til skjemaet (f.eks. Google Forms) ====== -->
+      <div class="eq-missing">
+        <div class="em-l">
+          <div class="em-ic">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </div>
+          <div>
+            <p class="em-kick">Mangler det noe?</p>
+            <h4>Finner du ikke det du trenger i Idégarasjen?</h4>
+            <p>Fyll ut skjemaet, så ser vi om vi kan kjøpe det inn til Idégarasjen. Tips oss gjerne om verktøy, materialer eller utstyr du savner.</p>
+          </div>
+        </div>
+        <div class="em-btns">
+          <a href="mailto:framntnu@gmail.com?subject=Tilgang%20til%20Id%C3%A9garasjen" class="em-btn">Ta kontakt på e-post ↗</a>
+          <a href="mailto:framntnu@gmail.com?subject=Feil%20p%C3%A5%20utstyr%20i%20Id%C3%A9garasjen" class="em-btn em-btn-alt">Meld feil på utstyr ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ KART ============ -->
+<section id="kart">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="st">Finn fram til <span class="y">Idégarasjen.</span></h2>
+      <p>Idégarasjen ligger på FRAM, Sem Sælands vei 1. Bruk kartet for å finne veien.</p>
+    </div>
+
+    <!--
+      ┌─────────────────────────────────────────────────────────────────┐
+      │  KART: legg til kartet her på én av to måter:                     │
+      │  1) Lim inn en embed-<iframe> (f.eks. fra MazeMap eller Google    │
+      │     Maps) RETT INNI .map-slot under, og slett .map-ph-blokken.    │
+      │  2) Eller bare dra et kartbilde rett inn i feltet (image-slot).   │
+      └─────────────────────────────────────────────────────────────────┘
+    -->
+    <div class="map-slot" id="kart-felt">
+      <iframe src="https://use.mazemap.com/embed.html#v=1&amp;campusid=1&amp;zlevel=1&amp;center=10.406504,63.417116&amp;zoom=19.4&amp;sharepoitype=identifier&amp;sharepoi=305-114&amp;utm_medium=iframe" loading="lazy" allowfullscreen allow="geolocation" title="Map by MazeMap"></iframe>
+    </div>
+
+    <div class="map-actions">
+      <a href="https://use.mazemap.com/#v=1&campusid=1&sharepoitype=identifier&sharepoi=FRAM" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Åpne i MazeMap ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section id="kontakt" style="padding-top:24px;">
+  <div class="wrap">
+    <div class="ide-cta">
+      <div class="l">
+        <h3>Er det noe du <span class="y">lurer på?</span></h3>
+        <p>Ta kontakt med oss, så hjelper vi deg i gang i Idégarasjen — enten du har et konkret prosjekt eller bare vil teste en idé.</p>
+        <div class="cta-actions">
+          <a href="mailto:framntnu@gmail.com" class="btn-yellow">framntnu@gmail.com</a>
+          <a href="https://use.mazemap.com/#v=1&campusid=1&sharepoitype=identifier&sharepoi=FRAM" target="_blank" rel="noopener" class="btn-ghost">Finn oss på MazeMap ↗</a>
+        </div>
+      </div>
+      <div class="ide-person">
+        <img loading="lazy" decoding="async" src="assets/team/henrik.avif" alt="Henrik — verkstedansvarlig" class="ide-face"/>
+        <div>
+          <div class="label">Verkstedansvarlig</div>
+          <div class="nm">Henrik</div>
+          <a href="mailto:framntnu@gmail.com" class="email">framntnu@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-main">
+      <div class="foot-left">
+        <div class="foot-brand">
+          <img decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU"/>
+        </div>
+        <div class="foot-info">
+          Sem Sælands vei 1, 7034 Trondheim<br/>
+          <a href="mailto:framntnu@gmail.com">framntnu@gmail.com</a>
+        </div>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/framntnu/" target="_blank" rel="noopener" class="foot-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="foot-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="foot-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="foot-social" aria-label="Slack">
+            <svg viewBox="0 0 122.8 122.8" xmlns="http://www.w3.org/2000/svg"><path d="M25.8 77.6c0 7.1-5.8 12.9-12.9 12.9S0 84.7 0 77.6s5.8-12.9 12.9-12.9h12.9v12.9zm6.5 0c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9v32.3c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V77.6z" fill="#E01E5A"/><path d="M45.2 25.8c-7.1 0-12.9-5.8-12.9-12.9S38.1 0 45.2 0s12.9 5.8 12.9 12.9v12.9H45.2zm0 6.5c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H12.9C5.8 58.1 0 52.3 0 45.2s5.8-12.9 12.9-12.9h32.3z" fill="#36C5F0"/><path d="M97 45.2c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9-5.8 12.9-12.9 12.9H97V45.2zm-6.5 0c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V12.9C64.7 5.8 70.5 0 77.6 0s12.9 5.8 12.9 12.9v32.3z" fill="#2EB67D"/><path d="M77.6 97c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9-12.9-5.8-12.9-12.9V97h12.9zm0-6.5c-7.1 0-12.9-5.8-12.9-12.9s5.8-12.9 12.9-12.9h32.3c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H77.6z" fill="#ECB22E"/></svg>
+          </a>
+        </div>
+      </div>
+            <div class="foot-partners">
+        <div class="foot-group-label">Samarbeidspartnere</div>
+        <div class="foot-partners-logos">
+          <img loading="lazy" decoding="async" src="assets/partners/sb1-smn.webp" alt="SpareBank 1 SMN"/>
+          <img loading="lazy" decoding="async" src="assets/partners/equinor.webp" alt="Equinor" class="eq-logo"/>
+        </div>
+      </div>
+
+<div class="foot-links">
+        <div class="foot-group">
+          <div class="foot-group-label">Huset</div>
+          <a href="index.html#opplev">Opplev Fram</a>
+          <a href="miljoer.html">Organisasjonene</a>
+          <a href="arrangementer.html">Arrangementer</a>
+          <a href="booking.html">Book lokalene</a>
+        </div>
+        <div class="foot-group">
+          <div class="foot-group-label">Om oss</div>
+          <a href="om.html">Om Fram</a>
+          <a href="#">Ledige stillinger</a>
+          <a href="innovasjonsdagene.html">Innovasjonsdagene</a>
+          <a href="#">Slack-fellesskap</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>FRAM NTNU · EST. 2016 · Org.nr 917 611 653</div>
+      <div class="ntnu-line">
+        <span class="ntnu-label">Del av</span>
+        <span class="ntnu-logo" role="img" aria-label="NTNU"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+<style>
+  /* Footer — Samarbeidspartnere + farger (oppdatert) */
+  .foot-partners{ display:flex; flex-direction:column; gap:12px; }
+  .foot-partners-logos{ display:flex; flex-direction:row; align-items:center; gap:28px; flex-wrap:wrap; }
+  .foot-partners-logos img{ height:26px; width:auto; opacity:.9; filter:grayscale(.25); transition:opacity .2s, filter .2s; }
+  .foot-partners-logos img.eq-logo{ height:26px; }
+  .foot-partners-logos img:hover{ opacity:1; filter:grayscale(0); }
+  .foot-brand img{ filter:saturate(.4); }
+  .foot-social[aria-label="Instagram"]{ color:#E1306C; }
+  .foot-social[aria-label="Facebook"]{ color:#1877F2; }
+  .foot-social[aria-label="LinkedIn"]{ color:#0A66C2; }
+  .foot-social[aria-label="Instagram"]:hover{ color:#E1306C; border-color:#E1306C; }
+  .foot-social[aria-label="Facebook"]:hover{ color:#1877F2; border-color:#1877F2; }
+  .foot-social[aria-label="LinkedIn"]:hover{ color:#0A66C2; border-color:#0A66C2; }
+  .foot-social[aria-label="Slack"]:hover{ border-color:#E01E5A; }
+  .ntnu-line .ntnu-logo{
+    display:inline-block; height:22px; width:116px; opacity:1;
+    background-color:#00509E;
+    -webkit-mask:url(assets/ntnu-logo-dark.webp) left center / contain no-repeat;
+    mask:url(assets/ntnu-logo-dark.webp) left center / contain no-repeat;
+  }
+</style>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

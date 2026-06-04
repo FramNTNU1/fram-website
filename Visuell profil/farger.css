@@ -1,0 +1,19 @@
+/* ============================================================
+   FRAM · Fargepalett
+   Offisielle merkevarefarger hentet fra «Grafisk profil».
+   Bruk disse variablene i stedet for hardkodede hex-verdier.
+   ============================================================ */
+
+:root {
+  /* Gul */
+  --fram-gul: #FFD130;          /* RGB 255,209,48  · CMYK 0,18,81,0  */
+
+  /* Blå */
+  --fram-bla: #1385B3;          /* RGB 19,133,179  · CMYK 89,26,0,30 */
+
+  /* Korall (rød) */
+  --fram-korall: #E36672;       /* RGB 227,102,114 · CMYK 86,48,0,60 */
+
+  /* Turkis (grønn) */
+  --fram-turkis: #47B99F;       /* RGB 71,185,159  · CMYK 62,0,14,27 */
+}

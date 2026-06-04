@@ -1,0 +1,6 @@
+# Merkevare-/kildemateriale som ikke skal publiseres på nettsiden.
+# Filene blir liggende i Git-repoet, men lastes ikke opp til Vercel.
+Visuell profil/
+Logoer/
+Gruva/
+README.md

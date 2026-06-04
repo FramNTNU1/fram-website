@@ -1,0 +1,988 @@
+<!DOCTYPE html><html lang="nb"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Innovasjonsdagene '26 — FRAM NTNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FDC82F; --blue:#2E86C1; --red:#E85A5A; --teal:#3FC4A3;
+    --charcoal:#1E1E1E;
+    --bg:#FAF7F2; --bg-soft:#F2EDE3; --ink:#1E1E1E; --ink-soft:#555; --muted:#8A8A8A;
+    --line:#E6E0D5; --card:#FFFFFF;
+    --radius-l: 28px; --radius-m: 18px; --radius-s: 12px;
+
+    --id-cream: #FAF7F2;
+    --id-peach: #FFB775;
+    --id-pink: #FF8FB8;
+    --id-lilac: #B99BFF;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--id-cream); color:var(--ink); font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1360px; margin:0 auto; padding:0 48px;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .y{color:var(--yellow);} .b{color:var(--blue);} .r{color:var(--red);} .t{color:var(--teal);}
+  img{ display:block; max-width:100%;}
+
+  /* NAV */
+  nav.top{
+    position:sticky; top:0; z-index:50;
+    background: color-mix(in oklab, var(--id-cream) 88%, transparent);
+    backdrop-filter: blur(14px); border-bottom:1px solid rgba(30,30,30,.08);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:82px;}
+  .logo{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .logo-img, .logo img{height:38px; width:auto; display:block;}
+  .nav-links{display:flex; gap:32px; align-items:center; font-size:14px; font-weight:500;}
+  .nav-links a{
+    color:var(--ink-soft); text-decoration:none; padding:6px 0;
+    position:relative; transition:color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active{color:var(--ink);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-4px; height:3px;
+    background:var(--red, #E85A5A); border-radius:2px;
+    transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after{transform:scaleX(1);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:12px;
+    background: linear-gradient(135deg, var(--blue) 0%, #1a4d7a 100%);
+    color:#fff;
+    text-decoration:none; font-size:14px; font-weight:700;
+    transition:all .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 20px -4px rgba(46,134,193,.35), inset 0 1px 0 rgba(255,255,255,.15);
+    position:relative; overflow:hidden;
+  }
+  .nav-cta::before{
+    content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+    transition: left .4s ease-out;
+  }
+  .nav-cta:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 28px -4px rgba(46,134,193,.42), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+  .nav-cta:hover::before{left:100%;}
+  .nav-cta:active{transform:translateY(-1px) scale(0.98);}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 color-mix(in oklab, var(--teal) 60%, transparent);}
+    50%{box-shadow:0 0 0 8px color-mix(in oklab, var(--teal) 0%, transparent);}
+  }
+
+  .crumbs{
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    color:var(--muted); padding:28px 0 0;
+  }
+  .crumbs a{color:var(--muted); text-decoration:none;}
+  .crumbs a:hover{color:var(--ink);}
+
+  /* HERO */
+  header.page{
+    position: relative;
+    padding: 64px 0 120px;
+    overflow:hidden;
+  }
+  header.page::before{
+    content:''; position:absolute; inset:0; z-index:0;
+    background:
+      radial-gradient(ellipse 55% 55% at 92% -5%, rgba(255,164,150,.14) 0, transparent 62%),
+      radial-gradient(ellipse 60% 55% at 0% 100%, rgba(185,155,255,.10) 0, transparent 60%);
+    pointer-events:none;
+  }
+  header.page .wrap{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns: 1.1fr 1fr; gap:56px; align-items:center;
+  }
+  .eye{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em;
+    color:var(--charcoal); text-transform:uppercase; margin-bottom:24px;
+    display:inline-flex; align-items:center; gap:14px;
+  }
+  .eye::before{
+    content:''; display:inline-block; width:32px; height:2px;
+    background:var(--charcoal); border-radius:1px;
+  }
+  .eye .pill{
+    padding:6px 12px; border-radius:999px; background: var(--charcoal);
+    color: var(--yellow); font-size:10px; letter-spacing:.12em;
+  }
+
+  .id-logo-wrap{
+    margin: 8px 0 36px;
+    display: block;
+    max-width: 620px;
+  }
+  .id-logo-wrap img{
+    width: 100%; height:auto;
+    display:block;
+  }
+  .id-tagline{
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.25; letter-spacing:-.015em; font-weight:600;
+    margin: 0 0 28px; max-width: 20ch;
+    color: var(--charcoal);
+  }
+  .id-tagline .r{ color: var(--red); font-style: italic; font-weight:700;}
+  .id-tagline .t{ color: var(--teal); font-style: italic; font-weight:700;}
+  .id-meta{
+    display:flex; gap: 28px; flex-wrap:wrap; align-items:flex-start;
+    margin: 0 0 28px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(30,30,30,.12);
+    border-bottom: 1px solid rgba(30,30,30,.12);
+    max-width: 560px;
+  }
+  .id-meta .m-item{ display:flex; flex-direction:column; gap:4px;}
+  .id-meta .m-label{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em;
+    color: var(--ink-soft); text-transform:uppercase;
+  }
+  .id-meta .m-value{
+    font-size:15px; font-weight:600; color: var(--charcoal); line-height:1.3;
+  }
+  .id-meta .m-value .accent{ color: var(--red);}
+  .hero-cta{
+    display:flex; gap: 14px; flex-wrap:wrap; align-items:center;
+  }
+  .hero-pill{
+    display:inline-flex; align-items:center; gap: 8px;
+    padding: 10px 18px; border-radius:999px;
+    background: rgba(30,30,30,.08); font-size:13px; color:var(--charcoal);
+    font-weight:500;
+    border: 1px solid rgba(30,30,30,.08);
+  }
+  .hero-pill .dot{
+    width:8px; height:8px; border-radius:50%; background: var(--teal);
+    box-shadow: 0 0 0 3px rgba(63,196,163,.25);
+  }
+  .hero-pill.warm .dot{ background: var(--red);}
+  .hero-pill.warm2 .dot{ background: var(--id-peach);}
+
+  .hero-img{
+    position:relative;
+    aspect-ratio: 4/3;
+    border-radius: 32px;
+    overflow:hidden;
+    box-shadow: 0 28px 60px rgba(30,30,30,.15);
+    transform: rotate(2deg);
+  }
+  .hero-img img{ width:100%; height:100%; object-fit:cover;}
+  .hero-img .badge{
+    position:absolute; top:20px; left:20px;
+    background: var(--yellow); color: var(--charcoal);
+    padding: 8px 14px; border-radius:999px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em;
+    font-weight:700;
+  }
+  .hero-sticker{
+    position:absolute; z-index:2;
+    background: var(--charcoal); color: var(--bg);
+    padding: 20px 26px; border-radius: 20px;
+    font-weight: 700; font-size: 15px; line-height:1.25;
+    box-shadow: 0 12px 32px rgba(30,30,30,.2);
+    max-width: 240px;
+  }
+  .hero-sticker .kb{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em;
+    color: var(--yellow); display:block; margin-bottom: 6px;
+  }
+  .hero-sticker.s1{ bottom: -30px; left: -20px; transform: rotate(-4deg);}
+
+  /* FACTS STRIP */
+  .facts{
+    background: var(--charcoal); color: var(--bg);
+    padding: 36px 0;
+  }
+  .facts .wrap{
+    display:grid; grid-template-columns: repeat(4, 1fr);
+    gap: 32px; align-items:center;
+  }
+  .fact{ display:flex; flex-direction:column; gap: 6px;}
+  .fact .k{
+    font-size: 52px; font-weight:800; line-height:1; letter-spacing:-.025em;
+  }
+  .fact .l{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em;
+    color: #bbb; text-transform:uppercase;
+  }
+  .fact:nth-child(1) .k{ color: var(--yellow);}
+  .fact:nth-child(2) .k{ color: var(--id-pink);}
+  .fact:nth-child(3) .k{ color: var(--teal);}
+  .fact:nth-child(4) .k{ color: var(--id-peach);}
+
+  /* SECTION */
+  section{ padding: 112px 0; position:relative;}
+  .sec-head{
+    display:grid; grid-template-columns: 1fr auto; align-items:end;
+    margin-bottom: 48px; gap: 32px;
+  }
+  .sec-kick{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em;
+    color:var(--muted); text-transform:uppercase; margin-bottom:14px;
+  }
+  .sec-kick::before{
+    content:''; display:inline-block; width:28px; height:2px;
+    background:var(--ink); vertical-align:middle; margin-right:12px; border-radius:1px;
+  }
+  .sec-head h2{
+    font-size: clamp(40px, 4.6vw, 64px);
+    line-height:1.02; letter-spacing:-.025em; font-weight:800;
+    margin:0; max-width:16ch;
+  }
+  .sec-count{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);
+    letter-spacing:.1em;
+  }
+
+  /* OM */
+  #om{ background: var(--id-cream);}
+  .om-grid{
+    display:grid; grid-template-columns: 1.15fr .85fr; gap: 72px; align-items:start;
+  }
+  #om .om-text .sec-kick{ margin-bottom: 20px; }
+  #om .om-text h2{
+    font-size: clamp(34px, 3.6vw, 50px);
+    line-height:1.06; letter-spacing:-.025em; font-weight:800;
+    margin: 0 0 28px; max-width: 15ch;
+  }
+  .om-text p{
+    font-size:18px; line-height:1.65; color: var(--ink-soft); margin: 0 0 20px;
+    max-width: 54ch;
+  }
+  .om-text p strong{ font-weight: 700;}
+  .om-quote{
+    font-size: 28px; line-height: 1.25; letter-spacing:-.015em; font-weight:700;
+    margin: 40px 0 0; padding: 24px 0 0;
+    border-top: 2px solid var(--charcoal); max-width: 18ch;
+  }
+  .om-quote::before{ content: '"'; color: var(--red); margin-right: 4px;}
+  .om-quote::after{ content: '"'; color: var(--red);}
+  .om-side{
+    background: var(--charcoal); color: var(--bg);
+    border-radius: 24px; padding: 36px;
+    display:flex; flex-direction:column; gap: 24px;
+  }
+  .om-side h3{
+    font-size: 24px; letter-spacing:-.01em;
+    margin: 0; font-weight:700; color: var(--yellow);
+  }
+  .om-side ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; flex-direction:column; gap: 14px;
+  }
+  .om-side li{
+    position: relative;
+    font-size: 15px; line-height:1.45; color: var(--bg); font-weight:500;
+    display:flex; align-items:center; gap: 14px;
+  }
+  .om-side li .em{
+    flex:none; width:22px; text-align:center; font-size:17px;
+  }
+  .om-side li::before{ content:none; }
+
+  /* GALLERI */
+  #galleri{ background: var(--bg-soft); border-top:1px solid var(--line);}
+  .gal-grid{
+    display:grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 160px;
+    gap: 12px;
+  }
+  .gal{
+    position:relative; overflow:hidden; border-radius: var(--radius-m);
+    background: var(--bg-soft);
+    transition: transform .25s ease;
+  }
+  .gal:hover{ transform: scale(1.015);}
+  .gal img{ width:100%; height:100%; object-fit:cover;}
+  .gal .cap{
+    position:absolute; bottom: 14px; left:14px;
+    background: rgba(0,0,0,.6); backdrop-filter: blur(8px);
+    padding: 6px 12px; border-radius:999px;
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em;
+    color: #fff; text-transform:uppercase;
+  }
+  .gal.g1{ grid-column: span 7; grid-row: span 3;}
+  .gal.g2{ grid-column: span 5; grid-row: span 2;}
+  .gal.g3{ grid-column: span 5; grid-row: span 1;}
+  .gal.g4{ grid-column: span 4; grid-row: span 2;}
+  .gal.g5{ grid-column: span 4; grid-row: span 2;}
+  .gal.g6{ grid-column: span 4; grid-row: span 2;}
+
+  /* VIDEO */
+  #video{
+    background: linear-gradient(135deg, var(--charcoal) 0%, #2a1a4a 100%);
+    color: var(--bg);
+  }
+  #video .sec-kick{ color: #aaa;}
+  #video .sec-head h2{ color: var(--bg);}
+  #video .sec-kick::before{ background: var(--yellow);}
+  .vid-wrap{
+    position:relative; border-radius: var(--radius-l); overflow:hidden;
+    aspect-ratio: 16/9;
+    background: #000;
+    box-shadow: 0 24px 48px rgba(0,0,0,.4);
+  }
+  .vid-wrap iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+  }
+
+  /* PROGRAM */
+  #program{ background: var(--id-cream);}
+  .prog-wrap{ position:relative; }
+  .prog-wrap .day-body{ filter: blur(7px); user-select:none; pointer-events:none; }
+  .prog-soon{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    z-index:3; pointer-events:none;
+  }
+  .prog-soon-box{
+    background: var(--charcoal); color:#fff;
+    font-weight:700; font-size: 22px; letter-spacing:-.01em;
+    padding: 22px 40px; border-radius: var(--radius-l);
+    box-shadow: 0 18px 50px rgba(30,30,30,.28);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .prog-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  }
+  .day{
+    background: var(--card); border:1px solid rgba(30,30,30,.08);
+    border-radius: var(--radius-l); overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .day-head{
+    padding: 28px 28px 24px;
+    color: var(--charcoal);
+  }
+  .day-head .num{
+    font-size: 80px; font-weight:800; line-height:.9; letter-spacing:-.04em;
+  }
+  .day-head .date{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em;
+    margin-top: 10px; text-transform:uppercase; opacity:.75;
+  }
+  .day:nth-child(1) .day-head{ background: var(--yellow);}
+  .day:nth-child(2) .day-head{ background: var(--id-pink); color:#fff;}
+  .day:nth-child(3) .day-head{ background: var(--teal); color:#fff;}
+  .day-body{
+    padding: 28px;
+    flex:1;
+    display:flex; flex-direction:column; gap: 18px;
+  }
+  .day-body h3{
+    font-size: 22px; font-weight:700; letter-spacing:-.01em; margin: 0;
+  }
+  .day-body ul{
+    list-style:none; padding:0; margin:0;
+    display:flex; flex-direction:column; gap: 12px;
+  }
+  .day-body li{
+    font-size: 14px; line-height: 1.5; color: var(--ink-soft);
+    padding-left: 20px; position:relative;
+  }
+  .day-body li::before{
+    content:'›'; position:absolute; left:0; top:0;
+    color: var(--charcoal); font-weight:700;
+  }
+  .day-body li strong{ color: var(--ink); font-weight: 600; display:block;}
+
+  /* MILJØENE */
+  #miljoer{
+    background: var(--id-pink);
+    color: var(--charcoal);
+  }
+  #miljoer .wrap{
+    display:grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items:center;
+  }
+  #miljoer .eye{ color: var(--charcoal);}
+  #miljoer .eye::before{ background: var(--charcoal);}
+  #miljoer h2{
+    font-size: clamp(40px, 4.8vw, 72px);
+    line-height:1; letter-spacing:-.025em; font-weight:800;
+    margin: 0 0 24px; max-width: 14ch;
+  }
+  #miljoer h2 em{
+    font-style: normal; background: var(--yellow); padding: 0 .12em;
+    border-radius: 6px; box-decoration-break: clone;
+  }
+  #miljoer .lede{
+    font-size: 18px; line-height: 1.55; margin: 0 0 28px; max-width: 46ch;
+    color: rgba(30,30,30,.85);
+  }
+  .org-preview{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .org-chip{
+    background: rgba(255,255,255,.6); backdrop-filter: blur(6px);
+    padding: 12px 14px; border-radius: var(--radius-s);
+    font-size: 13px; font-weight:600; color: var(--charcoal);
+    display:flex; align-items:center; gap:10px;
+    border:1px solid rgba(255,255,255,.6);
+  }
+  .org-chip .dt{
+    width: 8px; height:8px; border-radius:50%; background: var(--charcoal); opacity:.6;
+  }
+  .org-chip.gold .dt{ background: var(--yellow); opacity:1;}
+  .org-chip.teal .dt{ background: var(--teal); opacity:1;}
+  .org-chip.red .dt{ background: var(--red); opacity:1;}
+  .org-more{
+    margin-top: 20px; font-family:'JetBrains Mono',monospace; font-size:12px;
+    opacity:.7;
+  }
+
+  /* CTA */
+  #cta{
+    background: var(--charcoal); color: var(--bg);
+    text-align: center;
+  }
+  #cta h2{
+    font-size: clamp(48px, 6vw, 96px);
+    line-height: .95; letter-spacing:-.03em; font-weight:800;
+    margin: 0 0 24px; max-width: 16ch; margin-left:auto; margin-right:auto;
+  }
+  #cta h2 .y{ color: var(--yellow);}
+  #cta .lede{
+    font-size: 18px; line-height:1.55; color:#ccc; max-width: 48ch;
+    margin: 0 auto 40px;
+  }
+  .cta-meta{
+    display:flex; gap: 32px; justify-content:center; flex-wrap:wrap;
+    padding-top: 36px; margin-top: 36px;
+    border-top: 1px solid rgba(255,255,255,.15);
+  }
+  .cta-meta > div{ text-align:center;}
+  .cta-meta dt{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
+    color: #888; margin-bottom: 6px; text-transform:uppercase;
+  }
+  .cta-meta dd{ margin:0; font-size: 18px; font-weight:600;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 14px 28px; border-radius:999px;
+    font-size:14px; font-weight:600; text-decoration:none;
+    transition: all .2s;
+  }
+  .btn-yellow{ background: var(--yellow); color: var(--charcoal);}
+  .btn-yellow:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(253,200,47,.4);}
+
+  .id-actions{ margin-top: 28px; }
+  .id-actions .btn{ cursor:pointer; border:none; font: inherit; font-weight:700; }
+  .cal-ico{
+    width:17px; height:17px; flex:0 0 auto;
+    border:2px solid currentColor; border-radius:4px; position:relative;
+  }
+  .cal-ico::before{
+    content:''; position:absolute; top:-4px; left:2px; right:2px; height:4px;
+    border-left:2px solid currentColor; border-right:2px solid currentColor;
+  }
+  .cal-ico::after{
+    content:''; position:absolute; top:4px; left:1px; right:1px; height:2px;
+    background: currentColor;
+  }
+
+  footer{
+    background: var(--bg); color: var(--ink);
+    border-top: 1px solid var(--line);
+    padding: 40px 0 32px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; color:var(--muted);
+    letter-spacing:.04em;
+  }
+  .foot-main{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:40px; flex-wrap:wrap;
+    margin-bottom:28px; padding-bottom:28px;
+    border-bottom:1px solid var(--line);
+  }
+  .foot-left{ display:flex; flex-direction:column; gap:10px; }
+  .foot-brand{ display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+  .foot-brand img{ height:26px; width:auto; display:block; }
+  .foot-info{ line-height:1.9; }
+  .foot-info a{ color:var(--muted); text-decoration:none; transition:color .2s; }
+  .foot-info a:hover{ color:var(--ink); }
+  .foot-links{ display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap; }
+  .foot-group{ display:flex; flex-direction:column; gap:8px; }
+  .foot-group-label{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:4px; font-weight:600;
+  }
+  .foot-group a{
+    color:var(--ink-soft); text-decoration:none; font-size:12px;
+    transition:color .2s; line-height:1.8;
+  }
+  .foot-group a:hover{ color:var(--ink); }
+  .foot-socials{ display:flex; gap:10px; align-items:center; }
+  .foot-social{
+    display:flex; align-items:center; justify-content:center;
+    width:36px; height:36px; border-radius:10px;
+    border:1px solid var(--line); background:var(--card);
+    color:var(--ink-soft); text-decoration:none;
+    transition:all .2s;
+  }
+  .foot-social:hover{ border-color:var(--ink); color:var(--ink); transform:translateY(-2px); }
+  .foot-social svg{ width:16px; height:16px; fill:currentColor; }
+  .foot-bot{
+    display:flex; justify-content:space-between; align-items:center; gap:24px;
+    flex-wrap:wrap;
+  }
+
+  @media (max-width: 960px){
+    header.page .wrap, .om-grid, #miljoer .wrap{ grid-template-columns: 1fr;}
+    .facts .wrap{ grid-template-columns: repeat(2, 1fr);}
+    .gal-grid{ grid-template-columns: repeat(2,1fr); grid-auto-rows: 140px;}
+    .gal.g1, .gal.g2, .gal.g3, .gal.g4, .gal.g5, .gal.g6{ grid-column: span 2; grid-row: span 1;}
+    .prog-grid{ grid-template-columns: 1fr;}
+  }
+</style>
+<style>
+/* Konsepter-dropdown i nav */
+.nav-dd{ position:relative; display:inline-flex; align-items:center; }
+.nav-dd-btn{
+  display:inline-flex; align-items:center; gap:6px;
+  background:none; border:0; cursor:pointer; font-family:inherit;
+  font-size:14px; font-weight:500; color:var(--ink-soft);
+  padding:6px 0; transition:color .2s;
+}
+.nav-dd-btn .dd-caret{ font-size:10px; transition:transform .2s; }
+.nav-dd:hover .nav-dd-btn, .nav-dd-btn.active{ color:var(--ink); }
+.nav-dd:hover .dd-caret{ transform:rotate(180deg); }
+.nav-dd::after{ content:''; position:absolute; top:100%; left:0; right:0; height:14px; }
+.nav-dd-menu{
+  position:absolute; top:100%; left:50%; transform:translateX(-50%) translateY(10px);
+  min-width:190px; background:var(--card,#fff); border:1px solid var(--line,#E6E0D5);
+  border-radius:14px; padding:8px; display:flex; flex-direction:column; gap:2px;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.28);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease; z-index:60;
+}
+.nav-dd:hover .nav-dd-menu{ opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(8px); }
+.nav-dd-menu a{
+  display:block; padding:10px 14px; border-radius:9px;
+  font-size:14px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+  white-space:nowrap; transition:background .15s, color .15s;
+}
+.nav-dd-menu a::after{ display:none !important; }
+.nav-dd-menu a:hover{ background:var(--bg-soft,#F2EDE3); color:var(--ink); }
+</style>
+
+<!-- ===== SEO / sosial deling (lagt til ved produksjonsklargjøring) ===== -->
+<meta name="description" content="Innovasjonsdagene '26 — FRAM NTNUs festival for innovasjon, entreprenørskap og nyskaping ved NTNU."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://www.framntnu.no/innovasjonsdagene.html"/>
+<meta name="theme-color" content="#FAF7F2"/>
+<meta name="author" content="FRAM NTNU"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="FRAM NTNU"/>
+<meta property="og:locale" content="nb_NO"/>
+<meta property="og:title" content="Innovasjonsdagene '26 — FRAM NTNU"/>
+<meta property="og:description" content="Innovasjonsdagene '26 — FRAM NTNUs festival for innovasjon, entreprenørskap og nyskaping ved NTNU."/>
+<meta property="og:url" content="https://www.framntnu.no/innovasjonsdagene.html"/>
+<meta property="og:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Innovasjonsdagene '26 — FRAM NTNU"/>
+<meta name="twitter:description" content="Innovasjonsdagene '26 — FRAM NTNUs festival for innovasjon, entreprenørskap og nyskaping ved NTNU."/>
+<meta name="twitter:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/webp" href="assets/fram-symbol.webp"/>
+<link rel="apple-touch-icon" href="assets/favicon-180.png"/>
+<link rel="stylesheet" href="assets/site.css"/>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html" aria-label="FRAM NTNU">
+      <img decoding="async" src="assets/fram-logo.webp" alt="fram"/>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#opplev">Opplev Fram</a>
+        <div class="nav-dd">
+        <button class="nav-dd-btn active" type="button">Arrangementer <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="arrangementer.html">Alle arrangementer</a>
+          <a href="innovasjonsdagene.html">Innovasjonsdagene</a>
+          <a href="arrangementer.html#koble">Koble</a>
+        </div>
+      </div>
+      <a href="miljoer.html">Organisasjonene</a>
+      <a href="booking.html">Booking</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button">Konsepter <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="https://www.gruvantnu.no/" target="_blank" rel="noopener">Gruva</a>
+          <a href="idegarasjen.html">Idégarasjen</a>
+        </div>
+      </div>
+      <a href="om.html">Om Fram</a>
+    </div>
+  </div>
+</nav>
+
+
+<header class="page">
+  <div class="wrap">
+    <div>
+      <div class="id-logo-wrap">
+        <img loading="lazy" decoding="async" src="assets/innovasjonsdagene-logo-v2.svg" alt="Innovasjonsdagene"/>
+      </div>
+      <p class="id-tagline">Finn ditt <span class="r">nye verv</span> og møt NTNUs <span class="t">råeste miljø</span>.</p>
+      <div class="id-meta">
+        <div class="m-item">
+          <span class="m-label">Når</span>
+          <span class="m-value">19.–20. august <span class="accent">2026</span></span>
+        </div>
+        <div class="m-item">
+          <span class="m-label">Hvor</span>
+          <span class="m-value">Gruva</span>
+        </div>
+        <div class="m-item">
+          <span class="m-label">Pris</span>
+          <span class="m-value">Gratis · Drop-in</span>
+        </div>
+      </div>
+      <div class="id-actions">
+        <button type="button" class="btn btn-yellow" id="addToCal">
+          <span class="cal-ico" aria-hidden="true"></span>
+          Legg i kalender
+        </button>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <div class="hero-img">
+        <img decoding="async" src="assets/innovasjonsdagene-hovedscenen.avif" alt="Hovedscenen på Innovasjonsdagene 2025"/>
+      </div>
+      <div class="hero-sticker s1">
+        <span class="kb">// 2026</span>
+        Ses vi der?
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="facts">
+  <div class="wrap">
+    <div class="fact"><div class="k">25+</div><div class="l">Organisasjoner på stand</div></div>
+    <div class="fact"><div class="k">2</div><div class="l">Dager · Drop-in</div></div>
+    <div class="fact"><div class="k">~1k</div><div class="l">Studenter deltok '25</div></div>
+    <div class="fact"><div class="k">∞</div><div class="l">Muligheter</div></div>
+  </div>
+</div>
+
+<section id="om">
+  <div class="wrap">
+    <div class="om-grid">
+      <div class="om-text">
+        <h2>Hele innovasjons&shy;miljøet <span class="r">samlet</span> på ett sted.</h2>
+        <p>Ny student i Trondheim? Innovasjonsdagene er en enkel måte å bli kjent med noen av NTNUs mest aktive studentmiljøer på.</p>
+        <p>Over to dager kan du møte organisasjonene i FRAM, høre om prosjektene deres og finne ut hvordan du kan engasjere deg. Gratis inngang og åpent for alle.</p>
+        <p>Stikk innom, slå av en prat og finn et miljø eller et verv som passer deg. Gratis inngang, drop-in hele dagen — og helt lov å bare være nysgjerrig.</p>
+      </div>
+
+      <aside class="om-side">
+        <h3>Hva du får ut av det</h3>
+        <ul>
+          <li><span class="em">🍕</span>Gratis lunsj</li>
+          <li><span class="em">🚀</span>Møt 25+ studentorganisasjoner</li>
+          <li><span class="em">💡</span>Finn ditt nye verv</li>
+          <li><span class="em">🤝</span>Bli kjent med nye mennesker</li>
+          <li><span class="em">🏠</span>Opplev FRAM fra innsiden</li>
+          <li><span class="em">🎁</span>Konkurranser og premier</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="galleri">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>Høydepunkter.</h2>
+      </div>
+    </div>
+
+    <div class="gal-grid">
+      <div class="gal g1">
+        <img decoding="async" src="assets/innovasjonsdagene-hovedscenen.avif" alt="Hovedscenen"/>
+        <span class="cap">Hovedscenen</span>
+      </div>
+      <div class="gal g2">
+        <img loading="lazy" decoding="async" src="assets/innovasjonsdagene-revolve.avif" alt="Revolve NTNU"/>
+        <span class="cap">Revolve · Simulator</span>
+      </div>
+      <div class="gal g3">
+        <img loading="lazy" decoding="async" src="assets/innovasjonsdagene-mat.avif" alt="Mat og drikke"/>
+        <span class="cap">Mat &amp; drikke</span>
+      </div>
+      <div class="gal g4">
+        <img loading="lazy" decoding="async" src="assets/innovasjonsdagene-teamet.avif" alt="Fram-teamet"/>
+        <span class="cap">Fram-teamet</span>
+      </div>
+      <div class="gal g5">
+        <img loading="lazy" decoding="async" src="assets/innovasjonsdagene-redbull.avif" alt="Red Bull Olabil"/>
+        <span class="cap">Red Bull Olabil</span>
+      </div>
+      <div class="gal g6">
+        <img loading="lazy" decoding="async" src="assets/innovasjonsdagene-mat.avif" alt="Stands i Gruva"/>
+        <span class="cap">Stands · Gruva</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>Aftermovie '25.</h2>
+      </div>
+      <div class="sec-count" style="color:#aaa;"></div>
+    </div>
+    <div class="vid-wrap">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/C31svE3VMlI?rel=0&modestbranding=1&playsinline=1"
+        title="Innovasjonsdagene 2025 — Aftermovie"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>Program.</h2>
+      </div>
+      <div class="sec-count">19.–20. august · Gruva</div>
+    </div>
+
+    <div class="prog-wrap">
+    <div class="prog-grid">
+      <div class="day">
+        <div class="day-head">
+          <div class="num">01</div>
+          <div class="date">Onsdag · 19. august</div>
+        </div>
+        <div class="day-body">
+          <h3>Åpningsdag</h3>
+          <ul>
+            <li><strong>10:00 · Stands åpner</strong>25+ organisasjoner klare i Gruva.</li>
+            <li><strong>12:00 · Hovedscenen åpner</strong>Åpningsseremoni + first-pitch av semesterets idéer.</li>
+            <li><strong>14:00 · Foredrag</strong>"AI for alle" — hvordan studenter bruker LLM-er i praksis.</li>
+            <li><strong>17:00 · Happy hour</strong>Red Bull Olabil + gratis mat.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-head">
+          <div class="num">02</div>
+          <div class="date">Torsdag · 20. august</div>
+        </div>
+        <div class="day-body">
+          <h3>Gründerdag &amp; finale</h3>
+          <ul>
+            <li><strong>10:00 · Gründerhistorier</strong>Studenter som har startet egne bedrifter deler sine reiser.</li>
+            <li><strong>13:00 · Workshop</strong>"Fra idé til team" med Spark* og Gründerbrakka.</li>
+            <li><strong>16:00 · Pitch-konkurranse</strong>Juryen er fra Cognite, Statkraft og DNB.</li>
+            <li><strong>19:00 · Premie­utdeling + afterparty</strong>Konkurranse­vinnerne kåres, gratis inngang for alle deltakere.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="prog-soon">
+        <div class="prog-soon-box">Program kommer snart</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="miljoer">
+  <div class="wrap">
+    <div>
+      <h2>Du finner våre medlemmer <em>på stand.</em></h2>
+      <p class="lede">Fra kunstig intelligens og romfart til helse og bærekraft. I FRAM finner du organisasjoner for nesten alle interesser og fagbakgrunner.</p>
+      <a href="miljoer.html" class="btn btn-yellow">Se alle organisasjonene →</a>
+    </div>
+    <div>
+      <div class="org-preview">
+        <div class="org-chip gold"><span class="dt"></span>Spark* NTNU</div>
+        <div class="org-chip teal"><span class="dt"></span>Start NTNU</div>
+        <div class="org-chip red"><span class="dt"></span>Revolve NTNU</div>
+        <div class="org-chip"><span class="dt"></span>Ascend</div>
+        <div class="org-chip"><span class="dt"></span>Cogito</div>
+        <div class="org-chip"><span class="dt"></span>Gridville</div>
+        <div class="org-chip"><span class="dt"></span>NORSTEC</div>
+        <div class="org-chip"><span class="dt"></span>Hackerspace</div>
+        <div class="org-chip"><span class="dt"></span>Studio Beta</div>
+      </div>
+      <div class="org-more">+ 19 andre organisasjoner →</div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="wrap">
+    <h2>Ses vi på <span class="y">Innovasjonsdagene</span> i år?</h2>
+    <a href="https://www.instagram.com/framntnu/" target="_blank" rel="noopener" class="btn btn-yellow">Følg @framntnu for oppdateringer →</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+
+
+<footer>
+  <div class="wrap">
+    <div class="foot-main">
+      <div class="foot-left">
+        <div class="foot-brand">
+          <img decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU"/>
+        </div>
+        <div class="foot-info">
+          Sem Sælands vei 1, 7034 Trondheim<br/>
+          <a href="mailto:framntnu@gmail.com">framntnu@gmail.com</a>
+        </div>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/framntnu/" target="_blank" rel="noopener" class="foot-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="foot-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="foot-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <!-- Slack -->
+          <a href="#" class="foot-social" aria-label="Slack">
+            <svg viewBox="0 0 122.8 122.8" xmlns="http://www.w3.org/2000/svg"><path d="M25.8 77.6c0 7.1-5.8 12.9-12.9 12.9S0 84.7 0 77.6s5.8-12.9 12.9-12.9h12.9v12.9zm6.5 0c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9v32.3c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V77.6z" fill="#E01E5A"/><path d="M45.2 25.8c-7.1 0-12.9-5.8-12.9-12.9S38.1 0 45.2 0s12.9 5.8 12.9 12.9v12.9H45.2zm0 6.5c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H12.9C5.8 58.1 0 52.3 0 45.2s5.8-12.9 12.9-12.9h32.3z" fill="#36C5F0"/><path d="M97 45.2c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9-5.8 12.9-12.9 12.9H97V45.2zm-6.5 0c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V12.9C64.7 5.8 70.5 0 77.6 0s12.9 5.8 12.9 12.9v32.3z" fill="#2EB67D"/><path d="M77.6 97c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9-12.9-5.8-12.9-12.9V97h12.9zm0-6.5c-7.1 0-12.9-5.8-12.9-12.9s5.8-12.9 12.9-12.9h32.3c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H77.6z" fill="#ECB22E"/></svg>
+          </a>
+        </div>
+      </div>
+            <div class="foot-partners">
+        <div class="foot-group-label">Samarbeidspartnere</div>
+        <div class="foot-partners-logos">
+          <img loading="lazy" decoding="async" src="assets/partners/sb1-smn.webp" alt="SpareBank 1 SMN"/>
+          <img loading="lazy" decoding="async" src="assets/partners/equinor.webp" alt="Equinor" class="eq-logo"/>
+        </div>
+      </div>
+
+<div class="foot-links">
+        <div class="foot-group">
+          <div class="foot-group-label">Huset</div>
+          <a href="index.html#opplev">Opplev Fram</a>
+          <a href="miljoer.html">Organisasjonene</a>
+          <a href="arrangementer.html">Arrangementer</a>
+          <a href="booking.html">Book lokalene</a>
+        </div>
+        <div class="foot-group">
+          <div class="foot-group-label">Om oss</div>
+          <a href="om.html">Om Fram</a>
+          <a href="#">Ledige stillinger</a>
+          <a href="innovasjonsdagene.html">Innovasjonsdagene</a>
+          <a href="#">Slack-fellesskap</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>FRAM NTNU · EST. 2016 · Org.nr 917 611 653</div>
+      <div class="ntnu-line">
+        <span class="ntnu-label">Del av</span>
+        <span class="ntnu-logo" role="img" aria-label="NTNU"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ntnu-line{
+    margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid rgba(30,30,30,.08);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .ntnu-line .ntnu-label{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em;
+    text-transform:uppercase; color: var(--muted);
+  }
+  .ntnu-line .ntnu-logo{
+    height: 22px; width: auto; opacity: .75;
+  }
+</style>
+
+<style>
+  /* Footer — Samarbeidspartnere + farger (oppdatert) */
+  .foot-partners{ display:flex; flex-direction:column; gap:12px; }
+  .foot-partners-logos{ display:flex; flex-direction:row; align-items:center; gap:28px; flex-wrap:wrap; }
+  .foot-partners-logos img{ height:26px; width:auto; opacity:.9; filter:grayscale(.25); transition:opacity .2s, filter .2s; }
+  .foot-partners-logos img.eq-logo{ height:26px; }
+  .foot-partners-logos img:hover{ opacity:1; filter:grayscale(0); }
+  .foot-brand img{ filter:saturate(.4); }
+  .foot-social[aria-label="Instagram"]{ color:#E1306C; }
+  .foot-social[aria-label="Facebook"]{ color:#1877F2; }
+  .foot-social[aria-label="LinkedIn"]{ color:#0A66C2; }
+  .foot-social[aria-label="Instagram"]:hover{ color:#E1306C; border-color:#E1306C; }
+  .foot-social[aria-label="Facebook"]:hover{ color:#1877F2; border-color:#1877F2; }
+  .foot-social[aria-label="LinkedIn"]:hover{ color:#0A66C2; border-color:#0A66C2; }
+  .foot-social[aria-label="Slack"]:hover{ border-color:#E01E5A; }
+  .ntnu-line .ntnu-logo{
+    display:inline-block; height:22px; width:116px; opacity:1;
+    background-color:#00509E;
+    -webkit-mask:url(assets/ntnu-logo-dark.webp) left center / contain no-repeat;
+    mask:url(assets/ntnu-logo-dark.webp) left center / contain no-repeat;
+  }
+</style>
+
+<script>
+(function(){
+  var btn = document.getElementById('addToCal');
+  if(!btn) return;
+  function pad(n){ return (n<10?'0':'')+n; }
+  function fmt(d){
+    return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())
+      +'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
+  }
+  btn.addEventListener('click', function(){
+    // 19. august 2026 10:00 → 20. august 2026 19:00 (Europe/Oslo = UTC+2 in August)
+    var start = new Date(Date.UTC(2026, 7, 19, 8, 0, 0));
+    var end   = new Date(Date.UTC(2026, 7, 20, 17, 0, 0));
+    var ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//FRAM NTNU//Innovasjonsdagene//NO',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:innovasjonsdagene-2026@framntnu.no',
+      'DTSTAMP:'+fmt(new Date()),
+      'DTSTART:'+fmt(start),
+      'DTEND:'+fmt(end),
+      'SUMMARY:Innovasjonsdagene 2026 – FRAM NTNU',
+      'LOCATION:Gruva, Trondheim',
+      'DESCRIPTION:Møt 25+ studentorganisasjoner i FRAM. Gratis inngang, drop-in hele dagen.',
+      'URL:https://www.framntnu.no/',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    var blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'innovasjonsdagene-2026.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+})();
+</script>
+
+<script src="assets/site.js"></script>
+</body></html>

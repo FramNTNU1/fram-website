@@ -1,0 +1,128 @@
+/* ============================================================
+   FRAM NTNU · Delt produksjons- og mobil-lag
+   Lastes på alle sider etter sidens egne <style>-blokker.
+   Inneholder: globale mobilfikser + responsiv toppmeny (hamburger).
+   ============================================================ */
+
+/* ---------- Globale fikser ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-x: hidden; }
+img, svg, video, iframe { max-width: 100%; }
+img { height: auto; }
+
+/* Burger skjult på desktop */
+.nav-burger {
+  display: none;
+  align-items: center; justify-content: center;
+  width: 44px; height: 44px; padding: 0;
+  border: 1px solid var(--line, #E6E0D5); border-radius: 12px;
+  background: var(--card, #fff); color: var(--ink, #2A2A2A);
+  cursor: pointer; flex-shrink: 0;
+}
+.nav-burger svg { width: 22px; height: 22px; display: block; }
+.nav-burger .x { display: none; }
+.nav-burger.is-open .menu { display: none; }
+.nav-burger.is-open .x { display: block; }
+
+/* ---------- Mobil (≤ 900px) ---------- */
+@media (max-width: 900px) {
+  .wrap { padding-left: 20px; padding-right: 20px; }
+
+  /* Vis hamburger når JS har aktivert mobilmenyen */
+  body.has-mnav .nav-burger { display: inline-flex; }
+
+  /* Slå sammen til ~64px høy meny */
+  body.has-mnav .nav-inner { height: 64px; }
+  body.has-mnav .logo-img,
+  body.has-mnav .logo img { height: 32px; }
+
+  /* Lenkene blir en nedtrekksmeny under toppen */
+  body.has-mnav .nav-links {
+    position: fixed; top: 64px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--bg, #FAF7F2);
+    border-bottom: 1px solid var(--line, #E6E0D5);
+    box-shadow: 0 24px 40px -24px rgba(0,0,0,.35);
+    padding: 8px 20px 20px;
+    max-height: calc(100vh - 64px); overflow-y: auto;
+    transform: translateY(-12px); opacity: 0; pointer-events: none;
+    transition: opacity .22s ease, transform .22s ease;
+    z-index: 45;
+  }
+  body.has-mnav .nav-links.open { transform: none; opacity: 1; pointer-events: auto; }
+
+  /* Topp-nivå lenker */
+  body.has-mnav .nav-links > a {
+    padding: 15px 4px; font-size: 16px; font-weight: 500;
+    border-bottom: 1px solid var(--line, #E6E0D5);
+  }
+  body.has-mnav .nav-links > a::after { display: none !important; }
+
+  /* Dropdowns blir trekkspill */
+  body.has-mnav .nav-dd { display: block; width: 100%; }
+  body.has-mnav .nav-dd-btn {
+    width: 100%; justify-content: space-between;
+    padding: 15px 4px; font-size: 16px;
+    border-bottom: 1px solid var(--line, #E6E0D5);
+  }
+  body.has-mnav .nav-dd .dd-caret { transition: transform .2s; }
+  body.has-mnav .nav-dd.open .dd-caret { transform: rotate(180deg); }
+
+  /* Skjul hover-menyen; vis bare når .open er satt */
+  body.has-mnav .nav-dd-menu {
+    position: static; transform: none; box-shadow: none;
+    border: 0; min-width: 0; padding: 2px 0 8px 12px;
+    background: transparent; opacity: 1; visibility: visible; pointer-events: auto;
+    display: none;
+  }
+  body.has-mnav .nav-dd:hover .nav-dd-menu { display: none; }
+  body.has-mnav .nav-dd.open .nav-dd-menu { display: flex; }
+  body.has-mnav .nav-dd-menu a { padding: 11px 6px; font-size: 15px; }
+
+  /* CTA-knapp i meny tar full bredde */
+  body.has-mnav .nav-links > .nav-cta { margin-top: 12px; justify-content: center; }
+}
+
+/* ---------- Responsiv kollaps av flerkolonne-grids ----------
+   Mange sider ble bygget i fast 1440px-bredde og manglet
+   mobil-kollaps. Klassenavnene er sidespesifikke, så vi kan
+   trygt målrette dem her i det delte laget.                    */
+
+/* Lange ord i store overskrifter skal bryte i stedet for å flyte ut */
+h1, h2, h3 { overflow-wrap: break-word; }
+
+@media (max-width: 1000px) {
+  .team-grid, .orgs-grid, .to-grid, .ark-grid,
+  .org-preview, .facts .wrap {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Innholds-grids → én kolonne */
+  .feat-event, .finn-intro, .join .wrap, .yt-stack,
+  .rooms-grid, .mtg-grid, .how-grid, .hero-mosaic, .gruva-grid,
+  .ide-stage, .future, .ide-soon, .prog-grid, .steps, .equip-grid,
+  .toc, .feat, .reisen-foot, .story .wrap,
+  header.page .wrap, #submit .wrap, #miljoer .wrap, .om-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Lange hero-overskrifter som var låst til én linje skal bryte */
+  header.page h1 { white-space: normal !important; }
+  /* Reisen-kort i tidslinjen må kunne krympe */
+  .rcard { min-width: 0; }
+  .rcard-logo img { max-width: 100%; }
+  .rcard-foot { flex-wrap: wrap; gap: 8px; }
+  /* Galleri til to kolonner */
+  .gal-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  /* Romslig luft mellom seksjoner som var tett på desktop */
+  .reisen-foot { gap: 20px !important; text-align: left; }
+}
+
+@media (max-width: 520px) {
+  .wrap { padding-left: 16px; padding-right: 16px; }
+  /* På de minste skjermene: kort-grids til to, evt. én kolonne */
+  .team-grid, .orgs-grid, .to-grid, .ark-grid, .org-preview {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

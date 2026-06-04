@@ -1,0 +1,10 @@
+# Avhengigheter / verktøy
+node_modules/
+.vercel/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
