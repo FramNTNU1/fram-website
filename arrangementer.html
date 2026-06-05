@@ -453,6 +453,24 @@
   @media (max-width: 960px){
     .ev-grid{ grid-template-columns: 1fr;}
   }
+  @media (max-width: 760px){
+    .ev-locked #evGrid{
+      grid-template-columns: 1fr 1fr;
+    }
+    .ev-locked #evGrid .ev-card:nth-child(n+3){
+      display: none;
+    }
+    .ev-locked #evGrid .ev-body{
+      display: none;
+    }
+    .ev-cover-band{
+      padding: 24px 20px;
+      margin: 0 12px;
+    }
+    .ev-cover-text{
+      font-size: 17px;
+    }
+  }
 
   /* ---- locked: blurred "coming soon" cover over event cards ---- */
   .ev-locked{
