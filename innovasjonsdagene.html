@@ -946,9 +946,13 @@
       +'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
   }
   btn.addEventListener('click', function(){
-    // 19. august 2026 10:00 → 20. august 2026 19:00 (Europe/Oslo = UTC+2 in August)
-    var start = new Date(Date.UTC(2026, 7, 19, 8, 0, 0));
-    var end   = new Date(Date.UTC(2026, 7, 20, 17, 0, 0));
+    // Dag 1: 19. august 2026 10:00–15:00 (Europe/Oslo = UTC+2 i august)
+    var start1 = new Date(Date.UTC(2026, 7, 19, 8, 0, 0));
+    var end1   = new Date(Date.UTC(2026, 7, 19, 13, 0, 0));
+    // Dag 2: 20. august 2026 10:00–15:00
+    var start2 = new Date(Date.UTC(2026, 7, 20, 8, 0, 0));
+    var end2   = new Date(Date.UTC(2026, 7, 20, 13, 0, 0));
+    var stamp  = fmt(new Date());
     var ics = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -956,14 +960,24 @@
       'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH',
       'BEGIN:VEVENT',
-      'UID:innovasjonsdagene-2026@framntnu.no',
-      'DTSTAMP:'+fmt(new Date()),
-      'DTSTART:'+fmt(start),
-      'DTEND:'+fmt(end),
-      'SUMMARY:Innovasjonsdagene 2026 – FRAM NTNU',
+      'UID:innovasjonsdagene-2026-dag1@framntnu.no',
+      'DTSTAMP:'+stamp,
+      'DTSTART:'+fmt(start1),
+      'DTEND:'+fmt(end1),
+      'SUMMARY:Innovasjonsdagene 2026 – Dag 1 – FRAM NTNU',
       'LOCATION:Gruva, Trondheim',
       'DESCRIPTION:Møt 25+ studentorganisasjoner i FRAM. Gratis inngang, drop-in hele dagen.',
-      'URL:https://www.framntnu.no/',
+      'URL:https://www.framntnu.no/innovasjonsdagene.html',
+      'END:VEVENT',
+      'BEGIN:VEVENT',
+      'UID:innovasjonsdagene-2026-dag2@framntnu.no',
+      'DTSTAMP:'+stamp,
+      'DTSTART:'+fmt(start2),
+      'DTEND:'+fmt(end2),
+      'SUMMARY:Innovasjonsdagene 2026 – Dag 2 – FRAM NTNU',
+      'LOCATION:Gruva, Trondheim',
+      'DESCRIPTION:Møt 25+ studentorganisasjoner i FRAM. Gratis inngang, drop-in hele dagen.',
+      'URL:https://www.framntnu.no/innovasjonsdagene.html',
       'END:VEVENT',
       'END:VCALENDAR'
     ].join('\r\n');
