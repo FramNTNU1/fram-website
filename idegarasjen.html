@@ -149,6 +149,15 @@
   }
   .eq:hover{transform:translateY(-3px); border-color:var(--ink); box-shadow:0 18px 40px -24px rgba(0,0,0,.32);}
   .eq-photo{ width:100%; aspect-ratio:16/10; display:block; object-fit:cover; }
+  .eq-photo-wrap{ position:relative; }
+  .eq-photo-wrap .eq-photo{ width:100%; }
+  .eq-members-badge{
+    position:absolute; top:10px; left:10px;
+    background:rgba(0,0,0,.62); backdrop-filter:blur(6px);
+    color:#fff; font-size:11px; font-weight:600; letter-spacing:.07em;
+    text-transform:uppercase; padding:4px 9px; border-radius:4px;
+    pointer-events:none;
+  }
   .eq-body{padding:28px 30px 30px; display:flex; flex-direction:column; gap:12px;}
   .eq-tophdr{display:flex; align-items:center; gap:14px;}
   .eq-num{
@@ -467,7 +476,10 @@
       </article>
 
       <article class="eq">
-        <div class="eq-photo eq-photo--ph"><span>Bilde av plotteren</span></div>
+        <div class="eq-photo-wrap">
+          <div class="eq-photo eq-photo--ph"><span>Bilde av plotteren</span></div>
+          <span class="eq-members-badge">Kun for Fram-medlemmer</span>
+        </div>
         <div class="eq-body">
           <div class="eq-tophdr"><span class="eq-num">04</span><h4>Plotter</h4></div>
           <p>Skjær vinyl og folie til klistremerker, logoer, stensiler og merking. Fint for å gi prototypen — eller laptopen — et profesjonelt preg.</p>
