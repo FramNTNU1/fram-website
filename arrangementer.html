@@ -453,25 +453,6 @@
   @media (max-width: 960px){
     .ev-grid{ grid-template-columns: 1fr;}
   }
-  @media (max-width: 760px){
-    .ev-locked #evGrid{
-      grid-template-columns: 1fr;
-    }
-    .ev-locked #evGrid .ev-card:nth-child(n+3){
-      display: none;
-    }
-    .ev-locked #evGrid .ev-body{
-      display: none;
-    }
-    .ev-cover-band{
-      padding: 24px 20px;
-      margin: 0 12px;
-    }
-    .ev-cover-text{
-      font-size: 17px;
-    }
-  }
-
   /* ---- locked: blurred "coming soon" cover over event cards ---- */
   .ev-locked{
     position:relative;
@@ -511,6 +492,27 @@
     margin:0; font-size: clamp(21px, 2.4vw, 29px); font-weight:600;
     line-height:1.4; letter-spacing:-.01em; color:var(--ink);
     text-wrap: balance;
+  }
+  @media (max-width: 760px){
+    .ev-locked #evGrid{
+      display: none;
+    }
+    .ev-cover{
+      position: static;
+      background: none;
+      padding: 0;
+    }
+    .ev-cover-band{
+      padding: 32px 24px;
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      backdrop-filter: none;
+    }
+    .ev-cover-text{
+      font-size: 18px;
+    }
   }
 
   /* ---- toggle: bakgrunnsbilder på/av (som organisasjonssidene) ---- */
