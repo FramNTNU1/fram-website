@@ -1414,8 +1414,8 @@
 
   @media (max-width: 900px){
     .explorer{ grid-template-columns:1fr; }
-    .exp-rail{ position:static; flex-direction:row; overflow-x:auto; padding-bottom:4px; }
-    .exp-tab{ flex:0 0 auto; min-width:200px; }
+    .exp-rail{ position:static; flex-direction:row; flex-wrap:wrap; gap:8px; }
+    .exp-tab{ flex:1 1 calc(50% - 4px); min-width:140px; }
     .exp-tab .et-arrow{ display:none; }
   }
   @media (max-width: 600px){
