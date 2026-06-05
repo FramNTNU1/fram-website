@@ -159,6 +159,8 @@
   .hero-sketch-mobile{ display:none; }
   .hero-subtitle--mobile{ display:none; }
   .hero-subtitle--desktop{ display:none; }
+  .hero-subtitle.hero-subtitle--mobile{ display:none; }
+  .hero-subtitle.hero-subtitle--desktop{ display:none; }
   .hero-editorial-lede{
     font-size:18px; line-height:1.6; color:var(--ink-soft);
     margin:0 0 30px; max-width:540px;
@@ -1646,8 +1648,8 @@
     .hero-editorial { grid-template-columns: 1fr; min-height: auto; gap: 24px; }
     .hero-editorial-right { display: none; }
     .hero-editorial-lede { display: none; }
-    .hero-subtitle--desktop { display: none; }
-    .hero-subtitle--mobile { display: block; }
+    .hero-subtitle.hero-subtitle--desktop { display: none; }
+    .hero-subtitle.hero-subtitle--mobile { display: block; }
     .hero-sketch-mobile { display: block; width: 115%; height: auto; margin: 8px -13% 24px 0; }
     .hero-editorial-stats { gap: 20px; }
     /* Arrangementer: 2 kolonner på nettbrett */
