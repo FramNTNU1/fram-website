@@ -178,6 +178,14 @@
       0 2px 4px rgba(0,0,0,.04),
       0 8px 24px rgba(0,0,0,.08),
       0 32px 64px -24px rgba(0,0,0,.18);
+    margin: 0 8px;
+  }
+  @media (min-width: 600px){
+    .hero-video-card{ margin: 0; }
+  }
+  @media (max-width: 599px){
+    .hero{ padding: 24px 0 40px; }
+    .hero-editorial{ min-height: unset; margin-bottom: 32px; gap: 24px; }
   }
   .hero-video-card-inner{
     position:relative;
@@ -1218,6 +1226,7 @@
 
   /* ---------- VÅRE LOKALER (expandable rooms) ---------- */
   .lokaler{ padding: 110px 0 120px; }
+  @media (max-width: 599px){ .lokaler{ padding-top: 56px; } }
   .lokaler-head{
     display:flex; justify-content:space-between; align-items:end;
     margin-bottom:42px; gap:32px; flex-wrap:wrap;
