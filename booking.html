@@ -678,13 +678,25 @@
     .gruva-stage { padding: 32px 24px; }
     .gruva-grid { grid-template-columns: 1fr; gap: 28px; }
     .gruva-photo { aspect-ratio: 16/9; }
-    .gruva-stage h3 { font-size: 36px; }
     .gruva-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .stat { padding: 12px; }
     .stat .n { font-size: 24px; }
 
     /* Skjul overskriften "Skreddersydd for store ideer." på mobil */
     .gruva-stage h3 { display: none; }
+
+    /* "Hvordan booker jeg?" — stack kortene vertikalt */
+    .book-strip { padding: 32px 24px; }
+    .book-strip.how { padding: 32px 24px; }
+    .how-grid { grid-template-columns: 1fr; gap: 14px; }
+    .how-note { border-radius: 16px; }
+
+    /* Idégarasjen — skjul bilde, vis logo i stedet, stack til én kolonne */
+    .ide-stage { grid-template-columns: 1fr; }
+    .ide-media { display: none; }
+    .ide-mobile-logo { display: block !important; }
+    .ide-content { padding: 32px 24px 28px; }
+    .ide-content h3 { font-size: 28px; }
   }
 
   </style>
@@ -999,6 +1011,7 @@
         <img loading="lazy" decoding="async" src="uploads/Idegarasjen.webp" alt="Idégarasjen — studentenes innovasjonsverksted"/>
       </div>
       <div class="ide-content">
+        <img src="assets/idegarasjen-logo-hvit.webp" alt="Idégarasjen" class="ide-mobile-logo" style="display:none; height:40px; width:auto; margin-bottom:20px;"/>
         <h3>Studentenes eget <span class="y">innovasjonsverksted.</span></h3>
         <p>
           Idégarasjen er alltid åpent for studenter som driver med innovasjon. Vi tilbyr alt mulig utstyr man trenger til prototyping. Er det noe du lurer på? Ta kontakt gjennom framntnu@gmail.com.
