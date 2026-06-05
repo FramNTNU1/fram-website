@@ -780,9 +780,12 @@
 
   /* ---------- MOBILRESPONSIVITET ---------- */
   @media (max-width: 760px) {
-    #koble .wrap { grid-template-columns: 1fr; gap: 40px; }
-    .kob-right { aspect-ratio: 16/9; max-height: 280px; }
-    .kob-specs { grid-template-columns: 1fr; max-width: none; }
+    #koble .wrap { grid-template-columns: 1fr; gap: 32px; }
+    .kob-right { aspect-ratio: 16/9; max-height: 260px; }
+    .kob-specs { grid-template-columns: repeat(3, 1fr); max-width: none; gap: 12px; }
+    .kob-specs dd { font-size: 13px; white-space: nowrap; }
+    #koble h2 { font-size: 48px; margin-bottom: 16px; }
+    #koble .lede { font-size: 15px; margin-bottom: 24px; }
   }
 
   </style>
