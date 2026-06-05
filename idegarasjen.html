@@ -60,20 +60,60 @@
   }
   .crumbs a:hover{color:var(--ink);}
 
-  /* ---------- HERO BANNER ---------- */
+  /* ---------- HERO BANNER / CAROUSEL ---------- */
   .hero-banner{
     position:relative; width:100%;
-    height:min(62vh, 600px);
-    background: linear-gradient(135deg, #0f0e0b 0%, #1c1500 35%, #2d2100 65%, #1a1200 100%);
+    height:min(72vh, 700px);
     overflow:hidden;
+    background:#0f0e0b;
   }
+
+  /* Carousel slides */
+  .hero-slides{
+    position:absolute; inset:0; z-index:1;
+    display:flex; width:400%; height:100%;
+    transition:transform .9s cubic-bezier(0.77, 0, 0.18, 1);
+  }
+  .hero-slides img{
+    width:25%; height:100%; object-fit:cover; flex:none;
+    filter:brightness(.82);
+  }
+
+  /* Ken Burns subtle zoom on active slide */
+  .hero-slides img.active{
+    animation:kb 8s ease-out forwards;
+  }
+  @keyframes kb{
+    from{transform:scale(1.08);}
+    to{transform:scale(1);}
+  }
+
+  /* Gradient overlay + content */
   .hero-overlay{
     position:absolute; inset:0; z-index:2;
     display:flex; align-items:flex-end;
-    padding-bottom:54px;
+    padding-bottom:60px;
     pointer-events:none;
-    background: linear-gradient(to top, rgba(10,8,4,.55) 0%, transparent 60%);
+    background:
+      linear-gradient(to top, rgba(6,5,2,.72) 0%, rgba(6,5,2,.3) 40%, transparent 75%),
+      linear-gradient(to right, rgba(0,0,0,.22) 0%, transparent 55%);
   }
+
+  /* Dot indicators */
+  .hero-dots{
+    position:absolute; bottom:22px; right:36px; z-index:3;
+    display:flex; gap:8px; align-items:center;
+  }
+  .hero-dots button{
+    width:8px; height:8px; border-radius:50%;
+    border:none; padding:0; cursor:pointer;
+    background:rgba(255,255,255,.35);
+    transition:background .3s, transform .3s;
+  }
+  .hero-dots button.on{
+    background:#fff; transform:scale(1.3);
+  }
+
   .hero-eye{
     font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
     text-transform:uppercase; color:rgba(255,255,255,.78); margin-bottom:18px;
@@ -81,12 +121,13 @@
   }
   .hero-eye .dot{width:7px; height:7px; border-radius:50%; background:var(--yellow);}
   .hero-logo{
-    display:block; width:min(560px, 64%); height:auto;
-    margin:0 0 22px; filter:drop-shadow(0 8px 30px rgba(0,0,0,.45));
+    display:block; width:min(560px, 62%); height:auto;
+    margin:0 0 20px; filter:drop-shadow(0 8px 40px rgba(0,0,0,.55));
   }
   h1.big{
     font-size: clamp(22px, 2vw, 30px); line-height:1.3; letter-spacing:-.01em;
     font-weight:600; margin:0; color:rgba(255,255,255,.92); max-width:560px;
+    text-shadow:0 2px 16px rgba(0,0,0,.45);
   }
   h1.big .y{color:var(--yellow);}
 
@@ -431,15 +472,53 @@
   </div>
 </nav>
 
-<!-- ============ HERO BANNER ============ -->
+<!-- ============ HERO BANNER / CAROUSEL ============ -->
 <header class="hero-banner">
+  <div class="hero-slides" id="heroSlides">
+    <img src="assets/Idegarasjen1.webp" alt="Idégarasjen" class="active" decoding="async"/>
+    <img src="assets/Idegarasjen2.webp" alt="Idégarasjen" loading="lazy" decoding="async"/>
+    <img src="assets/Idegarasjen3.webp" alt="Idégarasjen" loading="lazy" decoding="async"/>
+    <img src="assets/Idegarasjen4.webp" alt="Idégarasjen" loading="lazy" decoding="async"/>
+  </div>
   <div class="hero-overlay">
     <div class="wrap">
-      <img loading="lazy" decoding="async" src="assets/idegarasjen-logo-hvit.webp" alt="Idégarasjen" class="hero-logo"/>
+      <img decoding="async" src="assets/idegarasjen-logo-hvit.webp" alt="Idégarasjen" class="hero-logo"/>
       <h1 class="big">Studentenes eget <span class="y">innovasjonsverksted.</span></h1>
     </div>
   </div>
+  <div class="hero-dots" id="heroDots">
+    <button class="on" aria-label="Bilde 1"></button>
+    <button aria-label="Bilde 2"></button>
+    <button aria-label="Bilde 3"></button>
+    <button aria-label="Bilde 4"></button>
+  </div>
 </header>
+
+<script>
+(function(){
+  const slides = document.getElementById('heroSlides');
+  const imgs = slides.querySelectorAll('img');
+  const dots = document.querySelectorAll('#heroDots button');
+  let cur = 0, timer;
+
+  function go(n){
+    imgs[cur].classList.remove('active');
+    dots[cur].classList.remove('on');
+    cur = (n + imgs.length) % imgs.length;
+    slides.style.transform = 'translateX(-' + (cur * 25) + '%)';
+    imgs[cur].classList.add('active');
+    dots[cur].classList.add('on');
+  }
+
+  function next(){ go(cur + 1); }
+
+  function start(){ timer = setInterval(next, 5000); }
+  function stop(){ clearInterval(timer); }
+
+  dots.forEach((d,i) => d.addEventListener('click', () => { stop(); go(i); start(); }));
+  start();
+})();
+</script>
 
 <!-- ============ UTSTYR ============ -->
 <section id="utstyr" style="padding-top:88px;">
@@ -452,7 +531,7 @@
     <div class="equip-grid">
 
       <article class="eq">
-        <img class="eq-photo" loading="lazy" decoding="async" src="assets/3d%20printere.avif" alt="3D-printere i Idégarasjen"/>
+        <img class="eq-photo" loading="lazy" decoding="async" src="assets/prusa3d.webp" alt="3D-printere i Idégarasjen"/>
         <div class="eq-body">
           <div class="eq-tophdr"><span class="eq-num">01</span><h4>3D-printere</h4></div>
           <p>Prusa 3D-printere for prototyper, deler og modeller. Flere og mer avanserte printere kommer i den nye Idégarasjen på Hesthagen.</p>
@@ -477,7 +556,7 @@
 
       <article class="eq">
         <div class="eq-photo-wrap">
-          <div class="eq-photo eq-photo--ph"><span>Bilde av plotteren</span></div>
+          <img class="eq-photo" loading="lazy" decoding="async" src="assets/breformatplotter.webp" alt="Storformatprinter i Idégarasjen"/>
           <span class="eq-members-badge">Kun for Fram-medlemmer</span>
         </div>
         <div class="eq-body">
@@ -495,7 +574,7 @@
       </article>
 
       <article class="eq">
-        <div class="eq-photo eq-photo--ph"><span>Bilde av elverktøyet</span></div>
+        <img class="eq-photo" loading="lazy" decoding="async" src="assets/Elverkt%C3%B8y.webp" alt="Elverktøy i Idégarasjen"/>
         <div class="eq-body">
           <div class="eq-tophdr"><span class="eq-num">06</span><h4>Elverktøy</h4></div>
           <p>Drill, stikksag, slipemaskin og annet elverktøy for bearbeiding av materialer og bygging av større prototyper.</p>
