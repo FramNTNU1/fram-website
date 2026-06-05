@@ -148,7 +148,7 @@
     transition:border-color .2s, box-shadow .25s, transform .25s;
   }
   .eq:hover{transform:translateY(-3px); border-color:var(--ink); box-shadow:0 18px 40px -24px rgba(0,0,0,.32);}
-  .eq-photo{ width:100%; aspect-ratio:16/10; display:block; }
+  .eq-photo{ width:100%; aspect-ratio:16/10; display:block; object-fit:cover; }
   .eq-body{padding:28px 30px 30px; display:flex; flex-direction:column; gap:12px;}
   .eq-tophdr{display:flex; align-items:center; gap:14px;}
   .eq-num{
@@ -443,7 +443,7 @@
     <div class="equip-grid">
 
       <article class="eq">
-        <div class="eq-photo eq-photo--ph"><span>Bilde av 3D-printerne</span></div>
+        <img class="eq-photo" loading="lazy" decoding="async" src="assets/3d%20printere.avif" alt="3D-printere i Idégarasjen"/>
         <div class="eq-body">
           <div class="eq-tophdr"><span class="eq-num">01</span><h4>3D-printere</h4></div>
           <p>Bygg deler, fester og modeller lag for lag i plast. Perfekt for å teste form, passform og funksjon før du går videre — eller for å lage ting som rett og slett ikke finnes fra før.</p>
@@ -451,7 +451,7 @@
       </article>
 
       <article class="eq">
-        <div class="eq-photo eq-photo--ph"><span>Bilde av loddestasjonene</span></div>
+        <img class="eq-photo" loading="lazy" decoding="async" src="assets/loddeplass.avif" alt="Loddestasjoner i Idégarasjen"/>
         <div class="eq-body">
           <div class="eq-tophdr"><span class="eq-num">02</span><h4>Loddestasjoner</h4></div>
           <p>Loddebolt, avtrekk og alt du trenger for å jobbe med elektronikk. Koble sammen komponenter, fest ledninger og bygg dine egne kretser — eller reparer noe som har røket.</p>
@@ -459,7 +459,7 @@
       </article>
 
       <article class="eq">
-        <div class="eq-photo eq-photo--ph"><span>Bilde av arbeidsplassen</span></div>
+        <img class="eq-photo" loading="lazy" decoding="async" src="assets/verkstedplass.avif" alt="Arbeidsplass i Idégarasjen"/>
         <div class="eq-body">
           <div class="eq-tophdr"><span class="eq-num">03</span><h4>Arbeidsplass</h4></div>
           <p>Romslige arbeidsbenker hvor du kan spre ut prosjektet, jobbe i fred og sette igjen ting mellom øktene. God plass, godt lys og strøm der du trenger det.</p>
@@ -475,7 +475,7 @@
       </article>
 
       <article class="eq">
-        <div class="eq-photo eq-photo--ph"><span>Bilde av håndverktøyet</span></div>
+        <img class="eq-photo" loading="lazy" decoding="async" src="assets/h%C3%A5ndverkt%C3%B8y.avif" alt="Håndverktøy i Idégarasjen"/>
         <div class="eq-body">
           <div class="eq-tophdr"><span class="eq-num">05</span><h4>Håndverktøy</h4></div>
           <p>Det grunnleggende, alltid for hånden: skrutrekkere, tenger, sag, fil og måleverktøy. Ofte alt du trenger for å komme raskt i gang med et bygg.</p>
