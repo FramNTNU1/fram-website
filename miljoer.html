@@ -1197,6 +1197,8 @@
     if(!shell || !grid) return;
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var mobile = window.matchMedia && window.matchMedia('(max-width:760px)').matches;
+    if(mobile){ return; }
 
     var COLS = 9, ROWS = 5;
     // FRAM-fargene i rene diagonale bånd (gul → korall → turkis → blå), som logoen
