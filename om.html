@@ -471,6 +471,10 @@
   transition:opacity .2s ease, transform .2s ease; z-index:60;
 }
 .nav-dd:hover .nav-dd-menu{ opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(8px); }
+@media (max-width: 600px){
+  .nav-dd-menu{ left:0; transform:translateY(10px); }
+  .nav-dd:hover .nav-dd-menu{ transform:translateY(8px); }
+}
 .nav-dd-menu a{
   display:block; padding:10px 14px; border-radius:9px;
   font-size:14px; font-weight:500; color:var(--ink-soft); text-decoration:none;
