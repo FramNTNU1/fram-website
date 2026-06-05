@@ -160,7 +160,15 @@
     display:grid; grid-template-columns: repeat(4, 1fr); gap:18px;
   }
   @media (max-width:1180px){ .org-grid{ grid-template-columns: repeat(3,1fr); } }
-  @media (max-width:760px){  .org-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width:760px){  .org-grid{ grid-template-columns: repeat(2,1fr); gap:10px; } }
+  @media (max-width:760px){
+    .org-body{ padding:12px 14px 16px; gap:5px; }
+    .org-body h3{ font-size:16px; }
+    .org-body p{ font-size:12px; }
+    .org-media{ height:110px; }
+    .wrap{ padding:0 16px; }
+    .origami{ display:none; }
+  }
 
   .org-card{
     position:relative; display:flex; flex-direction:column;
