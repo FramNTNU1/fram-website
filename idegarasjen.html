@@ -245,6 +245,9 @@
     display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center;
     position:relative; overflow:hidden;
   }
+  @media(max-width:640px){
+    .ide-cta{ padding:32px 24px; grid-template-columns:1fr; gap:28px; }
+  }
   .ide-cta::before{
     content:''; position:absolute; right:-90px; top:-90px;
     width:380px; height:380px; border-radius:50%;
@@ -541,7 +544,6 @@
         <p>Ta kontakt med oss, så hjelper vi deg i gang i Idégarasjen — enten du har et konkret prosjekt eller bare vil teste en idé.</p>
         <div class="cta-actions">
           <a href="mailto:framntnu@gmail.com" class="btn-yellow">framntnu@gmail.com</a>
-          <a href="https://use.mazemap.com/#v=1&campusid=1&sharepoitype=identifier&sharepoi=FRAM" target="_blank" rel="noopener" class="btn-ghost">Finn oss på MazeMap ↗</a>
         </div>
       </div>
       <div class="ide-person">
