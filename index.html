@@ -1625,6 +1625,27 @@
     margin:0; max-width:560px;
   }
 
+  /* ---------- MOBILRESPONSIVITET (manglende breakpoints) ---------- */
+  @media (max-width: 900px) {
+    /* Hero: skjul skissen, vis bare tekst */
+    .hero-editorial { grid-template-columns: 1fr; min-height: auto; gap: 24px; }
+    .hero-editorial-right { display: none; }
+    .hero-editorial-stats { gap: 20px; }
+    /* Arrangementer: 2 kolonner på nettbrett */
+    .events-list { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 760px) {
+    /* Arrangementer: én kolonne på mobil */
+    .events-list { grid-template-columns: 1fr; }
+    /* Drop-in hode: klokke-kortet under teksten */
+    .dropin-head { grid-template-columns: 1fr; }
+    .dropin-clock { min-width: 0; width: 100%; }
+    /* Drop-in bento-grid: 2 kolonner */
+    .dropin-grid { grid-template-columns: repeat(2, 1fr) !important; grid-auto-rows: 160px; }
+    .amenity--col-3, .amenity--col-2 { grid-column: span 2; }
+  }
+
 </style>
 <style>
 /* Konsepter-dropdown i nav */
