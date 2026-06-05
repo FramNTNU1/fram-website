@@ -446,6 +446,13 @@
   @media (max-width: 760px) {
     .sec-head { grid-template-columns: 1fr; gap: 24px; }
     .yt .wrap { grid-template-columns: 1fr; gap: 40px; }
+
+    /* Hide group portrait on mobile */
+    .hero-portrait { display: none; }
+
+    /* Story: stack aside above timeline, remove sticky so it doesn't overlap */
+    .story .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .story-aside { position: static; }
   }
 
   </style>
