@@ -97,15 +97,13 @@
   .hero-portrait{
   position:relative;
   aspect-ratio: 1/1;
-  display:flex; align-items:flex-end; justify-content:center;
-  overflow: visible;
-}
-/* Circle blob behind the group */
-.hero-portrait::before{
-  content:''; position:absolute;
-  left:50%; top:50%; transform:translate(-50%,-50%);
-  width: 92%; aspect-ratio:1/1;
   border-radius:50%;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -30px rgba(0,0,0,.28);
+}
+/* Circle background gradient */
+.hero-portrait::before{
+  content:''; position:absolute; inset:0;
   background:
     radial-gradient(circle at 35% 30%, color-mix(in oklab, var(--yellow) 55%, transparent), transparent 60%),
     radial-gradient(circle at 75% 75%, color-mix(in oklab, var(--teal) 38%, transparent), transparent 60%),
@@ -113,20 +111,12 @@
   box-shadow: 0 30px 80px -30px rgba(0,0,0,.28);
   z-index:0;
 }
-/* Soft floor shadow under the figures */
-.hero-portrait::after{
-  content:''; position:absolute; left:12%; right:12%; bottom:2%;
-  height: 6%;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,.22), transparent 70%);
-  filter: blur(10px);
-  z-index:1;
-  pointer-events:none;
-}
+.hero-portrait::after{ display:none; }
 .hero-portrait img{
-  position:relative; z-index:2;
-  width: 124%; height:auto; display:block;
-  margin: 0 -12% -4% 0;
-  filter: drop-shadow(0 20px 30px rgba(0,0,0,.18));
+  position:absolute; inset:0; z-index:1;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center center;
+  display:block;
 }
 .hero-portrait .cap{
   position:absolute; top:12px; left:0; z-index:3;
