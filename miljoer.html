@@ -1198,7 +1198,6 @@
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var mobile = window.matchMedia && window.matchMedia('(max-width:760px)').matches;
-    if(mobile){ return; }
 
     var COLS = 9, ROWS = 5;
     // FRAM-fargene i rene diagonale bånd (gul → korall → turkis → blå), som logoen
@@ -1206,7 +1205,7 @@
     grid.style.gridTemplateColumns = 'repeat(' + COLS + ',1fr)';
     grid.style.gridTemplateRows    = 'repeat(' + ROWS + ',1fr)';
 
-    if(!reduce){
+    if(!reduce && !mobile){
       var maxD = (COLS - 1) + (ROWS - 1);
       var STAGGER = 0.9; // siste trekant starter etter 0,9s → + 1,05s fold ≈ 1,95s
       for(var r=0; r<ROWS; r++){
@@ -1242,7 +1241,7 @@
       setTimeout(function(){ grid.classList.add('gone'); }, 2000);
     }
 
-    if(reduce){ reveal(); return; }
+    if(reduce || mobile){ reveal(); return; }
 
     // Når kartet scrolles inn i midten av skjermen: vent 1,5 sekunder
     // (så kartet rekker å laste bak trekantene), og kjør så foldingen (~2s).
