@@ -669,6 +669,22 @@
   @media (max-width: 760px) {
     header.page .hero-grid { grid-template-columns: 1fr; gap: 32px; }
     .v-head { grid-template-columns: 1fr; gap: 32px; }
+
+    /* Skjul isometrisk sketch på mobil */
+    .hero-compact-img { display: none; }
+    .hero-compact { grid-template-columns: 1fr; }
+
+    /* Gruva-boks: stack kolonner, reduser padding og fontstørrelser */
+    .gruva-stage { padding: 32px 24px; }
+    .gruva-grid { grid-template-columns: 1fr; gap: 28px; }
+    .gruva-photo { aspect-ratio: 16/9; }
+    .gruva-stage h3 { font-size: 36px; }
+    .gruva-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .stat { padding: 12px; }
+    .stat .n { font-size: 24px; }
+
+    /* Skjul overskriften "Skreddersydd for store ideer." på mobil */
+    .gruva-stage h3 { display: none; }
   }
 
   </style>
