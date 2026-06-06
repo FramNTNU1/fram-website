@@ -111,6 +111,7 @@
     font-size:16px; font-weight:700; text-decoration:none;
     transition:transform .2s, background .2s;
     margin-bottom:16px;
+    border:none; cursor:pointer; font-family:inherit;
   }
   .pivot-btn:hover{transform:translateY(-2px);}
 
@@ -242,7 +243,7 @@
 
 <nav class="top">
   <div class="wrap nav-inner">
-    <a href="index.html" aria-label="FRAM NTNU"><img decoding="async" src="assets/fram-logo.webp" alt="FRAM" class="logo-img"/></a>
+    <a href="index.html" class="logo" aria-label="FRAM NTNU"><img decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU" class="logo-img"/></a>
     <div class="nav-links">
       <a href="index.html#opplev">Opplev Fram</a>
       <div class="nav-dd">
@@ -282,8 +283,8 @@
     <div class="divider"></div>
 
     <div class="pivot-label">Pivot?</div>
-    <a href="index.html" class="pivot-btn">→ Ja, ta meg til noe som funker</a>
-    <a href="javascript:history.back()" class="back-link">← eller gå tilbake</a>
+    <button type="button" class="pivot-btn" onclick="history.back()">← Ta meg tilbake</button>
+    <a href="index.html" class="back-link">→ eller ta meg til noe som funker</a>
 
   </div>
 </main>
