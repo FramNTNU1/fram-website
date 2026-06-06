@@ -117,6 +117,7 @@
     align-self:stretch; width:1px; background:var(--line);
   }
   .org-media.dark{ background:#16181D !important; }
+  .org-media.dark-navy{ background:#022641 !important; }
   .org-word{
     z-index:1; font-weight:800; font-size:24px; line-height:1.05;
     letter-spacing:-.02em; text-align:center; padding:0 18px;
@@ -247,6 +248,7 @@
   .org-card[data-accent="red"]    .org-media::after{ background:color-mix(in srgb, var(--red) 14%, #fff); }
   .org-card[data-accent="teal"]   .org-media::after{ background:color-mix(in srgb, var(--teal) 16%, #fff); }
   .org-media.dark::after{ background:#16181D !important; }
+  .org-media.dark-navy::after{ background:#022641 !important; }
 
   /* HOVER → panel fades in, logo grows large & visible, photo nudges */
   .org-card:hover .org-photo{ transform:scale(1.05); }
@@ -874,7 +876,7 @@
       </a>
 
       <a class="org-card" data-accent="red" href="https://www.instagram.com/innovationtnu/" target="_blank" rel="noopener">
-        <div class="org-media dark" style="background:#022641;">
+        <div class="org-media dark-navy">
           <img loading="lazy" decoding="async" class="org-logo big" src="assets/logos/innovatio.webp" alt="Innovatio">
           <img loading="lazy" decoding="async" class="org-photo" src="assets/heroes/innovatio.webp" alt="Innovatio-teamet">
         </div>
