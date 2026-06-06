@@ -119,6 +119,10 @@ h1, h2, h3 { overflow-wrap: break-word; }
   .reisen-foot { gap: 20px !important; text-align: left; }
 }
 
+@media (max-width: 768px) {
+  .hide-on-mobile { display: none; }
+}
+
 @media (max-width: 520px) {
   .wrap { padding-left: 16px; padding-right: 16px; }
   /* På de minste skjermene: kort-grids til to, evt. én kolonne */
