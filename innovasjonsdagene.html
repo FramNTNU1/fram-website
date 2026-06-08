@@ -1160,30 +1160,32 @@
 (function(){
   var v = document.querySelector('.om-dj-video');
   if(!v) return;
-  var reverse = false;
-  var step = null;
+  var reversing = false;
+  var timer = null;
+  var STEP = 1/30; // ~30fps rewind
 
-  function playReverse(){
-    if(step) cancelAnimationFrame(step);
-    var last = performance.now();
-    function tick(now){
-      var dt = (now - last) / 1000;
-      last = now;
-      v.currentTime = Math.max(0, v.currentTime - dt * v.playbackRate);
+  function startReverse(){
+    reversing = true;
+    v.pause();
+    timer = setInterval(function(){
+      v.currentTime = Math.max(0, v.currentTime - STEP);
       if(v.currentTime <= 0){
-        reverse = false;
+        clearInterval(timer);
+        reversing = false;
         v.play();
-      } else {
-        step = requestAnimationFrame(tick);
       }
-    }
-    step = requestAnimationFrame(tick);
+    }, 33);
   }
 
   v.addEventListener('ended', function(){
-    v.pause();
-    reverse = true;
-    playReverse();
+    if(!reversing) startReverse();
+  });
+
+  // fallback: timeupdate for browsers that don't fire ended on muted autoplay
+  v.addEventListener('timeupdate', function(){
+    if(!reversing && v.duration && v.currentTime >= v.duration - 0.1){
+      startReverse();
+    }
   });
 })();
 </script>
