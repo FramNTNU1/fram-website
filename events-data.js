@@ -111,7 +111,7 @@ window.FRAM_renderEventCard = function (e) {
   }
   var titleAttr = e.titlePartner ? ' data-partner="' + e.titlePartner + '"' : '';
   return '' +
-  '<a class="ev-card"' + attrHost + ' data-type="' + e.dataType + '" data-audience="' + e.audience + '" href="' + e.href + '" style="--ev-hover-img:url(\'' + e.img + '\');">' +
+  '<div class="ev-card"' + attrHost + ' data-type="' + e.dataType + '" data-audience="' + e.audience + '" style="--ev-hover-img:url(\'' + e.img + '\');">' +
     '<div class="ev-header">' +
       '<div class="ev-hover-img"></div>' +
       partnerImg +
@@ -125,9 +125,8 @@ window.FRAM_renderEventCard = function (e) {
     '</div>' +
     '<div class="ev-foot">' +
       '<span class="ev-pill ' + e.pill.cls + '">' + esc(e.pill.text) + '</span>' +
-      '<span class="ev-cta">' + esc(e.cta) + '</span>' +
     '</div>' +
-  '</a>';
+  '</div>';
 };
 
 /* ---- Kompakt kort til forsiden (.events-list) ---- */
