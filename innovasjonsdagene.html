@@ -359,7 +359,7 @@
   #miljoer{
     background: var(--charcoal);
     color: #fff;
-    padding: 64px 0;
+    padding: 64px 0 0;
   }
   #miljoer .wrap{ max-width: 900px; }
   #miljoer h2{
@@ -383,6 +383,40 @@
   .org-chip .dt{ display: none; }
   .org-more{
     margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.40);
+  }
+
+  /* LOGO TICKER */
+  .logo-ticker-wrap{
+    margin-top: 48px;
+    overflow: hidden;
+    /* bleed full width past the section padding */
+    width: 100vw; position: relative; left: 50%; right: 50%;
+    margin-left: -50vw; margin-right: -50vw;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    /* subtle gradient fade on edges */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+  .logo-ticker{
+    display: flex; gap: 48px; align-items: center;
+    width: max-content;
+    animation: ticker-scroll 40s linear infinite;
+  }
+  .logo-ticker:hover{ animation-play-state: paused; }
+  .logo-ticker img{
+    height: 44px; width: auto;
+    filter: brightness(0) invert(1);
+    opacity: .55;
+    transition: opacity .2s;
+    flex-shrink: 0;
+  }
+  .logo-ticker img:hover{ opacity: 1; }
+  .logo-ticker img.lg{ height: 58px; }
+  .logo-ticker img.sm{ height: 32px; }
+  @keyframes ticker-scroll{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
   }
 
   /* CTA */
@@ -864,9 +898,70 @@
       <div class="org-chip">Studio Beta</div>
     </div>
     <div class="org-more">+ 19 andre organisasjoner</div>
-    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:32px; align-items:center;">
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:32px; align-items:center; padding-bottom: 64px;">
       <a href="miljoer.html" class="btn btn-yellow">Se alle organisasjonene →</a>
       <a href="https://www.instagram.com/framntnu/" target="_blank" rel="noopener" class="btn-ghost-white">Følg @framntnu →</a>
+    </div>
+  </div>
+
+  <!-- Logo ticker — full bleed -->
+  <div class="logo-ticker-wrap">
+    <div class="logo-ticker">
+      <img loading="lazy" src="Logoer/Ascend NTNU.png" alt="Ascend NTNU">
+      <img loading="lazy" src="Logoer/BRAIN NTNU.png" alt="BRAIN NTNU">
+      <img loading="lazy" src="Logoer/Boost Henne.png" alt="Boost Henne">
+      <img loading="lazy" src="Logoer/Cogito.png" alt="Cogito">
+      <img loading="lazy" src="Logoer/DRIV NTNU.png" alt="DRIV NTNU">
+      <img loading="lazy" src="Logoer/Designhjelpen.png" alt="Designhjelpen" class="lg">
+      <img loading="lazy" src="Logoer/Engage.png" alt="Engage" class="lg">
+      <img loading="lazy" src="Logoer/Entreprenørskolen.webp" alt="Entreprenørskolen">
+      <img loading="lazy" src="Logoer/Fuel Fighter.png" alt="Fuel Fighter">
+      <img loading="lazy" src="Logoer/Gridville.png" alt="Gridville" class="lg">
+      <img loading="lazy" src="Logoer/Gründerbrakka.webp" alt="Gründerbrakka">
+      <img loading="lazy" src="Logoer/HackerspaceLogo.webp" alt="Hackerspace NTNU">
+      <img loading="lazy" src="Logoer/Ingeniører uten grenser.png" alt="Ingeniører uten grenser">
+      <img loading="lazy" src="Logoer/Make NTNU.png" alt="Make NTNU" class="sm">
+      <img loading="lazy" src="Logoer/NORSTEC.png" alt="NORSTEC" class="lg">
+      <img loading="lazy" src="Logoer/Njord.png" alt="Njord" class="lg">
+      <img loading="lazy" src="Logoer/Nordlys.png" alt="Nordlys">
+      <img loading="lazy" src="Logoer/Orbit NTNU.png" alt="Orbit NTNU">
+      <img loading="lazy" src="Logoer/Propulse NTNU.webp" alt="Propulse NTNU">
+      <img loading="lazy" src="Logoer/Relu.png" alt="Relu">
+      <img loading="lazy" src="Logoer/Revolve NTNU.png" alt="Revolve NTNU" class="lg">
+      <img loading="lazy" src="Logoer/SolanLinjeforeninglogo.webp" alt="Solan" class="lg">
+      <img loading="lazy" src="Logoer/Spark NTNU.png" alt="Spark* NTNU">
+      <img loading="lazy" src="Logoer/Start NTNU.png" alt="Start NTNU">
+      <img loading="lazy" src="Logoer/Støttehjulet.png" alt="Støttehjulet" class="lg">
+      <img loading="lazy" src="Logoer/Vortex NTNU.png" alt="Vortex NTNU">
+      <img loading="lazy" src="Logoer/WIC.png" alt="WIC" class="lg">
+      <!-- duplicate for seamless loop -->
+      <img loading="lazy" src="Logoer/Ascend NTNU.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/BRAIN NTNU.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Boost Henne.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Cogito.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/DRIV NTNU.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Designhjelpen.png" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/Engage.png" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/Entreprenørskolen.webp" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Fuel Fighter.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Gridville.png" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/Gründerbrakka.webp" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/HackerspaceLogo.webp" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Ingeniører uten grenser.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Make NTNU.png" alt="" aria-hidden="true" class="sm">
+      <img loading="lazy" src="Logoer/NORSTEC.png" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/Njord.png" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/Nordlys.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Orbit NTNU.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Propulse NTNU.webp" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Relu.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Revolve NTNU.png" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/SolanLinjeforeninglogo.webp" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/Spark NTNU.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Start NTNU.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/Støttehjulet.png" alt="" aria-hidden="true" class="lg">
+      <img loading="lazy" src="Logoer/Vortex NTNU.png" alt="" aria-hidden="true">
+      <img loading="lazy" src="Logoer/WIC.png" alt="" aria-hidden="true" class="lg">
     </div>
   </div>
 </section>
