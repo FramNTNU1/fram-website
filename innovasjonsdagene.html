@@ -248,6 +248,33 @@
   }
   .om-side li:last-child{ border-bottom: none; }
 
+  /* DJ VIDEO */
+  .om-video-wrap{
+    border-radius: 24px; overflow: hidden;
+    width: 85%; margin: 0 auto;
+    aspect-ratio: 9/16;
+    background: #000;
+    box-shadow: 0 20px 60px rgba(0,0,0,.18);
+  }
+  .om-dj-video{
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+
+  /* PERKS STRIPE under galleri */
+  .perks-stripe{
+    display: flex; flex-wrap: wrap; gap: 10px 20px;
+    padding: 28px 0 0; margin-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .perks-stripe .perk{
+    font-size: 13px; font-weight: 600; color: var(--ink-soft);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .perks-stripe .perk::before{
+    content: '✓'; color: var(--red); font-weight: 700;
+  }
+
   /* GALLERI */
   #galleri{ background: var(--bg-soft); border-top:1px solid var(--line);}
   .gal-grid{
@@ -556,6 +583,7 @@
     /* Om */
     .om-grid{ grid-template-columns: 1fr; gap: 24px; }
     .om-side{ padding: 20px; }
+    .om-video-wrap{ width: 60%; aspect-ratio: 9/16; }
     .om-side h3{ font-size: 11px; margin-bottom: 12px; }
     .om-side li{ font-size: 15px; padding: 10px 0; }
     #om .lede{ font-size: 16px; }
@@ -768,16 +796,8 @@
         <p>Stikk innom, slå av en prat og finn et miljø eller et verv som passer deg. Gratis inngang, drop-in hele dagen — og helt lov å bare være nysgjerrig.</p>
       </div>
 
-      <aside class="om-side">
-        <h3>Hva du får ut av det</h3>
-        <ul>
-          <li>Gratis lunsj</li>
-          <li>Møt 25+ organisasjoner</li>
-          <li>Finn ditt nye verv</li>
-          <li>Bli kjent med nye folk</li>
-          <li>Opplev FRAM fra innsiden</li>
-          <li>Konkurranser og premier</li>
-        </ul>
+      <aside class="om-video-wrap">
+        <video class="om-dj-video" src="assets/FramDJ.mpeg" autoplay muted playsinline></video>
       </aside>
     </div>
   </div>
@@ -810,6 +830,14 @@
       <div class="gal g6">
         <img loading="lazy" decoding="async" src="assets/innovasjonsdagene-mat.avif" alt="Stands i Gruva"/>
       </div>
+    </div>
+    <div class="perks-stripe">
+      <span class="perk">Gratis lunsj</span>
+      <span class="perk">Møt 25+ organisasjoner</span>
+      <span class="perk">Finn ditt nye verv</span>
+      <span class="perk">Bli kjent med nye folk</span>
+      <span class="perk">Opplev FRAM fra innsiden</span>
+      <span class="perk">Konkurranser og premier</span>
     </div>
   </div>
 </section>
@@ -1128,4 +1156,35 @@
 </script>
 
 <script src="assets/site.js"></script>
+<script>
+(function(){
+  var v = document.querySelector('.om-dj-video');
+  if(!v) return;
+  var reverse = false;
+  var step = null;
+
+  function playReverse(){
+    if(step) cancelAnimationFrame(step);
+    var last = performance.now();
+    function tick(now){
+      var dt = (now - last) / 1000;
+      last = now;
+      v.currentTime = Math.max(0, v.currentTime - dt * v.playbackRate);
+      if(v.currentTime <= 0){
+        reverse = false;
+        v.play();
+      } else {
+        step = requestAnimationFrame(tick);
+      }
+    }
+    step = requestAnimationFrame(tick);
+  }
+
+  v.addEventListener('ended', function(){
+    v.pause();
+    reverse = true;
+    playReverse();
+  });
+})();
+</script>
 </body></html>
