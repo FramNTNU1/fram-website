@@ -508,9 +508,13 @@
       flex-direction: column; align-items: flex-start; gap: 16px;
       padding-top: 18px; padding-bottom: 22px;
     }
-    .id-meta{ gap: 0; width: 100%; justify-content: space-between; }
-    .id-meta .m-item{ padding-right: 16px; margin-right: 16px; }
-    .id-meta .m-value{ font-size: 15px; }
+    .hero-bar .wrap{ padding-top: 16px; padding-bottom: 18px; gap: 16px; }
+    .id-meta{ display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .id-meta .m-item{ padding: 0; margin: 0; border-right: none; }
+    .id-meta .m-item:first-child{ padding-right: 16px; border-right: 1px solid rgba(255,255,255,.2); }
+    .id-meta .m-label{ font-size: 9px; }
+    .id-meta .m-value{ font-size: 13px; font-weight: 600; }
+    .id-actions .btn{ font-size: 13px; padding: 11px 18px; }
 
     /* Om */
     .om-grid{ grid-template-columns: 1fr; gap: 24px; }
@@ -703,11 +707,7 @@
         </div>
         <div class="m-item">
           <span class="m-label">Hvor</span>
-          <span class="m-value">Gruva</span>
-        </div>
-        <div class="m-item">
-          <span class="m-label">Pris</span>
-          <span class="m-value">Gratis · Drop-in</span>
+          <span class="m-value">Gruva <span style="opacity:.55; font-weight:500;">· Drop-in</span></span>
         </div>
       </div>
       <div class="id-actions">
