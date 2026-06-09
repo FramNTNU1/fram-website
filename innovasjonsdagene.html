@@ -1022,9 +1022,9 @@
           <a href="https://www.youtube.com/@FramNTNU" target="_blank" rel="noopener" class="foot-social" aria-label="YouTube">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
-          <a href="https://fram-ntnu.slack.com/archives/C019FAC9YC9" target="_blank" rel="noopener" class="foot-social" aria-label="Slack">
+          <button onclick="document.getElementById('slack-modal').classList.add('open')" class="foot-social" aria-label="Slack">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/><path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/><path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/><path d="M8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/><path d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834z" fill="#2EB67D"/><path d="M17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/><path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52z" fill="#ECB22E"/><path d="M15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/></svg>
-          </a>
+          </button>
         </div>
       </div>
             <div class="foot-partners">
@@ -1088,6 +1088,25 @@
   .foot-social[aria-label="YouTube"]{ color:#FF0000; }
   .foot-social[aria-label="YouTube"]:hover{ color:#FF0000; border-color:#FF0000; }
   .foot-social[aria-label="Slack"]:hover{ border-color:#4A154B; }
+  /* Slack-tilgangsmodal */
+  .slack-modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);
+    z-index:9999;align-items:center;justify-content:center;
+  }
+  .slack-modal-overlay.open{ display:flex; }
+  .slack-modal{
+    background:var(--card);border-radius:14px;padding:36px 32px 28px;max-width:380px;width:90%;
+    box-shadow:0 8px 40px rgba(0,0,0,.2);text-align:center;position:relative;
+  }
+  .slack-modal-close{
+    position:absolute;top:10px;right:14px;background:none;border:none;
+    font-size:1.5rem;cursor:pointer;color:var(--ink-soft);line-height:1;padding:4px;
+  }
+  .slack-modal-close:hover{ color:var(--ink); }
+  .slack-modal-icon{ width:44px;margin:0 auto 16px;display:block; }
+  .slack-modal h3{ margin:0 0 10px;font-size:1.1rem;color:var(--ink); }
+  .slack-modal p{ margin:0;color:var(--ink-soft);font-size:.95rem;line-height:1.6; }
+  button.foot-social{ font:inherit;cursor:pointer; }
   @media (max-width: 620px){ .foot-links{ display:none; } }
   .ntnu-line .ntnu-logo{
     display:inline-block; height:22px; width:116px; opacity:1;
@@ -1189,4 +1208,13 @@
   });
 })();
 </script>
+<div id="slack-modal" class="slack-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="slack-modal-title" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="slack-modal">
+    <button class="slack-modal-close" onclick="document.getElementById('slack-modal').classList.remove('open')" aria-label="Lukk">&times;</button>
+    <svg class="slack-modal-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/><path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/><path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/><path d="M8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/><path d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834z" fill="#2EB67D"/><path d="M17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/><path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52z" fill="#ECB22E"/><path d="M15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/></svg>
+    <h3 id="slack-modal-title">Kun for ledere</h3>
+    <p>Slacken er for tiden bare for lederne av våre medlemsorganisasjoner. Ønsker du tilgang, ta kontakt med oss.</p>
+  </div>
+</div>
+<script>document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('slack-modal').classList.remove('open');});</script>
 </body></html>
