@@ -172,6 +172,7 @@
     #kart{ padding:0 !important; border-bottom:0; }
     #kart > div{ padding:0 !important; }
     #kart .map-wrap{ border-radius:0 !important; border-left:0 !important; border-right:0 !important; border-top:0 !important; }
+    #kart .engage-map{ border-radius:0 !important; border-left:0 !important; border-right:0 !important; }
   }
 
   .org-card{
@@ -526,6 +527,31 @@
   .map-active .map-gate{ opacity:0; pointer-events:none; }
   .map-active .map-frost{ opacity:0; }
 
+  /* ---- SFU Engage-ramme rundt kartet ---- */
+  .engage-map{
+    border:1px solid var(--line); border-radius:20px; overflow:hidden;
+    background:var(--bg-soft); box-shadow:0 14px 40px -28px rgba(0,0,0,.4);
+  }
+  .engage-map-head{
+    display:flex; align-items:center; gap:22px;
+    padding:20px 26px; border-bottom:1px solid var(--line);
+    background:var(--card);
+  }
+  .engage-map-logo{ height:38px; width:auto; flex:none; }
+  .engage-map-text{ flex:1; min-width:0; }
+  .engage-map-name{ font-weight:700; font-size:16px; color:var(--ink); letter-spacing:.01em; }
+  .engage-map-text p{ margin:3px 0 0; font-size:13.5px; line-height:1.45; color:var(--ink-soft); }
+  .engage-map-link{
+    flex:none; font-size:14px; font-weight:600; color:var(--ink);
+    text-decoration:none; white-space:nowrap;
+  }
+  .engage-map-link:hover{ text-decoration:underline; }
+  @media (max-width:640px){
+    .engage-map-head{ flex-wrap:wrap; gap:14px; padding:16px 18px; }
+    .engage-map-logo{ height:32px; }
+    .engage-map-link{ width:100%; }
+  }
+
   /* ---- origami-trekant fold-in (skjuler kart-lasting) ---- */
   .map-shell{ position:relative; perspective:1700px; }
   .map-iframe{
@@ -788,18 +814,6 @@
           <div class="org-cat">Helse · Innovasjon</div>
           <h3>DRIV NTNU</h3>
           <p>Kobler studenter med reelle helseutfordringer og et tverrfaglig innovasjonsmiljø.</p>
-        </div>
-      </a>
-
-      <a class="org-card" data-accent="blue" href="https://engage-centre.no" target="_blank" rel="noopener">
-        <div class="org-media">
-          <img loading="lazy" decoding="async" class="org-logo big-tall" src="assets/logos/engage.webp" alt="Engage">
-          <img loading="lazy" decoding="async" class="org-photo" src="assets/heroes/engage.webp" alt="Engage-arrangement">
-        </div>
-        <div class="org-body">
-          <div class="org-cat">Innovasjon · Nettverk</div>
-          <h3>SFU Engage</h3>
-          <p>Kobler sammen studenter, organisasjoner og muligheter i innovasjonsmiljøet.</p>
         </div>
       </a>
 
@@ -1087,7 +1101,16 @@
 <!-- ============ KART ============ -->
 <section id="kart" style="padding-top:48px;">
   <div style="max-width:1640px; margin:0 auto; padding:0 32px;">
-    <div class="map-wrap" style="position:relative; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:var(--bg-soft); box-shadow:0 14px 40px -28px rgba(0,0,0,.4);">
+    <div class="engage-map">
+      <div class="engage-map-head">
+        <img class="engage-map-logo" loading="lazy" decoding="async" src="assets/logos/engage.webp" alt="SFU Engage"/>
+        <div class="engage-map-text">
+          <div class="engage-map-name">SFU Engage</div>
+          <p>Senter for fremragende utdanning og fasilitator for innovasjonsmiljøet ved NTNU. Kartet under viser økosystemet av studentorganisasjoner, miljøer og muligheter.</p>
+        </div>
+        <a class="engage-map-link" href="https://engage-centre.no" target="_blank" rel="noopener">engage-centre.no →</a>
+      </div>
+    <div class="map-wrap" style="position:relative; overflow:hidden; background:var(--bg-soft);">
       <div class="map-shell" id="mapShell">
         <iframe class="map-iframe" id="mapFrame" src="https://app.atlas.co/shared/0s38wVERSNnDjC86AZRL?index=0" title="Kart over organisasjonene" loading="eager" fetchpriority="high" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
         <div class="map-frost" aria-hidden="true"></div>
@@ -1096,6 +1119,7 @@
       <button type="button" class="map-gate" onclick="this.closest('.map-wrap').classList.add('map-active')" aria-label="Aktiver kartet">
         <span class="map-gate-label">Trykk for å utforske økosystemet</span>
       </button>
+    </div>
     </div>
   </div>
 </section>
