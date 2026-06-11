@@ -189,7 +189,7 @@
   }
   .mtg{
     background:var(--card); border:1px solid var(--line);
-    border-radius: var(--radius-l); padding: 22px;
+    border-radius: var(--radius-l); padding: 0;
     position:relative; overflow:hidden;
     display:flex; flex-direction:column;
     transition: transform .25s, border-color .2s;
@@ -199,12 +199,13 @@
   .mtg[data-a="r"]{--accent:var(--red);}
   .mtg[data-a="y"]{--accent:var(--yellow);}
   .mtg-glyph{
-    width:100%; aspect-ratio: 16/10; border-radius:14px;
+    width:100%; aspect-ratio: 16/10;
     background: color-mix(in oklab, var(--accent) 14%, var(--bg-soft));
-    margin-bottom:22px; position:relative; overflow:hidden;
+    position:relative; overflow:hidden; flex-shrink:0;
   }
   .mtg-glyph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
   .mtg:hover .mtg-glyph img{transform:scale(1.05);}
+  .mtg-body{padding:22px; display:flex; flex-direction:column; flex:1;}
   .mtg .cap-bar{display:flex; align-items:baseline; gap:8px; margin-bottom:6px;}
   .mtg .cap-bar .n{
     font-size:42px; font-weight:800; letter-spacing:-.03em;
@@ -613,18 +614,18 @@
         <div class="mtg-glyph">
           <img loading="lazy" decoding="async" src="assets/rooms/storemoterom.avif" alt="Store møterom"/>
         </div>
-        <div class="cap-bar">
-          <span class="n">16</span>
-          <span class="l">Plasser</span>
-        </div>
-        <h5>Store møterom.</h5>
-        <p>
-          Det mest bookede rommet på FRAM. Egner seg godt til større møter, og fungerer også som undervisningsrom for små grupper.
-        </p>
-        <div class="equip">
-          <span>Projektor</span>
-          <span>Lydanlegg</span>
-          <span>Stoler &amp; bord</span>
+        <div class="mtg-body">
+          <div class="cap-bar">
+            <span class="n">16</span>
+            <span class="l">Plasser</span>
+          </div>
+          <h5>Store møterom.</h5>
+          <p>Det mest bookede rommet på FRAM. Egner seg godt til større møter, og fungerer også som undervisningsrom for små grupper.</p>
+          <div class="equip">
+            <span>Projektor</span>
+            <span>Lydanlegg</span>
+            <span>Stoler &amp; bord</span>
+          </div>
         </div>
       </div>
 
@@ -632,18 +633,18 @@
         <div class="mtg-glyph">
           <img loading="lazy" decoding="async" src="assets/rooms/lillemoterom.avif" alt="Lillemøterom"/>
         </div>
-        <div class="cap-bar">
-          <span class="n">7</span>
-          <span class="l">Plasser</span>
-        </div>
-        <h5>Lillemøterom.</h5>
-        <p>
-          Ligger i hjørnet på FRAM med vinduer ut og en god, intim stemning. Stor flatskjerm gjør det perfekt for tette møter og presentasjoner.
-        </p>
-        <div class="equip">
-          <span>Flatskjerm</span>
-          <span>Lydanlegg</span>
-          <span>Hjørnerom</span>
+        <div class="mtg-body">
+          <div class="cap-bar">
+            <span class="n">7</span>
+            <span class="l">Plasser</span>
+          </div>
+          <h5>Lillemøterom.</h5>
+          <p>Ligger i hjørnet på FRAM med vinduer ut og en god, intim stemning. Stor flatskjerm gjør det perfekt for tette møter og presentasjoner.</p>
+          <div class="equip">
+            <span>Flatskjerm</span>
+            <span>Lydanlegg</span>
+            <span>Hjørnerom</span>
+          </div>
         </div>
       </div>
 
@@ -651,18 +652,18 @@
         <div class="mtg-glyph">
           <img loading="lazy" decoding="async" src="assets/Bananrommet.webp" alt="Bananrommet"/>
         </div>
-        <div class="cap-bar">
-          <span class="n">12</span>
-          <span class="l">Plasser</span>
-        </div>
-        <h5>Banan&shy;rommet.</h5>
-        <p>
-          Det gule møterommet — også kjent som banan&shy;rommet. Plass til tolv, og en uformell stemning som passer like godt til workshops som til lange teamsamtaler.
-        </p>
-        <div class="equip">
-          <span>Gult</span>
-          <span>Workshop-vennlig</span>
-          <span>12 plasser</span>
+        <div class="mtg-body">
+          <div class="cap-bar">
+            <span class="n">12</span>
+            <span class="l">Plasser</span>
+          </div>
+          <h5>Banan&shy;rommet.</h5>
+          <p>Det gule møterommet — også kjent som banan&shy;rommet. Plass til tolv, og en uformell stemning som passer like godt til workshops som til lange teamsamtaler.</p>
+          <div class="equip">
+            <span>Gult</span>
+            <span>Workshop-vennlig</span>
+            <span>12 plasser</span>
+          </div>
         </div>
       </div>
     </div>
