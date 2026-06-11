@@ -202,9 +202,8 @@
     width:100%; aspect-ratio: 16/10; border-radius:14px;
     background: color-mix(in oklab, var(--accent) 14%, var(--bg-soft));
     margin-bottom:22px; position:relative; overflow:hidden;
-    display:flex; align-items:center; justify-content:center;
   }
-  .mtg-glyph img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
+  .mtg-glyph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
   .mtg:hover .mtg-glyph img{transform:scale(1.05);}
   .mtg .cap-bar{display:flex; align-items:baseline; gap:8px; margin-bottom:6px;}
   .mtg .cap-bar .n{
