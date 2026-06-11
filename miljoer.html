@@ -537,8 +537,17 @@
     padding:20px 26px; border-bottom:1px solid var(--line);
     background:var(--card);
   }
-  .engage-map-logo{ height:38px; width:auto; flex:none; }
+  .engage-map-logo{ height:58px; width:auto; flex:none; }
   .engage-map-text{ flex:1; min-width:0; }
+  .engage-map-cat{
+    font-family:'JetBrains Mono',monospace; font-size:10px;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+    display:flex; align-items:center; gap:7px; margin-bottom:5px;
+  }
+  .engage-map-cat::before{
+    content:''; width:6px; height:6px; border-radius:50%; flex:none;
+    background:var(--blue);
+  }
   .engage-map-name{ font-weight:700; font-size:16px; color:var(--ink); letter-spacing:.01em; }
   .engage-map-text p{ margin:3px 0 0; font-size:13.5px; line-height:1.45; color:var(--ink-soft); }
   .engage-map-link{
@@ -548,7 +557,7 @@
   .engage-map-link:hover{ text-decoration:underline; }
   @media (max-width:640px){
     .engage-map-head{ flex-wrap:wrap; gap:14px; padding:16px 18px; }
-    .engage-map-logo{ height:32px; }
+    .engage-map-logo{ height:46px; }
     .engage-map-link{ width:100%; }
   }
 
@@ -1105,10 +1114,11 @@
       <div class="engage-map-head">
         <img class="engage-map-logo" loading="lazy" decoding="async" src="assets/logos/engage.webp" alt="SFU Engage"/>
         <div class="engage-map-text">
+          <div class="engage-map-cat">Fasilitator</div>
           <div class="engage-map-name">SFU Engage</div>
           <p>Senter for fremragende utdanning og fasilitator for innovasjonsmiljøet ved NTNU. Kartet under viser økosystemet av studentorganisasjoner, miljøer og muligheter.</p>
         </div>
-        <a class="engage-map-link" href="https://engage-centre.no" target="_blank" rel="noopener">engage-centre.no →</a>
+        <a class="engage-map-link" href="https://engage-centre.no" target="_blank" rel="noopener">Les mer →</a>
       </div>
     <div class="map-wrap" style="position:relative; overflow:hidden; background:var(--bg-soft);">
       <div class="map-shell" id="mapShell">
