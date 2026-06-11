@@ -1082,6 +1082,7 @@
         <div class="foot-partners-logos">
           <img loading="lazy" decoding="async" src="assets/partners/sb1-smn.webp" alt="SpareBank 1 SMN"/>
           <img loading="lazy" decoding="async" src="assets/partners/equinor.webp" alt="Equinor" class="eq-logo"/>
+          <img loading="lazy" decoding="async" src="assets/DNB_Logo.png" alt="DNB" class="dnb-logo"/>
         </div>
       </div>
 
@@ -1157,9 +1158,10 @@
 <style>
   /* Footer — Samarbeidspartnere + farger (oppdatert) */
   .foot-partners{ display:flex; flex-direction:column; gap:12px; }
-  .foot-partners-logos{ display:flex; flex-direction:row; align-items:center; gap:28px; flex-wrap:wrap; }
+  .foot-partners-logos{ display:flex; flex-direction:column; align-items:flex-start; gap:18px; }
   .foot-partners-logos img{ height:26px; width:auto; opacity:.9; filter:grayscale(.25); transition:opacity .2s, filter .2s; }
   .foot-partners-logos img.eq-logo{ height:26px; }
+  .foot-partners-logos img.dnb-logo{ height:30px; }
   .foot-partners-logos img:hover{ opacity:1; filter:grayscale(0); }
   .foot-brand img{ filter:saturate(.4); }
   .foot-social[aria-label="Instagram"]{ color:#E1306C; }
