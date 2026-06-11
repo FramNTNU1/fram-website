@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="preload" as="image" href="assets/Idegarasjen1.webp" fetchpriority="high"/>
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"/>
 <title>Idégarasjen — FRAM NTNU</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -206,7 +207,7 @@
     color:#7a5c00; background:color-mix(in oklab, var(--yellow) 26%, var(--bg-soft));
     padding:4px 10px; border-radius:100px;
   }
-  .eq h4{font-size:23px; font-weight:700; letter-spacing:-.015em; margin:0;}
+  .eq h3{font-size:23px; font-weight:700; letter-spacing:-.015em; margin:0;}
   .eq p{font-size:14.5px; line-height:1.6; color:var(--ink-soft); margin:0;}
   .eq-tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:4px;}
   .eq-missing{
@@ -223,7 +224,7 @@
     display:flex; align-items:center; justify-content:center;
   }
   .eq-missing .em-kick{font-family:'JetBrains Mono',monospace; font-size:11px; color:#7a5c00; letter-spacing:.1em; text-transform:uppercase; margin:0 0 6px;}
-  .eq-missing h4{font-size:21px; font-weight:700; letter-spacing:-.015em; margin:0 0 8px;}
+  .eq-missing h3{font-size:21px; font-weight:700; letter-spacing:-.015em; margin:0 0 8px;}
   .eq-missing p{font-size:14.5px; line-height:1.6; color:var(--ink-soft); margin:0; max-width:480px;}
   .eq-missing .em-btns{flex:none; display:flex; flex-direction:column; gap:10px;}
   .eq-missing .em-btn{
@@ -501,10 +502,10 @@
 <!-- ============ HERO BANNER / CAROUSEL ============ -->
 <header class="hero-banner">
   <div class="hero-slides" id="heroSlides">
-    <img src="assets/Idegarasjen1.webp" alt="Idégarasjen" class="active" decoding="async"/>
-    <img src="assets/Idegarasjen2.webp" alt="Idégarasjen" loading="lazy" decoding="async"/>
-    <img src="assets/Idegarasjen3.webp" alt="Idégarasjen" loading="lazy" decoding="async"/>
-    <img src="assets/Idegarasjen4.webp" alt="Idégarasjen" loading="lazy" decoding="async"/>
+    <img src="assets/Idegarasjen1.webp" alt="Idégarasjen — studentenes innovasjonsverksted på NTNU i Trondheim" class="active" fetchpriority="high" decoding="async"/>
+    <img src="assets/Idegarasjen2.webp" alt="Stort verksted i Idégarasjen med ulike verktøy og maskiner" loading="lazy" decoding="async"/>
+    <img src="assets/Idegarasjen3.webp" alt="3D-printere, loddebenker og stativer i Idégarasjen" loading="lazy" decoding="async"/>
+    <img src="assets/Idegarasjen4.webp" alt="Diverse verktøy og utstyr studenter kan benytte i Idégarasjen" loading="lazy" decoding="async"/>
   </div>
   <div class="hero-overlay">
     <div class="wrap">
@@ -559,7 +560,7 @@
       <article class="eq">
         <img class="eq-photo" loading="lazy" decoding="async" src="assets/prusa3d.webp" alt="3D-printere i Idégarasjen"/>
         <div class="eq-body">
-          <div class="eq-tophdr"><span class="eq-num">01</span><h4>3D-printere</h4></div>
+          <div class="eq-tophdr"><span class="eq-num">01</span><h3>3D-printere</h3></div>
           <p>Prusa 3D-printere for prototyper, deler og modeller. Flere og mer avanserte printere kommer i den nye Idégarasjen på Hesthagen.</p>
         </div>
       </article>
@@ -567,7 +568,7 @@
       <article class="eq">
         <img class="eq-photo" loading="lazy" decoding="async" src="assets/loddeplass.avif" alt="Loddestasjoner i Idégarasjen"/>
         <div class="eq-body">
-          <div class="eq-tophdr"><span class="eq-num">02</span><h4>Loddestasjoner</h4></div>
+          <div class="eq-tophdr"><span class="eq-num">02</span><h3>Loddestasjoner</h3></div>
           <p>Utstyr for elektronikkprosjekter, prototyping og reparasjoner. Her kan du lodde komponenter, bygge kretser og feilsøke elektronikk.</p>
         </div>
       </article>
@@ -575,7 +576,7 @@
       <article class="eq">
         <img class="eq-photo" loading="lazy" decoding="async" src="assets/Idegarasjen1.webp" alt="Arbeidsplass i Idégarasjen"/>
         <div class="eq-body">
-          <div class="eq-tophdr"><span class="eq-num">03</span><h4>Arbeidsplass</h4></div>
+          <div class="eq-tophdr"><span class="eq-num">03</span><h3>Arbeidsplass</h3></div>
           <p>Store arbeidsbenker med god plass, strøm og belysning. Et sted for bygging, montering og utvikling av prosjekter.</p>
         </div>
       </article>
@@ -586,7 +587,7 @@
           <span class="eq-members-badge">Kun for Fram-medlemmer</span>
         </div>
         <div class="eq-body">
-          <div class="eq-tophdr"><span class="eq-num">04</span><h4>Storformatprinter</h4></div>
+          <div class="eq-tophdr"><span class="eq-num">04</span><h3>Storformatprinter</h3></div>
           <p>Skriv ut plakater, presentasjoner, tekniske tegninger og annet materiell i opptil A0-format.</p>
         </div>
       </article>
@@ -594,7 +595,7 @@
       <article class="eq">
         <img class="eq-photo" loading="lazy" decoding="async" src="assets/h%C3%A5ndverkt%C3%B8y.avif" alt="Håndverktøy i Idégarasjen"/>
         <div class="eq-body">
-          <div class="eq-tophdr"><span class="eq-num">05</span><h4>Håndverktøy</h4></div>
+          <div class="eq-tophdr"><span class="eq-num">05</span><h3>Håndverktøy</h3></div>
           <p>Skrutrekkere, tenger, filer, måleverktøy og annet grunnleggende verkstedutstyr som dekker de fleste behov.</p>
         </div>
       </article>
@@ -602,7 +603,7 @@
       <article class="eq">
         <img class="eq-photo" loading="lazy" decoding="async" src="assets/Elverktøy.webp" alt="Elverktøy i Idégarasjen"/>
         <div class="eq-body">
-          <div class="eq-tophdr"><span class="eq-num">06</span><h4>Elverktøy</h4></div>
+          <div class="eq-tophdr"><span class="eq-num">06</span><h3>Elverktøy</h3></div>
           <p>Drill, stikksag, slipemaskin og annet elverktøy for bearbeiding av materialer og bygging av større prototyper.</p>
         </div>
       </article>
@@ -615,7 +616,7 @@
           </div>
           <div>
             <p class="em-kick">Mangler det noe?</p>
-            <h4>Finner du ikke det du trenger i Idégarasjen?</h4>
+            <h3>Finner du ikke det du trenger i Idégarasjen?</h3>
             <p>Fyll ut skjemaet, så ser vi om vi kan kjøpe det inn til Idégarasjen. Tips oss gjerne om verktøy, materialer eller utstyr du savner.</p>
           </div>
         </div>
