@@ -166,9 +166,12 @@
     border:1px solid var(--line); color:var(--ink);
   }
   .room .body{padding: 28px 32px 32px; flex:1;}
+  .room .cap-bar{display:flex; align-items:baseline; gap:8px; margin-bottom:6px;}
+  .room .cap-bar .n{font-size:42px; font-weight:800; letter-spacing:-.03em; color:var(--ink); line-height:.9;}
+  .room .cap-bar .l{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase;}
   .room h4{
     font-size:30px; font-weight:800; letter-spacing:-.02em;
-    margin:0 0 14px; line-height:1.05;
+    margin:10px 0 14px; line-height:1.05;
   }
   .room p{
     font-size:15px; line-height:1.6; color:var(--ink-soft); margin:0 0 18px;
@@ -567,16 +570,13 @@
     <div class="rooms-grid">
       <div class="room">
         <div class="photo">
-          <span class="tag">120 plasser</span>
           <img loading="lazy" decoding="async" src="assets/scenerommet.avif" alt="Scenerommet"/>
         </div>
         <div class="body">
+          <div class="cap-bar"><span class="n">120</span><span class="l">Plasser</span></div>
           <h4>Scene&shy;rommet.</h4>
-          <p>
-            En fleksibel arena for arrangementer, små konserter, foredrag og workshops. Utenom arrangementer fungerer det som et åpent arbeidslokale.
-          </p>
+          <p>En fleksibel arena for arrangementer, små konserter, foredrag og workshops. Utenom arrangementer fungerer det som et åpent arbeidslokale.</p>
           <div class="feats">
-            <span class="feat"><i class="ph ph-users-three"></i>120 stående</span>
             <span class="feat"><i class="ph ph-armchair"></i>70 sittende</span>
             <span class="feat"><i class="ph ph-microphone-stage"></i>Talerstol</span>
             <span class="feat"><i class="ph ph-speaker-hifi"></i>PA-anlegg</span>
@@ -588,16 +588,13 @@
 
       <div class="room">
         <div class="photo">
-          <span class="tag">~40 plasser</span>
           <img loading="lazy" decoding="async" src="assets/fram-fellesrom.webp" alt="Fellesrommet"/>
         </div>
         <div class="body">
+          <div class="cap-bar"><span class="n">~40</span><span class="l">Plasser</span></div>
           <h4>Felles&shy;rommet.</h4>
-          <p>
-            Åpent for alle studenter og egner seg like godt til skolearbeid som til en kaffe eller lunsjpause. For større arrangementer: avtal med leder i Fram.
-          </p>
+          <p>Åpent for alle studenter og egner seg like godt til skolearbeid som til en kaffe eller lunsjpause. For større arrangementer: avtal med leder i Fram.</p>
           <div class="feats">
-            <span class="feat"><i class="ph ph-users-three"></i>~40 plasser</span>
             <span class="feat"><i class="ph ph-coffee"></i>Kaffemaskin</span>
             <span class="feat"><i class="ph ph-ping-pong"></i>Bordtennis</span>
             <span class="feat"><i class="ph ph-fork-knife"></i>Kjøkken &amp; langbord</span>
