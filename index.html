@@ -1762,6 +1762,12 @@
     /* Drop-in bento-grid: 2 kolonner */
     .dropin-grid { grid-template-columns: repeat(2, 1fr) !important; grid-auto-rows: 160px; }
     .amenity--col-3, .amenity--col-2 { grid-column: span 2; }
+    /* Medlemskort: krymp logoboksen og la lange ord brytes så teksten
+       ikke renner utenfor kortet på smale skjermer */
+    .opt--members { gap: 12px; }
+    .opt--members .members-logo { flex: 0 0 92px; width: 92px; padding-right: 12px; }
+    .opt--members .members-logo img { max-width: 80px; }
+    .members-title, .members-sub { overflow-wrap: anywhere; }
   }
 
 </style>
