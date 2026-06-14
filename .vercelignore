@@ -1,9 +1,11 @@
 # Merkevare-/kildemateriale som ikke skal publiseres på nettsiden.
 # Filene blir liggende i Git-repoet, men lastes ikke opp til Vercel.
-Visuell profil/
-Logoer/
-Gruva/
+# NB: ledende «/» ankrer mønsteret til repo-roten, slik at f.eks. «Logoer/»
+# ikke også ekskluderer «assets/logoer/» (som forsiden faktisk bruker).
+/Visuell profil/
+/Logoer/
+/Gruva/
 README.md
 
 # Ubrukt kildemateriale – kun assets/Idegarasjen.webp var i bruk.
-uploads/
+/uploads/
