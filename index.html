@@ -1486,7 +1486,7 @@
   /* ---------- INNOVASJONSREISEN ---------- */
   .reisen{ padding: 100px 0 120px; position:relative; }
   .reisen-intro{
-    max-width:680px; margin: 0 auto 64px; text-align:center;
+    max-width:1060px; margin: 0 auto 64px; text-align:center;
   }
   .reisen-kick{
     display:inline-flex; align-items:center; gap:10px;
@@ -1682,6 +1682,61 @@
   .reisen-foot p{
     font-size:17px; line-height:1.5; color:var(--ink);
     margin:0; max-width:560px;
+  }
+
+  /* ---------- Idéreise: Velg din inngang (persona) ---------- */
+  .persona-grid{ display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:auto 1fr;
+    gap:26px; margin:48px auto 0; max-width:1060px; align-items:stretch; }
+  .persona{ position:relative; background:var(--card); border:1px solid var(--line);
+    border-radius:24px; overflow:hidden;
+    display:grid; grid-row:span 2; grid-template-rows:subgrid; row-gap:0;
+    box-shadow:0 30px 60px -40px rgba(0,0,0,.36);
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+  .persona:hover{ transform:translateY(-6px); box-shadow:0 42px 76px -40px rgba(0,0,0,.38);
+    border-color:color-mix(in oklab, var(--pc) 32%, var(--line)); }
+  .persona-head{ position:relative; padding:30px 30px 26px;
+    background:
+      radial-gradient(120% 140% at 100% 0%, color-mix(in oklab, var(--pc) 26%, var(--card)), transparent 60%),
+      color-mix(in oklab, var(--pc) 11%, var(--card)); }
+  .persona h3{ margin:0 0 10px; font-size:25px; font-weight:800; letter-spacing:-.02em; line-height:1.12;
+    max-width:80%; }
+  .persona .plead{ margin:0; font-size:14px; line-height:1.6; color:var(--ink-soft); max-width:92%; }
+  .persona-body{ padding:22px; display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+    background:var(--bg-soft); flex:1; }
+  .opt{ display:flex; flex-direction:column; gap:12px; padding:16px 16px 15px;
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .opt:hover{ transform:translateY(-3px);
+    border-color:color-mix(in oklab, var(--pc) 40%, var(--line));
+    box-shadow:0 16px 30px -22px rgba(0,0,0,.32); }
+  .opt--wide{ grid-column:1 / -1; }
+  .opt-logo{ height:30px; display:flex; align-items:center; }
+  .opt-logo img{ height:28px; width:auto; max-width:150px; object-fit:contain; object-position:left center; }
+  .opt-logo.dark{ align-self:flex-start; background:var(--ink); border-radius:8px; padding:7px 11px; height:auto; }
+  .opt-logo.dark img{ height:18px; }
+  .opt-desc{ font-size:12px; line-height:1.45; color:var(--ink-soft); }
+  .opt-desc b{ color:var(--ink); font-weight:600; }
+  .opt--members{ flex-direction:row; align-items:center; gap:18px; }
+  .opt--members .members-logo{ flex:0 0 148px; width:148px; height:60px; display:flex;
+    align-items:center; justify-content:center; overflow:hidden;
+    border-right:1px solid var(--line); padding-right:18px; }
+  .opt--members .members-logo img{ max-height:40px; max-width:104px; width:auto; height:auto;
+    object-fit:contain; object-position:center; transition:opacity .35s ease; }
+  .opt--members .members-meta{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
+  .members-title{ font-size:15px; line-height:1.2; color:var(--ink); font-weight:600; }
+  .members-title b{ font-family:'JetBrains Mono',monospace; font-weight:700;
+    color:var(--pc, var(--accent)); margin-right:3px; }
+  .members-sub{ font-size:12px; line-height:1.4; color:var(--ink-soft); }
+  .members-link{ display:inline-flex; align-self:flex-start; align-items:center; gap:7px;
+    margin-top:7px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+    letter-spacing:.05em; text-transform:uppercase; text-decoration:none;
+    color:var(--pc, var(--accent)); white-space:nowrap; transition:gap .2s ease; }
+  .members-link .ar{ transition:transform .2s ease; }
+  .members-link:hover{ gap:11px; }
+  .members-link:hover .ar{ transform:translateX(3px); }
+  @media (max-width:760px){
+    .persona-grid{ grid-template-columns:1fr; grid-template-rows:none; }
+    .persona{ grid-row:auto; grid-template-rows:auto auto; }
   }
 
   /* ---------- MOBILRESPONSIVITET (manglende breakpoints) ---------- */
@@ -2145,65 +2200,67 @@
 <section class="reisen" id="reisen">
   <div class="wrap">
     <div class="reisen-intro">
-      <h2 class="section-title">Har du en <span class="y">idé?</span></h2>
-      <p class="reisen-sub">Fra første tanke til eget selskap — slik tar du ideen videre i innovasjonsmiljøet på NTNU.</p>
+      <h2 class="section-title" style="color:var(--ink)">Hvor starter <span class="y" style="color:var(--ink)">du?</span></h2>
     </div>
 
-    <!-- Idéreise: Fram → (Spark / Entreprenørskolen) → Gründerbrakka -->
-    <div class="road">
+    <!-- Idéreise: Velg din inngang (persona) -->
+    <div class="persona-grid">
 
-      <div class="phase">
-        <div class="phase-label">Introduksjon</div>
-        <div class="phase-node">01</div>
-        <div class="phase-body">
-          <article class="rcard">
-            <div class="rcard-logo"><img decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU"/></div>
-            <p>Hvis du leser dette, har du allerede tatt det første steget. Resten handler om å finne menneskene, prosjektene og mulighetene som passer deg.</p>
-            <div class="rcard-foot">
-              <span class="rcard-meta">For alle</span>
-            </div>
-          </article>
+      <div class="persona" style="--pc:var(--yellow)">
+        <div class="persona-head">
+          <h3>Bli kjent med miljøet</h3>
+          <p class="plead">Kom på et arrangement på FRAM eller les om de ulike medlemsorganisasjonene våre og se hva man kan involvere seg i på siden av studiene.</p>
         </div>
-      </div>
-
-      <div class="phase">
-        <div class="phase-label">Veivalg</div>
-        <div class="phase-node">02</div>
-        <div class="phase-body">
-          <div class="phase-pair">
-            <article class="rcard">
-              <div class="rcard-logo"><img loading="lazy" decoding="async" src="assets/spark-logo.webp" alt="Spark NTNU"/></div>
-              <p>Gratis veiledningstjeneste for studenter med en forretningsidé, eller som vil være med i en oppstartsbedrift.</p>
-              <div class="rcard-foot">
-                <span class="rcard-meta">Veiledning · 6 mnd</span>
-                <a class="rcard-link" href="https://sparkntnu.no" target="_blank" rel="noopener">Les mer <span class="ar">→</span></a>
-              </div>
-            </article>
-            <div class="phase-or">eller</div>
-            <article class="rcard">
-              <div class="rcard-logo"><img loading="lazy" decoding="async" src="assets/logos/entreprenorskolen.webp" alt="NTNU School of Entrepreneurship"/></div>
-              <p>Bygg et selskap mens du tar en mastergrad. NTNUs Entreprenørskole kombinerer entreprenørskap, teknologi og praktisk erfaring over to intensive år.</p>
-              <div class="rcard-foot">
-                <span class="rcard-meta">Master · 120 sp</span>
-                <a class="rcard-link" href="https://www.entreprenorskolen.no" target="_blank" rel="noopener">Les mer <span class="ar">→</span></a>
-              </div>
-            </article>
+        <div class="persona-body">
+          <div class="opt opt--wide">
+            <span class="opt-logo"><img loading="lazy" decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU"/></span>
+            <span class="opt-desc"><b>Fram</b> — lavterskel-arrangementer som en introduksjon til innovasjonsmiljøet på NTNU</span>
+          </div>
+          <div class="opt">
+            <span class="opt-logo"><img loading="lazy" decoding="async" src="assets/logos/start-ntnu.png" alt="Start NTNU"/></span>
+            <span class="opt-desc"><b>Start NTNU</b> — arrangementer for deg som vil utforske entreprenørskap</span>
+          </div>
+          <div class="opt">
+            <span class="opt-logo"><img loading="lazy" decoding="async" src="assets/logos/boosthenne.webp" alt="Boost Henne"/></span>
+            <span class="opt-desc"><b>Boost Henne</b> — arrangerer lavterskel-events for kvinner i innovasjon</span>
+          </div>
+          <div class="opt opt--wide opt--members">
+            <span class="members-logo"><img id="memberLogo" loading="lazy" decoding="async" src="assets/logoer/ascend-ntnu.png" alt="Medlemsorganisasjon"/></span>
+            <span class="members-meta">
+              <span class="members-title"><b>28+</b> medlemsorganisasjoner</span>
+              <span class="members-sub">Bli med i en organisasjon og finn folk som deler de samme interessene som deg</span>
+              <a class="members-link" href="miljoer.html">Utforsk alle <span class="ar">→</span></a>
+            </span>
           </div>
         </div>
       </div>
 
-      <div class="phase">
-        <div class="phase-label">Skalér</div>
-        <div class="phase-node">03</div>
-        <div class="phase-body">
-          <article class="rcard">
-            <div class="rcard-logo"><img loading="lazy" decoding="async" src="assets/logos/grunderbrakka.webp" alt="Gründerbrakka"/></div>
-            <p>Arbeidsplass for oppstartsbedrifter med ambisjoner. Kontorplasser, investornettverk og et fellesskap som hjelper selskaper å vokse.</p>
-            <div class="rcard-foot">
-              <span class="rcard-meta">Coworking</span>
-              <a class="rcard-link" href="https://www.grunderbrakka.no" target="_blank" rel="noopener">Les mer <span class="ar">→</span></a>
-            </div>
-          </article>
+      <div class="persona" style="--pc:var(--blue)">
+        <div class="persona-head">
+          <h3>Ta idéen videre &amp; bygg selskap</h3>
+          <p class="plead">Har du en idé eller et prosjekt du vil bygge videre på? På NTNU finnes det veiledning, finansiering og et miljø som kan hjelpe deg videre.</p>
+        </div>
+        <div class="persona-body">
+          <div class="opt">
+            <span class="opt-logo"><img loading="lazy" decoding="async" src="assets/spark-logo.webp" alt="Spark NTNU" style="height:34px"/></span>
+            <span class="opt-desc"><b>Spark NTNU</b> — gratis veiledning</span>
+          </div>
+          <div class="opt">
+            <span class="opt-logo"><img loading="lazy" decoding="async" src="assets/ntnu_discovery_web.gif" alt="NTNU Discovery"/></span>
+            <span class="opt-desc"><b>NTNU Discovery</b> — finansiering til å verifisere idéen</span>
+          </div>
+          <div class="opt">
+            <span class="opt-logo dark"><img loading="lazy" decoding="async" src="assets/Aneo_logo.svg.png" alt="Aneo"/></span>
+            <span class="opt-desc"><b>Aneo-bidraget</b> — støtte til å ta idéen videre</span>
+          </div>
+          <div class="opt">
+            <span class="opt-logo"><img loading="lazy" decoding="async" src="assets/logos/entreprenorskolen.webp" alt="Entreprenørskolen"/></span>
+            <span class="opt-desc"><b>Entreprenørskolen</b> — bygg selskap mens du tar en master</span>
+          </div>
+          <div class="opt opt--wide">
+            <span class="opt-logo"><img loading="lazy" decoding="async" src="assets/logos/grunderbrakka.webp" alt="Gründerbrakka"/></span>
+            <span class="opt-desc"><b>Gründerbrakka</b> — coworking og investornettverk for selskaper som vil vokse</span>
+          </div>
         </div>
       </div>
 
@@ -2621,6 +2678,38 @@ const sty=document.createElement('style'); sty.textContent='@keyframes pulseRing
     t.addEventListener('click', ()=> select(+t.dataset.exp));
   });
 })();
+</script>
+
+<script>
+  // Roterende medlemslogo i idéreise-seksjonen
+  (function(){
+    const memberLogo = document.getElementById('memberLogo');
+    if (!memberLogo) return;
+    // Kun logoer med god kontrast på hvit bakgrunn
+    const members = [
+      'ascend-ntnu.png','brain-ntnu.png','designhjelpen.png','driv-ntnu.png',
+      'fuel-fighter.png','ingeniorer-uten-grenser.png','make-ntnu.png','njord.png',
+      'nordlys.png','norstec.png','propulse-ntnu.webp','solanlinjeforeninglogo.webp',
+      'studio-beta.png'
+    ];
+    const big = new Set(['designhjelpen.png','njord.png','propulse-ntnu.webp','solanlinjeforeninglogo.webp','ascend-ntnu.png']);
+    const setLogo = (name) => {
+      memberLogo.src = 'assets/logoer/' + name;
+      const isBig = big.has(name);
+      memberLogo.style.maxHeight = isBig ? '54px' : '40px';
+      memberLogo.style.maxWidth  = isBig ? '126px' : '104px';
+    };
+    let mi = 0;
+    setLogo(members[0]);
+    setInterval(() => {
+      memberLogo.style.opacity = '0';
+      setTimeout(() => {
+        mi = (mi + 1) % members.length;
+        setLogo(members[mi]);
+        memberLogo.style.opacity = '1';
+      }, 350);
+    }, 2000);
+  })();
 </script>
 
 <!-- Forsidens arrangementer leses fra felles datakilde (events-data.js) -->
