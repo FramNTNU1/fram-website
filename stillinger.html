@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"/>
+<title>Stillinger — FRAM NTNU</title>
+<link rel="preload" href="assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Self-hostede fonter */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/poppins-600.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/poppins-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/poppins-800.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url(assets/fonts/poppins-900.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400i.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500i.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/jetbrainsmono-400.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/jetbrainsmono-500.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/jetbrainsmono-600.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/jetbrainsmono-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins Fallback';src:local('Arial'),local('Helvetica Neue'),local('Roboto');size-adjust:113.64%;ascent-override:92.40%;descent-override:30.80%;line-gap-override:8.80%}
+</style>
+<style>
+  :root{
+    --yellow:#FDC82F; --blue:#2E86C1; --red:#E85A5A; --teal:#3FC4A3;
+    --ink:#1A1A1A; --ink-soft:#555; --muted:#8a8a8a;
+    --bg:#FBF7F0; --bg-soft:#F4EFE5; --card:#FFFFFF; --line:#E9E2D3;
+    --radius-m:16px; --radius-l:22px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; padding:0}
+  body{
+    font-family:'Poppins','Poppins Fallback',sans-serif; background:var(--bg); color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1360px; margin:0 auto; padding:0 48px;}
+  a{color:inherit; text-decoration:none}
+
+  /* ---------- NAV ---------- */
+  nav.top{
+    position:sticky; top:0; z-index:50;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px); border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:82px;}
+  .logo{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .logo-img, .logo img{height:38px; width:auto; display:block;}
+  .nav-links{display:flex; gap:32px; align-items:center; font-size:14px; font-weight:500;}
+  .nav-links a{
+    color:var(--ink-soft); text-decoration:none; padding:6px 0;
+    position:relative; transition:color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active{color:var(--ink);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-4px; height:3px;
+    background:var(--red, #E85A5A); border-radius:2px;
+    transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after{transform:scaleX(1);}
+
+  /* ---------- HERO ---------- */
+  header.page{padding: 80px 0 72px; border-bottom:1px solid var(--line);}
+  .hero-text{ text-align:center; }
+  h1.big{
+    font-size: clamp(40px, 5vw, 76px); line-height:1.02; letter-spacing:-.03em;
+    font-weight:800; color:var(--ink); margin:0 auto 28px; max-width:20ch;
+  }
+  .lede{font-size:21px; line-height:1.55; color:var(--ink-soft); max-width:640px; margin:0 auto;}
+
+  /* ---------- STILLINGER ---------- */
+  section{padding: 84px 0;}
+  .jobs h2{
+    font-size: clamp(28px, 3vw, 42px); font-weight:800; letter-spacing:-.02em;
+    line-height:1.05; margin:0 0 28px;
+  }
+
+  /* Liste over stillinger (fylles inn når noe er ute) */
+  .jobs-list{display:grid; gap:16px; max-width:820px;}
+  .job-card{
+    display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius-m);
+    padding:24px 28px; transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .job-card:hover{border-color:var(--blue); box-shadow:0 14px 30px -22px rgba(0,0,0,.4);}
+  .job-card h3{font-size:20px; font-weight:700; letter-spacing:-.01em; margin:0 0 6px;}
+  .job-card p{font-size:15px; line-height:1.55; color:var(--ink-soft); margin:0; max-width:520px;}
+
+  /* Tom tilstand */
+  .empty{
+    border:1px solid var(--line); border-radius:var(--radius-m);
+    background:var(--card); padding:36px 38px; max-width:680px;
+  }
+  .empty h3{font-size:20px; font-weight:700; letter-spacing:-.01em; margin:0 0 10px;}
+  .empty p{font-size:16px; line-height:1.65; color:var(--ink-soft); margin:0;}
+  .empty .empty-cta{
+    display:inline-flex; align-items:center; gap:8px; margin-top:20px;
+    font-weight:600; font-size:15px; color:var(--blue);
+  }
+  .empty .empty-cta:hover{text-decoration:underline;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background: var(--bg); color: var(--ink);
+    border-top: 1px solid var(--line);
+    padding: 40px 0 32px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; color:var(--muted);
+    letter-spacing:.04em;
+  }
+  .foot-main{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:40px; flex-wrap:wrap;
+    margin-bottom:28px; padding-bottom:28px;
+    border-bottom:1px solid var(--line);
+  }
+  .foot-left{ display:flex; flex-direction:column; gap:10px; }
+  .foot-brand{ display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+  .foot-brand img{ height:26px; width:auto; display:block; }
+  .foot-info{ line-height:1.9; }
+  .foot-info a{ color:var(--muted); text-decoration:none; transition:color .2s; }
+  .foot-info a:hover{ color:var(--ink); }
+  .foot-links{ display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap; }
+  .foot-group{ display:flex; flex-direction:column; gap:8px; }
+  .foot-group-label{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:4px; font-weight:600;
+  }
+  .foot-group a{
+    color:var(--ink-soft); text-decoration:none; font-size:12px;
+    transition:color .2s; line-height:1.8;
+  }
+  .foot-group a:hover{ color:var(--ink); }
+  .foot-socials{ display:flex; gap:10px; align-items:center; }
+  .foot-social{
+    display:flex; align-items:center; justify-content:center;
+    width:36px; height:36px; border-radius:10px;
+    border:1px solid var(--line); background:var(--card);
+    color:var(--ink-soft); text-decoration:none;
+    transition:all .2s;
+  }
+  .foot-social:hover{ border-color:var(--ink); color:var(--ink); transform:translateY(-2px); }
+  .foot-social svg{ width:16px; height:16px; fill:currentColor; }
+  .foot-bot{
+    display:flex; justify-content:space-between; align-items:center; gap:24px;
+    flex-wrap:wrap;
+  }
+  .ntnu-line{ display:flex; align-items:center; gap:12px; }
+  .ntnu-label{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+  .ntnu-logo{ height:22px; width:auto; opacity:.75; }
+
+  /* ---------- MOBILRESPONSIVITET ---------- */
+  @media (max-width: 560px){
+    section{ padding:56px 0; }
+    header.page{ padding:48px 0 44px; }
+    .job-card{ grid-template-columns:1fr; gap:14px; align-items:flex-start; }
+    .empty{ padding:26px 24px; }
+  }
+</style>
+<style>
+/* Gruva &amp; Idégarasjen-dropdown i nav */
+.nav-dd{ position:relative; display:inline-flex; align-items:center; }
+.nav-dd-btn{
+  display:inline-flex; align-items:center; gap:6px;
+  background:none; border:0; cursor:pointer; font-family:inherit;
+  font-size:14px; font-weight:500; color:var(--ink-soft);
+  padding:6px 0; transition:color .2s;
+}
+.nav-dd-btn .dd-caret{ font-size:10px; transition:transform .2s; }
+.nav-dd:hover .nav-dd-btn, .nav-dd-btn.active{ color:var(--ink); }
+.nav-dd:hover .dd-caret{ transform:rotate(180deg); }
+.nav-dd::after{ content:''; position:absolute; top:100%; left:0; right:0; height:14px; }
+.nav-dd-menu{
+  position:absolute; top:100%; left:50%; transform:translateX(-50%) translateY(10px);
+  min-width:190px; background:var(--card,#fff); border:1px solid var(--line,#E6E0D5);
+  border-radius:14px; padding:8px; display:flex; flex-direction:column; gap:2px;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.28);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease; z-index:60;
+}
+.nav-dd:hover .nav-dd-menu{ opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(8px); }
+@media (max-width: 600px){
+  .nav-dd-menu{ left:0; transform:translateY(10px); }
+  .nav-dd:hover .nav-dd-menu{ transform:translateY(8px); }
+}
+.nav-dd-menu a{
+  display:block; padding:10px 14px; border-radius:9px;
+  font-size:14px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+  white-space:nowrap; transition:background .15s, color .15s;
+}
+.nav-dd-menu a::after{ display:none !important; }
+.nav-dd-menu a:hover{ background:var(--bg-soft,#F2EDE3); color:var(--ink); }
+</style>
+
+<!-- ===== SEO / sosial deling ===== -->
+<meta name="description" content="Ledige stillinger i FRAM NTNU — bli med og form fremtidens innovasjonsmiljø ved NTNU. Vi søker studenter som brenner for teknologi, strategi, design og samarbeid."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://www.framntnu.no/stillinger"/>
+<meta name="theme-color" content="#FAF7F2"/>
+<meta name="author" content="FRAM NTNU"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="FRAM NTNU"/>
+<meta property="og:locale" content="nb_NO"/>
+<meta property="og:title" content="Stillinger — FRAM NTNU"/>
+<meta property="og:description" content="Bli med og form fremtidens innovasjonsmiljø ved NTNU. Vi søker studenter som brenner for teknologi, strategi, design og samarbeid."/>
+<meta property="og:url" content="https://www.framntnu.no/stillinger"/>
+<meta property="og:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Stillinger — FRAM NTNU"/>
+<meta name="twitter:description" content="Bli med og form fremtidens innovasjonsmiljø ved NTNU. Vi søker studenter som brenner for teknologi, strategi, design og samarbeid."/>
+<meta name="twitter:image" content="https://www.framntnu.no/assets/og-fram.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/webp" href="assets/fram-symbol.webp"/>
+<link rel="apple-touch-icon" href="assets/favicon-180.png"/>
+<link rel="stylesheet" href="assets/site.css"/>
+<script defer src="/_vercel/insights/script.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://www.framntnu.no/"},
+    {"@type": "ListItem", "position": 2, "name": "Stillinger", "item": "https://www.framntnu.no/stillinger"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "FRAM NTNU",
+  "url": "https://www.framntnu.no",
+  "logo": "https://www.framntnu.no/assets/og-fram.png",
+  "description": "FRAM NTNU er NTNUs senter for studentinnovasjon — et fellesskap for studenter som vil skape noe.",
+  "sameAs": [
+    "https://www.instagram.com/framntnu/",
+    "https://www.facebook.com/framntnu",
+    "https://www.linkedin.com/company/framntnu/"
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="top">
+  <div class="wrap nav-inner">
+    <a href="/" class="logo">
+      <img decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU" class="logo-img"/>
+    </a>
+    <div class="nav-links">
+      <a href="/#opplev">Opplev Fram</a>
+        <div class="nav-dd">
+        <button class="nav-dd-btn" type="button">Arrangementer <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="innovasjonsdagene">Innovasjonsdagene</a>
+          <a href="arrangementer#koble">Koble</a>
+          <a href="arrangementer">Alle arrangementer</a>
+        </div>
+      </div>
+      <a href="miljoer">Organisasjonene</a>
+      <a href="booking">Booking</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button">Gruva &amp; Idégarasjen <span class="dd-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-dd-menu">
+          <a href="https://www.gruvantnu.no/" target="_blank" rel="noopener">Gruva</a>
+          <a href="idegarasjen">Idégarasjen</a>
+        </div>
+      </div>
+      <a href="om">Om Fram</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ============ HERO ============ -->
+<header class="page">
+  <div class="wrap hero-text">
+    <h1 class="big">Vil du bli med i Fram?</h1>
+    <p class="lede">
+      Enten du brenner for teknologi, strategi, design, samarbeid – eller bare elsker å få ting til å skje – har vi en plass til deg.
+    </p>
+  </div>
+</header>
+
+<!-- ============ LEDIGE STILLINGER ============ -->
+<section class="jobs">
+  <div class="wrap">
+    <h2>Ledige stillinger</h2>
+
+    <!-- Når stillinger er ute: fjern .empty under og legg .job-card-er inn i .jobs-list.
+         Mal for en stilling:
+    <div class="jobs-list">
+      <a class="job-card" href="#">
+        <div>
+          <h3>Tittel på stillingen</h3>
+          <p>Kort beskrivelse av hva rollen innebærer og hvem vi ser etter.</p>
+        </div>
+        <span class="empty-cta">Les mer <i class="ph ph-arrow-right"></i></span>
+      </a>
+    </div>
+    -->
+
+    <div class="empty">
+      <h3>Ingen ledige stillinger akkurat nå</h3>
+      <p>
+        Vi har ingen utlysninger ute for øyeblikket, men det dukker stadig opp nye muligheter. Følg oss på Instagram eller ta kontakt – vi hører gjerne fra deg.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-main">
+
+      <div class="foot-left">
+        <div class="foot-brand">
+          <img decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU"/>
+        </div>
+        <div class="foot-info">
+          Sem Sælands vei 1, 7034 Trondheim<br/>
+          <a href="mailto:framntnu@gmail.com">framntnu@gmail.com</a>
+        </div>
+        <div class="foot-socials">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/framntnu/" target="_blank" rel="noopener" class="foot-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/framntnu" target="_blank" rel="noopener" class="foot-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/company/framntnu/" target="_blank" rel="noopener" class="foot-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@FramNTNU" target="_blank" rel="noopener" class="foot-social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <button onclick="document.getElementById('slack-modal').classList.add('open')" class="foot-social" aria-label="Slack">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/><path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/><path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/><path d="M8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/><path d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834z" fill="#2EB67D"/><path d="M17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/><path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52z" fill="#ECB22E"/><path d="M15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="foot-partners">
+        <div class="foot-group-label">Samarbeidspartnere</div>
+        <div class="foot-partners-logos">
+          <img loading="lazy" decoding="async" src="assets/partners/sparebank1NY.webp" alt="SpareBank 1 SMN"/>
+          <img loading="lazy" decoding="async" src="assets/partners/equinor.webp" alt="Equinor" class="eq-logo"/>
+          <img loading="lazy" decoding="async" src="assets/DNB_Logo.png" alt="DNB" class="dnb-logo"/>
+        </div>
+      </div>
+
+            <div class="foot-links">
+        <div class="foot-group">
+          <div class="foot-group-label">Sider</div>
+          <a href="miljoer">Organisasjonene</a>
+          <a href="arrangementer">Arrangementer</a>
+          <a href="booking">Book lokalene</a>
+          <a href="om">Om Fram</a>
+          <a href="innovasjonsdagene">Innovasjonsdagene</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot-bot">
+      <div>© 2015–2026 Fram NTNU</div>
+      <div class="ntnu-line" style="margin:0; padding:0; border:none;">
+        <span class="ntnu-label">Tilknyttet</span>
+        <span class="ntnu-logo" role="img" aria-label="NTNU"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ntnu-line{
+    display: flex; align-items: center; gap: 14px;
+  }
+  .ntnu-line .ntnu-label{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em;
+    text-transform:uppercase; color: var(--muted);
+  }
+  .ntnu-line .ntnu-logo{
+    height: 22px; width: auto; opacity: .75;
+  }
+</style>
+
+<style>
+  /* Footer — Samarbeidspartnere + farger */
+  .foot-partners{ display:flex; flex-direction:column; gap:12px; }
+  .foot-partners-logos{ display:flex; flex-direction:column; align-items:flex-start; gap:18px; }
+  .foot-partners-logos img{ height:26px; width:auto; opacity:1; filter:none; transition:opacity .2s, filter .2s; }
+  .foot-partners-logos img.eq-logo{ height:34px; }
+  .foot-partners-logos img.dnb-logo{ height:30px; margin-top:16px; }
+  .foot-partners-logos img:hover{ opacity:1; filter:grayscale(0); }
+  .foot-brand img{ filter:saturate(.4); }
+  .foot-social[aria-label="Instagram"]{ color:#E1306C; }
+  .foot-social[aria-label="Facebook"]{ color:#1877F2; }
+  .foot-social[aria-label="LinkedIn"]{ color:#0A66C2; }
+  .foot-social[aria-label="Instagram"]:hover{ color:#E1306C; border-color:#E1306C; }
+  .foot-social[aria-label="Facebook"]:hover{ color:#1877F2; border-color:#1877F2; }
+  .foot-social[aria-label="LinkedIn"]:hover{ color:#0A66C2; border-color:#0A66C2; }
+  .foot-social[aria-label="YouTube"]{ color:#FF0000; }
+  .foot-social[aria-label="YouTube"]:hover{ color:#FF0000; border-color:#FF0000; }
+  .foot-social[aria-label="Slack"]:hover{ border-color:#4A154B; }
+  /* Slack-tilgangsmodal */
+  .slack-modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);
+    z-index:9999;align-items:center;justify-content:center;
+  }
+  .slack-modal-overlay.open{ display:flex; }
+  .slack-modal{
+    background:var(--card);border-radius:14px;padding:36px 32px 28px;max-width:380px;width:90%;
+    box-shadow:0 8px 40px rgba(0,0,0,.2);text-align:center;position:relative;
+  }
+  .slack-modal-close{
+    position:absolute;top:10px;right:14px;background:none;border:none;
+    font-size:1.5rem;cursor:pointer;color:var(--ink-soft);line-height:1;padding:4px;
+  }
+  .slack-modal-close:hover{ color:var(--ink); }
+  .slack-modal-icon{ width:44px;margin:0 auto 16px;display:block; }
+  .slack-modal h3{ margin:0 0 10px;font-size:1.1rem;color:var(--ink); }
+  .slack-modal p{ margin:0;color:var(--ink-soft);font-size:.95rem;line-height:1.6; }
+  button.foot-social{ font:inherit;cursor:pointer;background:var(--card);appearance:none; }
+  @media (max-width: 620px){ .foot-links{ display:none; } }
+  .ntnu-line .ntnu-logo{
+    display:inline-block; height:22px; width:116px; opacity:1;
+    background-color:#00509E;
+    -webkit-mask:url(assets/ntnu-logo-dark.webp) left center / contain no-repeat;
+    mask:url(assets/ntnu-logo-dark.webp) left center / contain no-repeat;
+  }
+</style>
+
+<script src="assets/site.js"></script>
+<div id="slack-modal" class="slack-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="slack-modal-title" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="slack-modal">
+    <button class="slack-modal-close" onclick="document.getElementById('slack-modal').classList.remove('open')" aria-label="Lukk">&times;</button>
+    <svg class="slack-modal-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/><path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/><path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/><path d="M8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/><path d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834z" fill="#2EB67D"/><path d="M17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/><path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52z" fill="#ECB22E"/><path d="M15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/></svg>
+    <h3 id="slack-modal-title">Kun for ledere</h3>
+    <p>Slacken er for tiden bare for lederne av våre medlemsorganisasjoner. Ønsker du tilgang, ta kontakt med oss.</p>
+  </div>
+</div>
+<script>document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('slack-modal').classList.remove('open');});</script>
+</body>
+</html>
