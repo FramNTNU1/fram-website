@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="preload" as="image" href="assets/innovasjonsmiljo-sketch-cropped.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/innovasjonsmiljo-sketch-cropped-800.webp" media="(max-width:900px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/innovasjonsmiljo-sketch-cropped.webp" media="(min-width:901px)" fetchpriority="high">
 <title>FRAM NTNU — NTNUs senter for studentinnovasjon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap"></noscript>
 
 
 <style>
@@ -157,7 +159,7 @@
     margin-right:-8%;
     filter: drop-shadow(0 26px 46px rgba(20,30,50,.14));
   }
-  .hero-sketch-mobile{ display:none; }
+  .hero-sketch-mobile-wrap{ display:none; }
   .hero-subtitle--mobile{ display:none; }
   .hero-subtitle--desktop{ display:none; }
   .hero-subtitle.hero-subtitle--mobile{ display:none; }
@@ -1771,6 +1773,7 @@
     .hero-editorial-lede { display: none; }
     .hero-subtitle.hero-subtitle--desktop { display: none; }
     .hero-subtitle.hero-subtitle--mobile { display: block; }
+    .hero-sketch-mobile-wrap { display: block; }
     .hero-sketch-mobile { display: block; width: 115%; height: auto; margin: 8px -13% 24px 0; }
     .hero-editorial-stats { gap: 20px; }
     /* Arrangementer: 2 kolonner på nettbrett */
@@ -1928,7 +1931,7 @@
         </h1>
         <p class="hero-subtitle hero-subtitle--desktop">For alle på NTNU</p>
         <h2 class="hero-subtitle hero-subtitle--mobile">Fram er paraplyorganisasjonen for innovasjonsmiljøet på NTNU — åpent for alle studenter.</h2>
-        <img decoding="sync" class="hero-sketch-mobile" width="1280" height="812" src="assets/innovasjonsmiljo-sketch-cropped.webp" alt="Innovasjonsmiljøet ved NTNU — illustrert oversikt over lokaler og organisasjoner" />
+        <div class="hero-sketch-mobile-wrap"><img decoding="sync" class="hero-sketch-mobile" width="800" height="508" src="assets/innovasjonsmiljo-sketch-cropped-800.webp" alt="Innovasjonsmiljøet ved NTNU — illustrert oversikt over lokaler og organisasjoner" /></div>
         <h3 class="hero-editorial-lede">
           FRAM NTNU er et senter for innovasjon, entreprenørskap og kreativitet ved NTNU, åpent for alle studenter uavhengig av studieprogram eller erfaring. Som møteplass og paraplyorganisasjon samler FRAM studentdrevne initiativer og tilbyr lokaler, arrangementer, workshops og et inkluderende fellesskap for nyskaping.
         </h3>
