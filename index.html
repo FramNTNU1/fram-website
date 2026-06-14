@@ -198,6 +198,30 @@
   .hero-video-card-inner iframe{
     position:absolute; inset:-1px; width:calc(100% + 2px); height:calc(100% + 2px); border:0; display:block;
   }
+  /* Lett "facade" – laster YouTube først ved klikk (sparer ~950 KiB ved sidelast) */
+  .yt-facade{
+    position:absolute; inset:0; width:100%; height:100%;
+    border:0; padding:0; margin:0; cursor:pointer; display:block;
+    background-color:#000; background-size:cover; background-position:center;
+  }
+  .yt-facade::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.25));
+    transition:background .2s;
+  }
+  .yt-facade:hover::after{ background:rgba(0,0,0,.15); }
+  .yt-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:68px; height:48px; border-radius:14px; z-index:1;
+    background:rgba(0,0,0,.72); transition:background .2s;
+  }
+  .yt-facade:hover .yt-play{ background:#f00; }
+  .yt-play::before{
+    content:""; position:absolute; top:50%; left:50%;
+    transform:translate(-40%,-50%);
+    border-style:solid; border-width:11px 0 11px 19px;
+    border-color:transparent transparent transparent #fff;
+  }
   /* bottom caption bar */
   .hero-video-caption{
     display:flex; align-items:center; justify-content:space-between;
@@ -1379,7 +1403,7 @@
     background: var(--rc);
     font-size:0;
   }
-  .feat-item h5{ font-size:14px; font-weight:600; margin:0; color:var(--ink); letter-spacing:-.005em; }
+  .feat-item h4{ font-size:14px; font-weight:600; margin:0; color:var(--ink); letter-spacing:-.005em; }
   .feat-item p{ font-size:12.5px; line-height:1.42; color:var(--ink-soft); margin:0; }
   .room-detail-foot{
     display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top:22px;
@@ -1892,6 +1916,7 @@
   </div>
 </nav>
 
+<main>
 <!-- ============ PART 1 · OPPLEV FRAM ============ -->
 <section class="hero" id="opplev">
   <div class="wrap">
@@ -1903,7 +1928,7 @@
         </h1>
         <p class="hero-subtitle hero-subtitle--desktop">For alle på NTNU</p>
         <h2 class="hero-subtitle hero-subtitle--mobile">Fram er paraplyorganisasjonen for innovasjonsmiljøet på NTNU — åpent for alle studenter.</h2>
-        <img decoding="sync" class="hero-sketch-mobile" src="assets/innovasjonsmiljo-sketch-cropped.webp" alt="Innovasjonsmiljøet ved NTNU — illustrert oversikt over lokaler og organisasjoner" />
+        <img decoding="sync" class="hero-sketch-mobile" width="1280" height="812" src="assets/innovasjonsmiljo-sketch-cropped.webp" alt="Innovasjonsmiljøet ved NTNU — illustrert oversikt over lokaler og organisasjoner" />
         <h3 class="hero-editorial-lede">
           FRAM NTNU er et senter for innovasjon, entreprenørskap og kreativitet ved NTNU, åpent for alle studenter uavhengig av studieprogram eller erfaring. Som møteplass og paraplyorganisasjon samler FRAM studentdrevne initiativer og tilbyr lokaler, arrangementer, workshops og et inkluderende fellesskap for nyskaping.
         </h3>
@@ -1918,18 +1943,19 @@
         </div>
       </div>
       <div class="hero-editorial-right">
-        <img decoding="async" class="hero-sketch" src="assets/innovasjonsmiljo-sketch-cropped.webp" alt="Innovasjonsmiljøet ved NTNU — illustrert oversikt over lokaler og organisasjoner" />
+        <img decoding="async" class="hero-sketch" width="1280" height="812" src="assets/innovasjonsmiljo-sketch-cropped.webp" alt="Innovasjonsmiljøet ved NTNU — illustrert oversikt over lokaler og organisasjoner" />
       </div>
     </div>
 
     <!-- Contained video card -->
     <div class="hero-video-card">
       <div class="hero-video-card-inner">
-        <iframe loading="lazy"           src="https://www.youtube-nocookie.com/embed/GqTyq88uULs?rel=0&modestbranding=1"
-          title="Fram NTNU — Åpent for alle"
-          allow="accelerated-2d-canvas; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
+        <button type="button" class="yt-facade" id="ytFacade"
+          data-video="GqTyq88uULs"
+          aria-label="Spill av video: Fram NTNU — Åpent for alle"
+          style="background-image:url('https://i.ytimg.com/vi/GqTyq88uULs/maxresdefault.jpg')">
+          <span class="yt-play" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </div>
@@ -2009,11 +2035,11 @@
           <div class="exp-body">
             <div class="exp-kicker">Hva finnes her</div>
             <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h5>Scene</h5></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h5>6 mobile hus</h5></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h5>Stor LED-skjerm</h5></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h5>Lyd &amp; lys</h5></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h5>Garasjeport</h5></div></div>
+              <div class="feat-item"><span class="feat-num">01</span><div><h4>Scene</h4></div></div>
+              <div class="feat-item"><span class="feat-num">02</span><div><h4>6 mobile hus</h4></div></div>
+              <div class="feat-item"><span class="feat-num">03</span><div><h4>Stor LED-skjerm</h4></div></div>
+              <div class="feat-item"><span class="feat-num">04</span><div><h4>Lyd &amp; lys</h4></div></div>
+              <div class="feat-item"><span class="feat-num">05</span><div><h4>Garasjeport</h4></div></div>
             </div>
             <div class="exp-foot">
               <a href="https://www.gruvantnu.no/" target="_blank" rel="noopener" class="btn btn-primary">Book Gruva →</a>
@@ -2036,11 +2062,11 @@
           <div class="exp-body">
             <div class="exp-kicker">Hva finnes her</div>
             <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h5>Kjøkken</h5></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h5>Kaffemaskin</h5></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h5>Bordtennis</h5></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h5>Sofakrok</h5></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h5>Langbord</h5></div></div>
+              <div class="feat-item"><span class="feat-num">01</span><div><h4>Kjøkken</h4></div></div>
+              <div class="feat-item"><span class="feat-num">02</span><div><h4>Kaffemaskin</h4></div></div>
+              <div class="feat-item"><span class="feat-num">03</span><div><h4>Bordtennis</h4></div></div>
+              <div class="feat-item"><span class="feat-num">04</span><div><h4>Sofakrok</h4></div></div>
+              <div class="feat-item"><span class="feat-num">05</span><div><h4>Langbord</h4></div></div>
             </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Fellesrommet →</a>
@@ -2063,9 +2089,9 @@
           <div class="exp-body">
             <div class="exp-kicker">Hva finnes her</div>
             <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h5>Storskjerm</h5></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h5>Whiteboard</h5></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h5>Høyttaler</h5></div></div>
+              <div class="feat-item"><span class="feat-num">01</span><div><h4>Storskjerm</h4></div></div>
+              <div class="feat-item"><span class="feat-num">02</span><div><h4>Whiteboard</h4></div></div>
+              <div class="feat-item"><span class="feat-num">03</span><div><h4>Høyttaler</h4></div></div>
             </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Møterom →</a>
@@ -2085,11 +2111,11 @@
           <div class="exp-body">
             <div class="exp-kicker">Hva finnes her</div>
             <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h5>3D-printere</h5></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h5>A0-plotter</h5></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h5>Loddeplass</h5></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h5>Arbeidsplass</h5></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h5>Verktøy</h5></div></div>
+              <div class="feat-item"><span class="feat-num">01</span><div><h4>3D-printere</h4></div></div>
+              <div class="feat-item"><span class="feat-num">02</span><div><h4>A0-plotter</h4></div></div>
+              <div class="feat-item"><span class="feat-num">03</span><div><h4>Loddeplass</h4></div></div>
+              <div class="feat-item"><span class="feat-num">04</span><div><h4>Arbeidsplass</h4></div></div>
+              <div class="feat-item"><span class="feat-num">05</span><div><h4>Verktøy</h4></div></div>
             </div>
             <div class="exp-foot">
               <a href="idegarasjen" class="btn btn-primary">Gå til Idégarasjen →</a>
@@ -2112,11 +2138,11 @@
           <div class="exp-body">
             <div class="exp-kicker">Hva finnes her</div>
             <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h5>Scene</h5></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h5>Lyd og lys</h5></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h5>Projektor</h5></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h5>Talerstol</h5></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h5>Bord og stoler</h5></div></div>
+              <div class="feat-item"><span class="feat-num">01</span><div><h4>Scene</h4></div></div>
+              <div class="feat-item"><span class="feat-num">02</span><div><h4>Lyd og lys</h4></div></div>
+              <div class="feat-item"><span class="feat-num">03</span><div><h4>Projektor</h4></div></div>
+              <div class="feat-item"><span class="feat-num">04</span><div><h4>Talerstol</h4></div></div>
+              <div class="feat-item"><span class="feat-num">05</span><div><h4>Bord og stoler</h4></div></div>
             </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Scenerommet →</a>
@@ -2136,11 +2162,11 @@
           <div class="exp-body">
             <div class="exp-kicker">Hva finnes her</div>
             <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h5>Mikrofoner</h5></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h5>Headset</h5></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h5>Rodecaster Pro 22</h5></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h5>Sofa</h5></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h5>Belysning</h5></div></div>
+              <div class="feat-item"><span class="feat-num">01</span><div><h4>Mikrofoner</h4></div></div>
+              <div class="feat-item"><span class="feat-num">02</span><div><h4>Headset</h4></div></div>
+              <div class="feat-item"><span class="feat-num">03</span><div><h4>Rodecaster Pro 22</h4></div></div>
+              <div class="feat-item"><span class="feat-num">04</span><div><h4>Sofa</h4></div></div>
+              <div class="feat-item"><span class="feat-num">05</span><div><h4>Belysning</h4></div></div>
             </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Podcastrommet →</a>
@@ -2273,6 +2299,7 @@
     </div>
   </div>
 </section>
+</main>
 
 
 <!-- ============ FOOTER ============ -->

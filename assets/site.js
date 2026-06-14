@@ -73,3 +73,21 @@
     init();
   }
 })();
+
+/* YouTube-facade: bytt thumbnail-knapp med ekte iframe (autoplay) ved klikk.
+   Sparer ~950 KiB + tung JS ved sidelast. Harmløs der knappen ikke finnes. */
+(function () {
+  var f = document.getElementById('ytFacade');
+  if (!f) return;
+  f.addEventListener('click', function () {
+    var id = f.getAttribute('data-video');
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + id +
+      '?rel=0&modestbranding=1&autoplay=1';
+    iframe.title = 'Fram NTNU — Åpent for alle';
+    iframe.allow = 'accelerated-2d-canvas; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+    f.replaceWith(iframe);
+  });
+})();
