@@ -4,9 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Innovasjonsmiljøene ved NTNU — FRAM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://app.atlas.co" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Self-hostede fonter */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/poppins-600.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/poppins-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/poppins-800.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url(assets/fonts/poppins-900.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400i.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500i.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/jetbrainsmono-400.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/jetbrainsmono-500.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/jetbrainsmono-600.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/jetbrainsmono-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins Fallback';src:local('Arial'),local('Helvetica Neue'),local('Roboto');size-adjust:113.64%;ascent-override:92.40%;descent-override:30.80%;line-gap-override:8.80%}
+</style>
 <style>
   :root{
     --yellow:#FDC82F; --blue:#2E86C1; --red:#E85A5A; --teal:#3FC4A3;
@@ -15,7 +32,7 @@
     --radius-l: 28px; --radius-m: 18px;
   }
   *{box-sizing:border-box}
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Poppins','Poppins Fallback',sans-serif; -webkit-font-smoothing:antialiased;}
   .wrap{max-width:1360px; margin:0 auto; padding:0 48px;}
   .mono{font-family:'JetBrains Mono',monospace;}
 
@@ -287,7 +304,7 @@
   }
   .gt-btn{
     border:0; background:transparent; cursor:pointer;
-    font-family:'Poppins',sans-serif; font-weight:600; font-size:13px;
+    font-family:'Poppins','Poppins Fallback',sans-serif; font-weight:600; font-size:13px;
     padding:8px 18px; border-radius:999px; color:var(--ink-soft);
     transition: background .2s ease, color .2s ease;
   }
@@ -413,7 +430,7 @@
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     padding:14px 22px; border-radius:999px;
-    font-family:'Poppins',sans-serif; font-weight:600; font-size:14px;
+    font-family:'Poppins','Poppins Fallback',sans-serif; font-weight:600; font-size:14px;
     text-decoration:none; transition: all .2s; border:1px solid transparent;
     white-space:nowrap;
   }

@@ -6,9 +6,25 @@
 <link rel="preload" as="image" href="assets/innovasjonsmiljo-sketch-cropped-800.webp" media="(max-width:900px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/innovasjonsmiljo-sketch-cropped.webp" media="(min-width:901px)" fetchpriority="high">
 <title>FRAM NTNU — NTNUs senter for studentinnovasjon</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Self-hostede fonter */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/poppins-600.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/poppins-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/poppins-800.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url(assets/fonts/poppins-900.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400i.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500i.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/jetbrainsmono-400.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/jetbrainsmono-500.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/jetbrainsmono-600.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/jetbrainsmono-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins Fallback';src:local('Arial'),local('Helvetica Neue'),local('Roboto');size-adjust:113.64%;ascent-override:92.40%;descent-override:30.80%;line-gap-override:8.80%}
+</style>
 
 
 <style>
@@ -26,7 +42,7 @@
   html,body{margin:0;padding:0; scroll-behavior:smooth;}
   body{
     background:var(--bg); color:var(--ink);
-    font-family:'Poppins',system-ui,sans-serif;
+    font-family:'Poppins','Poppins Fallback',system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
     transition: background .4s ease, color .4s ease;
   }
@@ -381,7 +397,7 @@
   .node:hover circle{
     filter: drop-shadow(0 4px 16px color-mix(in oklab, var(--accent) 50%, transparent));
   }
-  .node-label{font-family:'Poppins',sans-serif; font-size:11px; fill:var(--ink); pointer-events:none; font-weight:500;}
+  .node-label{font-family:'Poppins','Poppins Fallback',sans-serif; font-size:11px; fill:var(--ink); pointer-events:none; font-weight:500;}
   .link{ stroke: color-mix(in oklab, var(--ink) 22%, transparent); stroke-width:1; fill:none; }
   .link.hot{ stroke: var(--accent); stroke-width:2;}
 
@@ -1198,7 +1214,7 @@
     font-family:'JetBrains Mono',monospace; font-size:12px;
     color: var(--ink-soft); letter-spacing:.04em;
   }
-  .dropin-foot strong{ color: var(--ink); font-family:'Poppins',sans-serif; font-weight:600; letter-spacing:-.005em;}
+  .dropin-foot strong{ color: var(--ink); font-family:'Poppins','Poppins Fallback',sans-serif; font-weight:600; letter-spacing:-.005em;}
   .dropin-foot .hrs{ display:flex; gap:24px; flex-wrap:wrap;}
   .dropin-foot .hrs span b{ color: var(--ink); font-weight:600; }
 
@@ -1358,7 +1374,7 @@
     color:var(--muted);
   }
   .room-meta b{ display:block; color:var(--ink); font-size:22px; font-weight:700;
-    font-family:'Poppins',sans-serif; letter-spacing:-.02em; margin-bottom:2px; }
+    font-family:'Poppins','Poppins Fallback',sans-serif; letter-spacing:-.02em; margin-bottom:2px; }
   .room-toggle{
     flex:none; width:46px; height:46px; border-radius:50%;
     border:1.5px solid var(--line); background:var(--bg-soft);
@@ -1552,7 +1568,7 @@
     letter-spacing:.04em; color:var(--ink-soft);
   }
   .reisen-video .video-caption strong{
-    color:var(--ink); font-family:'Poppins',sans-serif; font-weight:700;
+    color:var(--ink); font-family:'Poppins','Poppins Fallback',sans-serif; font-weight:700;
     font-size:14px; letter-spacing:-.01em;
   }
   .reisen-video .video-caption .dot{
