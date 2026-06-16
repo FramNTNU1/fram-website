@@ -1112,6 +1112,35 @@
       results.scrollIntoView({ behavior:'smooth', block:'nearest' });
     }
 
+    // Pre-cachet svar for de 5 chip-forslagene – ingen API-kall nødvendig
+    var CACHE = {
+      'romfart og raketter': [
+        { navn: 'Orbit NTNU',    grunn: 'Bygger CubeSat-satellitter – første student-satellitt i bane fra NTNU.' },
+        { navn: 'Propulse NTNU', grunn: 'Designer, bygger og skyter opp væskedrevne forskningsraketter.' },
+        { navn: 'Ascend NTNU',   grunn: 'Konkurrerer i internasjonale drone-konkurranser med autonome systemer.' }
+      ],
+      'bærekraft og energi': [
+        { navn: 'Gridville',              grunn: 'Studentprosjekter på fornybar energi, mikronett og smart strømforsyning.' },
+        { navn: 'Fuel Fighter',           grunn: 'Bygger ultra-energieffektive kjøretøy til Shell Eco-marathon.' },
+        { navn: 'Ingeniører uten grenser', grunn: 'Teknisk bistand i utviklingsland – rent vann, skoler og energiprosjekter.' }
+      ],
+      'kunstig intelligens': [
+        { navn: 'Cogito',     grunn: 'Utvikler AI-løsninger og bygger erfaring gjennom semesterprosjekter.' },
+        { navn: 'Relu',       grunn: 'Utvikler AI-løsninger i samarbeid med næringslivet.' },
+        { navn: 'BRAIN NTNU', grunn: 'Arrangerer hackathons, foredrag og møteplasser innen kunstig intelligens.' }
+      ],
+      'design og arkitektur': [
+        { navn: 'Designhjelpen', grunn: 'Designstudenter hjelper andre orgs og oppstarter med visuell identitet, web og UX.' },
+        { navn: 'Studio Beta',   grunn: 'Studentdrevet arkitektur- og designstudio. Byggeprosjekter i full skala og prototyper.' },
+        { navn: 'Make NTNU',     grunn: 'Gir studenter tilgang til verktøy, utstyr og kompetanse for å bygge egne prosjekter.' }
+      ],
+      'entreprenørskap': [
+        { navn: 'Start NTNU',        grunn: 'Norges største studentorganisasjon for entreprenørskap – Startup Weekend og pitch-kvelder.' },
+        { navn: 'Entreprenørskolen', grunn: 'NTNUs master i entreprenørskap der du bygger et reelt selskap som eksamen.' },
+        { navn: 'DRIV NTNU',         grunn: 'Studentorganisasjon for de som vil starte og drive egne prosjekter og selskaper.' }
+      ]
+    };
+
     // Ekte backend-kall (kobles på senere)
     function askApi(text){
       return fetch('/api/forslag', {
@@ -1174,6 +1203,7 @@
     function submit(text){
       text = (text || '').trim();
       if(!text){ input.focus(); return; }
+      if(CACHE[text]){ render(CACHE[text]); return; }
       setLoading(true);
       var work = USE_API
         ? askApi(text)
