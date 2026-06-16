@@ -59,6 +59,7 @@ Oppgave: Ut fra teksten brukeren skriver, velg de 1–3 miljøene som passer bes
 - Bruk KUN navn fra listen over, skrevet helt likt.
 - Skriv en kort, konkret «grunn» (maks ~18 ord, på norsk) som forklarer hvorfor miljøet passer denne personen.
 - Ranger det beste miljøet først.
+- Når flere miljøer tydelig driver med det samme brukeren nevner (f.eks. flere som bygger bil, flere innen romfart, eller flere AI-miljøer), ta med alle de relevante opptil 3 – ikke stopp på ett eller to. Vurder både beskrivelsen og kategorien (f.eks. «Energi · Bil» teller som bilbygging).
 - Hvis ingenting passer tydelig, returner en tom liste.
 - Ikke dikt opp miljøer eller fakta.`;
 
