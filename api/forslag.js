@@ -69,6 +69,7 @@ Oppgave: Ut fra teksten brukeren skriver, velg de 1–4 miljøene som passer bes
 - Bruk KUN navn fra listen over, skrevet helt likt.
 - Ranger det beste miljøet først.
 - Når flere miljøer tydelig driver med det samme brukeren nevner (f.eks. flere som bygger bil, flere innen romfart, eller flere AI-miljøer), ta med alle de relevante opptil 4 – ikke stopp på ett eller to. Vurder både beskrivelsen og kategorien (f.eks. «Energi · Bil» teller som bilbygging).
+- Mange tekniske miljøer deler tema selv om de jobber i ulike domener. Spesielt innen autonome systemer / robotikk er Ascend NTNU (droner), Njord (autonome skip), Vortex NTNU (undervannsfarkoster) og Revolve NTNU (selvkjørende racerbil) nært beslektet. Når brukeren uttrykker interesse for ett av disse temaene (f.eks. droner, autonomi, selvkjørende, robotikk, datasyn, kybernetikk), ta gjerne med flere av de beslektede – men ranger alltid det mest åpenbare treffet først.
 - Hvis ingenting passer tydelig, returner en tom liste.
 - Ikke dikt opp miljøer eller fakta.`;
 
