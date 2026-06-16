@@ -44,7 +44,19 @@ const MILJOER = [
   { navn: "WIC", kat: "Kvinnenettverk", desc: "Women in Consulting. Nettverk, mentorprogram og karrierearrangementer for kvinner.", match: "kvinnenettverk, jenter, konsulent, consulting, karriere, mentorprogram, nettverk, finans, investering" },
 ];
 
-const GYLDIGE_NAVN = new Set(MILJOER.map((m) => m.navn));
+// Finn det kanoniske miljønavnet fra modellens forslag – tåler at modellen
+// skriver navnet litt annerledes (ulik casing, «NTNU»-suffiks o.l.).
+function finnKanonisk(navn) {
+  const n = String(navn || "").toLowerCase().trim();
+  if (n.length < 2) return null;
+  const eksakt = MILJOER.find((o) => o.navn.toLowerCase() === n);
+  if (eksakt) return eksakt.navn;
+  const delvis = MILJOER.find((o) => {
+    const on = o.navn.toLowerCase();
+    return n.length >= 4 && (n.includes(on) || on.includes(n));
+  });
+  return delvis ? delvis.navn : null;
+}
 
 const KATALOG = MILJOER.map((m) => `- ${m.navn} (${m.kat}): ${m.match}`).join("\n");
 
@@ -129,7 +141,7 @@ export default async function handler(req, res) {
     return res.status(413).json({ error: "Teksten er for lang." });
   }
   interesser = interesser.trim().slice(0, 300);
-  if (interesser.length < 3) {
+  if (interesser.length < 2) {
     return res.status(400).json({ error: "Skriv litt mer om interessene dine." });
   }
 
@@ -150,11 +162,18 @@ export default async function handler(req, res) {
     const text = response.content.find((b) => b.type === "text")?.text || "{}";
     const data = JSON.parse(text);
 
-    // Filtrer bort alt som ikke matcher et ekte miljønavn.
-    const forslag = (Array.isArray(data.forslag) ? data.forslag : [])
-      .filter((f) => f && GYLDIGE_NAVN.has(f.navn))
-      .slice(0, 3)
-      .map((f) => ({ navn: f.navn }));
+    // Normaliser navn til kanonisk form, fjern duplikater og ugyldige, maks 3.
+    const forslagListe = Array.isArray(data.forslag) ? data.forslag : [];
+    const sett = new Set();
+    const forslag = [];
+    for (const f of forslagListe) {
+      const navn = finnKanonisk(f && f.navn);
+      if (navn && !sett.has(navn)) {
+        sett.add(navn);
+        forslag.push({ navn });
+        if (forslag.length === 3) break;
+      }
+    }
 
     return res.status(200).json({ forslag });
   } catch (err) {
