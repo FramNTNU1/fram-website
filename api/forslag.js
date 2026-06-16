@@ -130,6 +130,10 @@ export default async function handler(req, res) {
   if (typeof interesser !== "string") {
     return res.status(400).json({ error: "Mangler «interesser»." });
   }
+  // Avvis åpenbart store payloads tidlig – før vi behandler noe videre.
+  if (interesser.length > 2000) {
+    return res.status(413).json({ error: "Teksten er for lang." });
+  }
   interesser = interesser.trim().slice(0, 300);
   if (interesser.length < 3) {
     return res.status(400).json({ error: "Skriv litt mer om interessene dine." });
