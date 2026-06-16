@@ -1197,7 +1197,7 @@
       }).filter(function(s){ return s.score > 0; });
 
       scored.sort(function(a,b){ return b.score - a.score; });
-      return scored.slice(0,3).map(function(s){ return { navn:s.org.navn, grunn:s.org.desc }; });
+      return scored.slice(0,4).map(function(s){ return { navn:s.org.navn, grunn:s.org.desc }; });
     }
 
     function submit(text){

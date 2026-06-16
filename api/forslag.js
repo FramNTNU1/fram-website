@@ -65,10 +65,10 @@ const SYSTEM = `Du er «Framkompasset» – en veiviser som matcher studenters i
 Her er miljøene du kan foreslå:
 ${KATALOG}
 
-Oppgave: Ut fra teksten brukeren skriver, velg de 1–3 miljøene som passer best. Regler:
+Oppgave: Ut fra teksten brukeren skriver, velg de 1–4 miljøene som passer best. Regler:
 - Bruk KUN navn fra listen over, skrevet helt likt.
 - Ranger det beste miljøet først.
-- Når flere miljøer tydelig driver med det samme brukeren nevner (f.eks. flere som bygger bil, flere innen romfart, eller flere AI-miljøer), ta med alle de relevante opptil 3 – ikke stopp på ett eller to. Vurder både beskrivelsen og kategorien (f.eks. «Energi · Bil» teller som bilbygging).
+- Når flere miljøer tydelig driver med det samme brukeren nevner (f.eks. flere som bygger bil, flere innen romfart, eller flere AI-miljøer), ta med alle de relevante opptil 4 – ikke stopp på ett eller to. Vurder både beskrivelsen og kategorien (f.eks. «Energi · Bil» teller som bilbygging).
 - Hvis ingenting passer tydelig, returner en tom liste.
 - Ikke dikt opp miljøer eller fakta.`;
 
@@ -162,7 +162,7 @@ export default async function handler(req, res) {
     const text = response.content.find((b) => b.type === "text")?.text || "{}";
     const data = JSON.parse(text);
 
-    // Normaliser navn til kanonisk form, fjern duplikater og ugyldige, maks 3.
+    // Normaliser navn til kanonisk form, fjern duplikater og ugyldige, maks 4.
     const forslagListe = Array.isArray(data.forslag) ? data.forslag : [];
     const sett = new Set();
     const forslag = [];
@@ -171,7 +171,7 @@ export default async function handler(req, res) {
       if (navn && !sett.has(navn)) {
         sett.add(navn);
         forslag.push({ navn });
-        if (forslag.length === 3) break;
+        if (forslag.length === 4) break;
       }
     }
 
