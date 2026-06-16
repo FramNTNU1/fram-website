@@ -207,6 +207,7 @@ export default async function handler(req, res) {
     }
 
     memoSet(mkey, forslag);
+    console.log("framkompasset:", JSON.stringify({ q: interesser, treff: forslag.map(f => f.navn) }));
     return res.status(200).json({ forslag });
   } catch (err) {
     console.error("forslag-feil:", err);
