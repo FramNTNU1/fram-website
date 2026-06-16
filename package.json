@@ -1,0 +1,10 @@
+{
+  "name": "fram-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FRAM NTNU – statisk nettside med ett Vercel-API-endepunkt (Framkompasset).",
+  "dependencies": {
+    "@anthropic-ai/sdk": ">=0.88.0"
+  }
+}
