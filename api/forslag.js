@@ -94,8 +94,8 @@ const SCHEMA = {
 // Enkel rate-limiting per instans (best effort – ekte vern er
 // utgiftstaket på API-nøkkelen + lengdegrensen under).
 const RATE = new Map();
-const RATE_WINDOW_MS = 60_000;
-const RATE_MAX = 12;
+const RATE_WINDOW_MS = 5 * 60_000;
+const RATE_MAX = 5;
 
 function rateLimited(ip) {
   const now = Date.now();
@@ -154,7 +154,7 @@ export default async function handler(req, res) {
     const response = await client.messages.create({
       model: "claude-haiku-4-5",
       max_tokens: 150,
-      system: SYSTEM,
+      system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: interesser }],
       output_config: { format: { type: "json_schema", schema: SCHEMA } },
     });
