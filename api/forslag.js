@@ -14,8 +14,8 @@ import Anthropic from "@anthropic-ai/sdk";
 
 // Miljøkatalogen – navnene MÅ matche <h3> på /miljoer eksakt,
 // så front-end kan koble forslaget til riktig kort.
-// `desc` = teksten som vises på /miljoer (uendret).
-// `match` = ekstra nøkkelord/temaer kun for AI-matchingen (vises ikke).
+// `desc` = teksten som vises på /miljoer (kun referanse her – sendes IKKE til modellen).
+// `match` = nøkkelord/temaer som sendes til modellen for matchingen.
 const MILJOER = [
   { navn: "Ascend NTNU", kat: "Luft · Droner", desc: "Konkurrerer i internasjonale drone-konkurranser med autonome systemer.", match: "autonome droner, flygende roboter, datasyn, kybernetikk, robotikk, AI, programmering, elektronikk, konkurranse" },
   { navn: "Boost Henne", kat: "Kvinnenettverk", desc: "Kvinnenettverk for studenter som vil inn i entreprenørskap. Rollemodeller, mentorer og events.", match: "kvinnenettverk, jenter, entreprenørskap, gründer, oppstart, mentorer, events" },
@@ -50,7 +50,7 @@ const MILJOER = [
 
 const GYLDIGE_NAVN = new Set(MILJOER.map((m) => m.navn));
 
-const KATALOG = MILJOER.map((m) => `- ${m.navn} (${m.kat}): ${m.desc} [Passer for: ${m.match}]`).join("\n");
+const KATALOG = MILJOER.map((m) => `- ${m.navn} (${m.kat}): ${m.match}`).join("\n");
 
 const SYSTEM = `Du er «Framkompasset» – en veiviser som matcher studenters interesser mot studentorganisasjonene i FRAM ved NTNU.
 
