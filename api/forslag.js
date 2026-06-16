@@ -59,7 +59,6 @@ ${KATALOG}
 
 Oppgave: Ut fra teksten brukeren skriver, velg de 1–3 miljøene som passer best. Regler:
 - Bruk KUN navn fra listen over, skrevet helt likt.
-- Skriv en kort, konkret «grunn» (maks ~18 ord, på norsk) som forklarer hvorfor miljøet passer denne personen.
 - Ranger det beste miljøet først.
 - Når flere miljøer tydelig driver med det samme brukeren nevner (f.eks. flere som bygger bil, flere innen romfart, eller flere AI-miljøer), ta med alle de relevante opptil 3 – ikke stopp på ett eller to. Vurder både beskrivelsen og kategorien (f.eks. «Energi · Bil» teller som bilbygging).
 - Hvis ingenting passer tydelig, returner en tom liste.
@@ -74,9 +73,8 @@ const SCHEMA = {
         type: "object",
         properties: {
           navn: { type: "string" },
-          grunn: { type: "string" },
         },
-        required: ["navn", "grunn"],
+        required: ["navn"],
         additionalProperties: false,
       },
     },
@@ -147,7 +145,7 @@ export default async function handler(req, res) {
     const client = new Anthropic();
     const response = await client.messages.create({
       model: "claude-haiku-4-5",
-      max_tokens: 400,
+      max_tokens: 150,
       system: SYSTEM,
       messages: [{ role: "user", content: interesser }],
       output_config: { format: { type: "json_schema", schema: SCHEMA } },
@@ -160,7 +158,7 @@ export default async function handler(req, res) {
     const forslag = (Array.isArray(data.forslag) ? data.forslag : [])
       .filter((f) => f && GYLDIGE_NAVN.has(f.navn))
       .slice(0, 3)
-      .map((f) => ({ navn: f.navn, grunn: String(f.grunn || "").slice(0, 200) }));
+      .map((f) => ({ navn: f.navn }));
 
     return res.status(200).json({ forslag });
   } catch (err) {
