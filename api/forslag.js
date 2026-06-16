@@ -107,6 +107,29 @@ function rateLimited(ip) {
   return hits.length > RATE_MAX;
 }
 
+// Memoisering av populære søk (best effort per varm instans). Gjentatte søk på
+// samme tekst – «AI», «bil», «rakett» osv. – serveres uten nytt modell-kall.
+const MEMO = new Map();
+const MEMO_TTL_MS = 30 * 60_000; // 30 min
+const MEMO_MAX = 500;
+
+function memoKey(text) {
+  return text.toLowerCase().replace(/\s+/g, " ").trim();
+}
+function memoGet(key) {
+  const hit = MEMO.get(key);
+  if (!hit) return null;
+  if (Date.now() - hit.t > MEMO_TTL_MS) {
+    MEMO.delete(key);
+    return null;
+  }
+  return hit.forslag;
+}
+function memoSet(key, forslag) {
+  if (MEMO.size > MEMO_MAX) MEMO.clear(); // unngå minnelekkasje
+  MEMO.set(key, { t: Date.now(), forslag });
+}
+
 // Slipp bare gjennom forespørsler som kommer fra siden selv.
 function sammeOpprinnelse(req) {
   const host = req.headers.host;
@@ -146,6 +169,13 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Skriv litt mer om interessene dine." });
   }
 
+  // Servér tidligere svar på samme søk uten nytt modell-kall.
+  const mkey = memoKey(interesser);
+  const cached = memoGet(mkey);
+  if (cached) {
+    return res.status(200).json({ forslag: cached });
+  }
+
   if (!process.env.ANTHROPIC_API_KEY) {
     return res.status(500).json({ error: "Mangler API-nøkkel på serveren." });
   }
@@ -176,6 +206,7 @@ export default async function handler(req, res) {
       }
     }
 
+    memoSet(mkey, forslag);
     return res.status(200).json({ forslag });
   } catch (err) {
     console.error("forslag-feil:", err);

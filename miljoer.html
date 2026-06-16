@@ -1112,6 +1112,27 @@
       results.scrollIntoView({ behavior:'smooth', block:'nearest' });
     }
 
+    // Klient-side cache av frie søk (localStorage). Gjentatte/identiske søk og
+    // sidelastinger slipper API-kall helt. Versjonert nøkkel så cachen kan tømmes
+    // ved å bumpe v-tallet hvis matchingen endres vesentlig.
+    var LS_PREFIX = 'fram_forslag_v2:';
+    var LS_TTL = 14 * 24 * 60 * 60 * 1000; // 14 dager
+    function lsKey(text){ return LS_PREFIX + text.toLowerCase().replace(/\s+/g, ' ').trim(); }
+    function lsGet(key){
+      try {
+        var raw = localStorage.getItem(key);
+        if(!raw) return null;
+        var o = JSON.parse(raw);
+        if(!o || (Date.now() - o.t) > LS_TTL){ localStorage.removeItem(key); return null; }
+        return o.f;
+      } catch(e){ return null; }
+    }
+    function lsSet(key, forslag){
+      try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), f: forslag })); } catch(e){}
+    }
+
+    var pending = false; // in-flight-sperre mot dobbeltkall
+
     // Pre-cachet svar for de 5 chip-forslagene – ingen API-kall nødvendig
     var CACHE = {
       'romfart og raketter': [
@@ -1203,15 +1224,25 @@
     function submit(text){
       text = (text || '').trim();
       if(!text){ input.focus(); return; }
-      if(CACHE[text]){ render(CACHE[text]); return; }
+      if(pending) return;                            // hindrer dobbeltkall
+      if(CACHE[text]){ render(CACHE[text]); return; } // pre-cachede chip-svar
+
+      var key = lsKey(text);
+      var hit = lsGet(key);
+      if(hit){ render(hit); return; }                // localStorage-treff
+
+      pending = true;
       setLoading(true);
-      var work = USE_API
-        ? askApi(text)
-        : new Promise(function(res){ setTimeout(function(){ res(localMatch(text)); }, 450); });
-      work.catch(function(){ return localMatch(text); }) // fallback hvis API feiler
-          .then(render)
-          .then(function(){ setLoading(false); })
-          .catch(function(){ setLoading(false); });
+      var done = function(){ pending = false; setLoading(false); };
+      if(USE_API){
+        askApi(text)
+          .then(function(forslag){ lsSet(key, forslag); return forslag; }) // cache kun ekte API-svar
+          .catch(function(){ return localMatch(text); })                   // fallback caches ikke
+          .then(render).then(done).catch(done);
+      } else {
+        new Promise(function(res){ setTimeout(function(){ res(localMatch(text)); }, 450); })
+          .then(render).then(done).catch(done);
+      }
     }
 
     form.addEventListener('submit', function(e){ e.preventDefault(); submit(input.value); });
