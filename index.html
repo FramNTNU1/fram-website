@@ -1436,8 +1436,8 @@
   }
 
   /* ---------- VÅRE LOKALER v2 — explorer (master–detail) ---------- */
-  .explorer{ display:grid; grid-template-columns: 330px 1fr; gap:18px; align-items:start; }
-  .exp-rail{ display:flex; flex-direction:column; gap:8px; position:sticky; top:96px; }
+  .explorer{ display:grid; grid-template-columns: 330px 1fr; gap:18px; align-items:stretch; }
+  .exp-rail{ display:flex; flex-direction:column; gap:8px; }
   .exp-tab{
     --rc:var(--blue);
     display:flex; align-items:center; gap:14px;
@@ -1468,13 +1468,14 @@
   .soon-text{ font-size:15px; line-height:1.55; color:var(--ink-soft); margin:0 0 22px; max-width:520px; }
 
   .exp-stage{ position:relative; min-width:0; }
-  .exp-panel{ display:none; }
-  .exp-panel.is-active{ display:block; animation: expfade .42s cubic-bezier(.4,0,.2,1); }
+  .exp-panel{ display:none; height:100%; }
+  .exp-panel.is-active{ display:flex; flex-direction:column; animation: expfade .42s cubic-bezier(.4,0,.2,1); }
   @keyframes expfade{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:none; } }
 
   .exp-card{ --rc:var(--blue); border-radius: var(--radius-l); overflow:hidden;
-    border:1px solid var(--line); background:var(--card); box-shadow: 0 30px 70px -44px rgba(0,0,0,.4); }
-  .exp-hero{ position:relative; height:368px; background:var(--rc); overflow:hidden; }
+    border:1px solid var(--line); background:var(--card); box-shadow: 0 30px 70px -44px rgba(0,0,0,.4);
+    display:flex; flex-direction:column; flex:1; min-height:0; }
+  .exp-hero{ position:relative; flex:1 1 auto; min-height:300px; background:var(--rc); overflow:hidden; }
   .exp-hero .ph{ position:absolute; inset:0; background-size:cover; background-position:center; transition: transform 6s ease; }
   .exp-panel.is-active .exp-hero .ph{ transform: scale(1.06); }
   .exp-hero::after{ content:''; position:absolute; inset:0;
@@ -1501,6 +1502,7 @@
   .exp-card .feat-grid{ grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
   .exp-foot{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top:24px;
     padding-top:22px; border-top:1px solid var(--line); }
+  .exp-body > .exp-foot:first-child{ margin-top:0; padding-top:0; border-top:none; }
   .exp-foot-note{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--muted); }
   .btn-maze{ background:transparent; color:var(--rc); border-color:var(--rc); }
   .btn-maze:hover{ background:var(--rc); color:#fff; transform:translateY(-2px); }
@@ -2057,14 +2059,6 @@
             </div>
           </div>
           <div class="exp-body">
-            <div class="exp-kicker">Hva finnes her</div>
-            <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h4>Scene</h4></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h4>6 mobile hus</h4></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h4>Stor LED-skjerm</h4></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h4>Lyd &amp; lys</h4></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h4>Garasjeport</h4></div></div>
-            </div>
             <div class="exp-foot">
               <a href="https://www.gruvantnu.no/" target="_blank" rel="noopener" class="btn btn-primary">Book Gruva →</a>
               <a href="https://link.mazemap.com/7MLNJ23W" target="_blank" rel="noopener" class="btn btn-maze">MazeMap →</a>
@@ -2084,14 +2078,6 @@
             </div>
           </div>
           <div class="exp-body">
-            <div class="exp-kicker">Hva finnes her</div>
-            <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h4>Kjøkken</h4></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h4>Kaffemaskin</h4></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h4>Bordtennis</h4></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h4>Sofakrok</h4></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h4>Langbord</h4></div></div>
-            </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Fellesrommet →</a>
               <a href="https://link.mazemap.com/Icfh3qjb" target="_blank" rel="noopener" class="btn btn-maze">MazeMap →</a>
@@ -2111,12 +2097,6 @@
             </div>
           </div>
           <div class="exp-body">
-            <div class="exp-kicker">Hva finnes her</div>
-            <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h4>Storskjerm</h4></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h4>Whiteboard</h4></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h4>Høyttaler</h4></div></div>
-            </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Møterom →</a>
               <a href="https://link.mazemap.com/geJyaaW5" target="_blank" rel="noopener" class="btn btn-maze">MazeMap →</a>
@@ -2133,14 +2113,6 @@
             </div>
           </div>
           <div class="exp-body">
-            <div class="exp-kicker">Hva finnes her</div>
-            <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h4>3D-printere</h4></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h4>A0-plotter</h4></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h4>Loddeplass</h4></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h4>Arbeidsplass</h4></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h4>Verktøy</h4></div></div>
-            </div>
             <div class="exp-foot">
               <a href="idegarasjen" class="btn btn-primary">Gå til Idégarasjen →</a>
               <a href="https://link.mazemap.com/mroIG1LI" target="_blank" rel="noopener" class="btn btn-maze">MazeMap →</a>
@@ -2160,14 +2132,6 @@
             </div>
           </div>
           <div class="exp-body">
-            <div class="exp-kicker">Hva finnes her</div>
-            <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h4>Scene</h4></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h4>Lyd og lys</h4></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h4>Projektor</h4></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h4>Talerstol</h4></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h4>Bord og stoler</h4></div></div>
-            </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Scenerommet →</a>
               <a href="https://link.mazemap.com/2S7qcBrY" target="_blank" rel="noopener" class="btn btn-maze">MazeMap →</a>
@@ -2184,14 +2148,6 @@
             </div>
           </div>
           <div class="exp-body">
-            <div class="exp-kicker">Hva finnes her</div>
-            <div class="feat-grid">
-              <div class="feat-item"><span class="feat-num">01</span><div><h4>Mikrofoner</h4></div></div>
-              <div class="feat-item"><span class="feat-num">02</span><div><h4>Headset</h4></div></div>
-              <div class="feat-item"><span class="feat-num">03</span><div><h4>Rodecaster Pro 22</h4></div></div>
-              <div class="feat-item"><span class="feat-num">04</span><div><h4>Sofa</h4></div></div>
-              <div class="feat-item"><span class="feat-num">05</span><div><h4>Belysning</h4></div></div>
-            </div>
             <div class="exp-foot">
               <a href="booking" class="btn btn-primary">Book Podcastrommet →</a>
               <a href="https://link.mazemap.com/WbokT9PE" target="_blank" rel="noopener" class="btn btn-maze">MazeMap →</a>
@@ -2211,10 +2167,9 @@
             </div>
           </div>
           <div class="exp-body">
-            <div class="exp-kicker">Status</div>
-            <p class="soon-text">Medialabben åpner når det nye bygget i Hesthagen ferdigstilles i 2027/28. Følg med!</p>
             <div class="exp-foot">
               <span class="btn btn-primary" style="opacity:.45; pointer-events:none;">Kommer snart</span>
+              <span class="exp-foot-note">Åpner med det nye bygget i Hesthagen, 2027/28.</span>
             </div>
           </div>
         </div>
