@@ -272,6 +272,39 @@
     animation:blink 1.6s infinite;
   }
   @keyframes blink{50%{opacity:.3}}
+
+  /* ---------- INNOVASJONSDAGENE-BANNER (forside) ---------- */
+  .idag-banner{
+    display:inline-flex; align-items:center; gap:10px;
+    margin:0 0 24px; padding:6px 14px 6px 8px;
+    border-radius:999px;
+    border:1px solid color-mix(in oklab, var(--yellow) 55%, var(--line));
+    background:color-mix(in oklab, var(--yellow) 10%, var(--card));
+    text-decoration:none; color:var(--ink-soft);
+    font-size:13px; line-height:1;
+    transition:border-color .2s, background .2s;
+  }
+  .idag-banner:hover{
+    border-color:color-mix(in oklab, var(--yellow) 85%, var(--line));
+    background:color-mix(in oklab, var(--yellow) 16%, var(--card));
+  }
+  .idag-tag{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:3px 9px; border-radius:999px;
+    background:var(--yellow); color:var(--charcoal);
+    font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  }
+  .idag-tag .dot{
+    width:6px; height:6px; border-radius:50%; background:var(--charcoal);
+    animation:blink 1.6s infinite;
+  }
+  .idag-banner b{ color:var(--ink); font-weight:600; }
+  .idag-banner .arr{ transition:transform .2s; }
+  .idag-banner:hover .arr{ transform:translateX(3px); }
+  @media (max-width:520px){
+    .idag-banner .sub{ display:none; }
+  }
+
   h1.hero-title{
     font-size: clamp(56px, 6.6vw, 108px);
     font-weight:700; line-height:.94; letter-spacing:-.04em;
@@ -1947,6 +1980,12 @@
 <section class="hero" id="opplev">
   <div class="wrap">
 
+    <a class="idag-banner" href="innovasjonsdagene">
+      <span class="idag-tag"><span class="dot"></span><span id="idagCount">Snart</span></span>
+      <span><b>Innovasjonsdagene&nbsp;'26</b><span class="sub"> · 19.–20. august</span></span>
+      <span class="arr">→</span>
+    </a>
+
     <div class="hero-editorial">
       <div class="hero-editorial-left">
         <h1 class="hero-title">
@@ -2736,5 +2775,19 @@ const sty=document.createElement('style'); sty.textContent='@keyframes pulseRing
   </div>
 </div>
 <script>document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('slack-modal').classList.remove('open');});</script>
+<script>
+(function(){
+  var el = document.getElementById('idagCount');
+  if(!el) return;
+  var start = new Date(2026, 7, 19);             // 19. aug 2026
+  var end   = new Date(2026, 7, 20, 23, 59, 59); // ut 20. aug 2026
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  if(now > end){ el.textContent = 'Vi sees neste år'; return; }
+  if(now >= start){ el.textContent = 'Pågår nå'; return; }
+  var days = Math.round((start - today) / 86400000);
+  el.textContent = days <= 0 ? 'I dag!' : (days === 1 ? 'I morgen' : 'Om ' + days + ' dager');
+})();
+</script>
 </body>
 </html>
