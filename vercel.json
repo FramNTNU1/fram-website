@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/FramNTNU.html", "destination": "/", "permanent": true },
+    { "source": "/FramNTNU", "destination": "/", "permanent": true },
     { "source": "/services-4", "destination": "/idegarasjen", "permanent": true },
     { "source": "/about-3-1", "destination": "/om", "permanent": true },
     { "source": "/about", "destination": "/booking", "permanent": true },
