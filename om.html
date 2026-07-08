@@ -228,6 +228,34 @@
   .member[data-a="r"]{--accent:var(--red);}
   .member[data-a="t"]{--accent:var(--teal);}
 
+  /* team year selector */
+  .team-select-wrap{
+    justify-self:end; display:flex; align-items:center; gap:12px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .team-select-wrap label{
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  }
+  .team-select{
+    position:relative; appearance:none; -webkit-appearance:none;
+    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600;
+    color:var(--ink); background:var(--card);
+    border:1px solid var(--line); border-radius:10px;
+    padding:9px 38px 9px 14px; cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23888' stroke-width='1.6' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 14px center;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .team-select:hover{ border-color:var(--muted); }
+  .team-select:focus-visible{
+    outline:none; border-color:var(--blue);
+    box-shadow:0 0 0 3px color-mix(in oklab, var(--blue) 22%, transparent);
+  }
+  .team-year[hidden]{ display:none; }
+  @media (max-width:640px){
+    .team-select-wrap{ justify-self:start; margin-top:8px; }
+  }
+
   /* ---------- ORIGAMI-DEKOR (bak teamet, i kantene) ---------- */
   #team{ position:relative; overflow:hidden; }
   #team .wrap{ position:relative; z-index:1; }
@@ -605,7 +633,7 @@
     </symbol>
   </svg>
   <span class="ori-deco" style="--tc:var(--yellow); --s:158px; --rot:-18deg; --op:.3; top:28px; left:36px;"><svg viewBox="0 0 1000 1000"><use href="#fram-ori"/></svg></span>
-  <span class="ori-deco" style="--tc:var(--teal); --s:96px; --rot:41deg; --op:.25; top:96px; right:16%;"><svg viewBox="0 0 1000 1000"><use href="#fram-ori"/></svg></span>
+  <span class="ori-deco" style="--tc:var(--teal); --s:96px; --rot:41deg; --op:.25; top:28px; right:16%;"><svg viewBox="0 0 1000 1000"><use href="#fram-ori"/></svg></span>
   <span class="ori-deco" style="--tc:var(--blue); --s:118px; --rot:-7deg; --op:.27; top:40%; left:14px;"><svg viewBox="0 0 1000 1000"><use href="#fram-ori"/></svg></span>
   <span class="ori-deco" style="--tc:var(--red); --s:132px; --rot:33deg; --op:.26; top:54%; right:30px;"><svg viewBox="0 0 1000 1000"><use href="#fram-ori"/></svg></span>
   <span class="ori-deco" style="--tc:var(--yellow); --s:88px; --rot:-24deg; --op:.24; bottom:56px; left:26%;"><svg viewBox="0 0 1000 1000"><use href="#fram-ori"/></svg></span>
@@ -615,40 +643,89 @@
       <div>
         <h2>Dette er Gjengen<span class="t">&lt;3</span></h2>
       </div>
+      <div class="team-select-wrap">
+        <label for="team-year">Styreår</label>
+        <select id="team-year" class="team-select" aria-label="Velg styreår">
+          <option value="2026">2026/2027</option>
+          <option value="2025">2025/2026</option>
+        </select>
+      </div>
     </div>
 
-    <div class="team-grid">
+    <div class="team-grid team-year" data-year="2026">
       <div class="member" data-a="y">
         <div class="portrait">
-          
-          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/julie.avif" alt="Julie"/>
+
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/malin.avif" alt="Malin"/>
         </div>
         <div class="body">
-          <div class="nm">Julie</div>
+          <div class="nm">Malin</div>
           <div class="role-label">Leder</div>
           <div class="contact-icons">
-            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Julie"><i class="ph ph-envelope"></i></a>
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Malin"><i class="ph ph-envelope"></i></a>
           </div>
         </div>
       </div>
 
       <div class="member" data-a="b">
         <div class="portrait">
-          
-          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/johannes.avif" alt="Johannes"/>
+
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/jonas.avif" alt="Jonas"/>
         </div>
         <div class="body">
-          <div class="nm">Johannes</div>
+          <div class="nm">Jonas</div>
           <div class="role-label">Nestleder</div>
           <div class="contact-icons">
-            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Johannes"><i class="ph ph-envelope"></i></a>
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Jonas"><i class="ph ph-envelope"></i></a>
           </div>
         </div>
       </div>
 
       <div class="member" data-a="r">
         <div class="portrait">
-          
+
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/britt.avif" alt="Britt"/>
+        </div>
+        <div class="body">
+          <div class="nm">Britt</div>
+          <div class="role-label">Arrangement</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Britt"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="t">
+        <div class="portrait">
+
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/mie.avif" alt="Mie"/>
+        </div>
+        <div class="body">
+          <div class="nm">Mie</div>
+          <div class="role-label">Arrangement</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Mie"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="y">
+        <div class="portrait">
+
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/sutha.avif" alt="Sutha"/>
+        </div>
+        <div class="body">
+          <div class="nm">Sutha</div>
+          <div class="role-label">Arrangement</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Sutha"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="b">
+        <div class="portrait">
+
           <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/henrik.avif" alt="Henrik"/>
         </div>
         <div class="body">
@@ -656,48 +733,6 @@
           <div class="role-label">Verksted</div>
           <div class="contact-icons">
             <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Henrik"><i class="ph ph-envelope"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="member" data-a="t">
-        <div class="portrait">
-          
-          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/malin.avif" alt="Malin"/>
-        </div>
-        <div class="body">
-          <div class="nm">Malin</div>
-          <div class="role-label">Arrangement</div>
-          <div class="contact-icons">
-            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Malin"><i class="ph ph-envelope"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="member" data-a="y">
-        <div class="portrait">
-          
-          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/ella.avif" alt="Ella"/>
-        </div>
-        <div class="body">
-          <div class="nm">Ella</div>
-          <div class="role-label">Arrangement</div>
-          <div class="contact-icons">
-            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Ella"><i class="ph ph-envelope"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="member" data-a="b">
-        <div class="portrait">
-          
-          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/jonas.avif" alt="Jonas"/>
-        </div>
-        <div class="body">
-          <div class="nm">Jonas</div>
-          <div class="role-label">Arrangement</div>
-          <div class="contact-icons">
-            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Jonas"><i class="ph ph-envelope"></i></a>
           </div>
         </div>
       </div>
@@ -719,6 +754,112 @@
       <div class="member" data-a="t">
         <div class="portrait">
           
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/eirill.avif" alt="Eirill"/>
+        </div>
+        <div class="body">
+          <div class="nm">Eirill</div>
+          <div class="role-label">Gruva</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Eirill"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-grid team-year" data-year="2025" hidden>
+      <div class="member" data-a="y">
+        <div class="portrait">
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/julie.avif" alt="Julie"/>
+        </div>
+        <div class="body">
+          <div class="nm">Julie</div>
+          <div class="role-label">Leder</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Julie"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="b">
+        <div class="portrait">
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/johannes.avif" alt="Johannes"/>
+        </div>
+        <div class="body">
+          <div class="nm">Johannes</div>
+          <div class="role-label">Nestleder</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Johannes"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="r">
+        <div class="portrait">
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/henrik-2025.avif" alt="Henrik"/>
+        </div>
+        <div class="body">
+          <div class="nm">Henrik</div>
+          <div class="role-label">Verksted</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Henrik"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="t">
+        <div class="portrait">
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/malin.avif" alt="Malin"/>
+        </div>
+        <div class="body">
+          <div class="nm">Malin</div>
+          <div class="role-label">Arrangement</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Malin"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="y">
+        <div class="portrait">
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/ella.avif" alt="Ella"/>
+        </div>
+        <div class="body">
+          <div class="nm">Ella</div>
+          <div class="role-label">Arrangement</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Ella"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="b">
+        <div class="portrait">
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/jonas.avif" alt="Jonas"/>
+        </div>
+        <div class="body">
+          <div class="nm">Jonas</div>
+          <div class="role-label">Arrangement</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Jonas"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="r">
+        <div class="portrait">
+          <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/marja.avif" alt="Marja"/>
+        </div>
+        <div class="body">
+          <div class="nm">Marja</div>
+          <div class="role-label">Gruva</div>
+          <div class="contact-icons">
+            <a href="mailto:framntnu@gmail.com" class="contact-icon" title="Send e-post til Marja"><i class="ph ph-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member" data-a="t">
+        <div class="portrait">
           <img width="236" height="232" loading="lazy" decoding="async" src="assets/team/eirill.avif" alt="Eirill"/>
         </div>
         <div class="body">
@@ -968,5 +1109,6 @@
   </div>
 </div>
 <script>document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('slack-modal').classList.remove('open');});</script>
+<script>(function(){var sel=document.getElementById('team-year');if(!sel)return;var grids=document.querySelectorAll('.team-year');function show(y){grids.forEach(function(g){g.hidden=(g.dataset.year!==y);});}sel.addEventListener('change',function(){show(sel.value);});show(sel.value);})();</script>
 </body>
 </html>
