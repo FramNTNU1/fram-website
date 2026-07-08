@@ -1781,6 +1781,7 @@
     background:var(--bg-soft); flex:1; }
   .opt{ display:flex; flex-direction:column; gap:12px; padding:16px 16px 15px;
     background:var(--card); border:1px solid var(--line); border-radius:14px;
+    text-decoration:none; color:inherit;
     transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
   .opt:hover{ transform:translateY(-3px);
     border-color:color-mix(in oklab, var(--pc) 40%, var(--line));
@@ -1795,7 +1796,10 @@
   .opt--members{ flex-direction:row; align-items:center; gap:18px; }
   .opt--members .members-logo{ flex:0 0 148px; width:148px; height:60px; display:flex;
     align-items:center; justify-content:center; overflow:hidden;
-    border-right:1px solid var(--line); padding-right:18px; }
+    border-right:1px solid var(--line); padding-right:18px;
+    text-decoration:none; }
+  a.members-logo{ transition:opacity .2s ease; }
+  a.members-logo:hover{ opacity:.7; }
   .opt--members .members-logo img{ max-height:40px; max-width:104px; width:auto; height:auto;
     object-fit:contain; object-position:center; transition:opacity .35s ease; }
   .opt--members .members-meta{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
@@ -2263,20 +2267,20 @@
           <p class="plead">Kom på et arrangement på FRAM eller les om de ulike medlemsorganisasjonene våre og se hva man kan involvere seg i på siden av studiene.</p>
         </div>
         <div class="persona-body">
-          <div class="opt opt--wide">
+          <a class="opt opt--wide" href="arrangementer">
             <span class="opt-logo"><img width="400" height="142" loading="lazy" decoding="async" src="assets/fram-logo.webp" alt="FRAM NTNU"/></span>
             <span class="opt-desc"><b>Fram</b> — lavterskel-arrangementer som en introduksjon til innovasjonsmiljøet på NTNU</span>
-          </div>
-          <div class="opt">
+          </a>
+          <a class="opt" href="https://www.startntnu.no" target="_blank" rel="noopener">
             <span class="opt-logo"><img width="240" height="80" loading="lazy" decoding="async" src="assets/logos/start-ntnu.png" alt="Start NTNU"/></span>
             <span class="opt-desc"><b>Start NTNU</b> — arrangementer for deg som vil utforske entreprenørskap</span>
-          </div>
-          <div class="opt">
+          </a>
+          <a class="opt" href="https://www.boosthenne.no" target="_blank" rel="noopener">
             <span class="opt-logo"><img width="200" height="87" loading="lazy" decoding="async" src="assets/logos/boosthenne.webp" alt="Boost Henne"/></span>
             <span class="opt-desc"><b>Boost Henne</b> — arrangerer lavterskel-events for kvinner i innovasjon</span>
-          </div>
+          </a>
           <div class="opt opt--wide opt--members">
-            <span class="members-logo"><img width="469" height="590" id="memberLogo" loading="lazy" decoding="async" src="assets/logoer/ascend-ntnu.png" alt="Medlemsorganisasjon"/></span>
+            <a class="members-logo" id="memberLogoLink" href="miljoer" target="_blank" rel="noopener"><img width="469" height="590" id="memberLogo" loading="lazy" decoding="async" src="assets/logoer/ascend-ntnu.png" alt="Medlemsorganisasjon"/></a>
             <span class="members-meta">
               <span class="members-title"><b>28+</b> medlemsorganisasjoner</span>
               <span class="members-sub">Bli med i en organisasjon og finn folk som deler de samme interessene som deg</span>
@@ -2292,26 +2296,26 @@
           <p class="plead">Har du en idé eller et prosjekt du vil bygge videre på? På NTNU finnes det veiledning, finansiering og et miljø som kan hjelpe deg videre.</p>
         </div>
         <div class="persona-body">
-          <div class="opt">
+          <a class="opt" href="https://sparkntnu.no" target="_blank" rel="noopener">
             <span class="opt-logo"><img width="240" height="100" loading="lazy" decoding="async" src="assets/spark-logo.webp" alt="Spark NTNU" style="height:34px"/></span>
             <span class="opt-desc"><b>Spark NTNU</b> — gratis veiledning</span>
-          </div>
-          <div class="opt">
+          </a>
+          <a class="opt" href="https://www.ntnudiscovery.no" target="_blank" rel="noopener">
             <span class="opt-logo"><img width="260" height="112" loading="lazy" decoding="async" src="assets/ntnu_discovery_web.gif" alt="NTNU Discovery"/></span>
             <span class="opt-desc"><b>NTNU Discovery</b> — finansiering til å verifisere idéen</span>
-          </div>
+          </a>
           <div class="opt">
-            <span class="opt-logo" style="height:auto"><img width="160" height="137" loading="lazy" decoding="async" src="assets/Aneo_logo.svg.png" alt="Aneo" style="height:40px"/></span>
-            <span class="opt-desc"><b>Aneo-bidraget</b> — støtte til å ta idéen videre</span>
+            <span class="opt-logo" style="height:auto"><img width="724" height="743" loading="lazy" decoding="async" src="assets/sparebank1smnKUle.webp" alt="SpareBank 1 SMN" style="height:40px"/></span>
+            <span class="opt-desc"><b>Fremtidsbidraget</b> — økonomisk støtte til å ta idéen videre</span>
           </div>
-          <div class="opt">
+          <a class="opt" href="https://www.entreprenorskolen.no/" target="_blank" rel="noopener">
             <span class="opt-logo"><img width="622" height="158" loading="lazy" decoding="async" src="assets/logos/entreprenorskolen.webp" alt="Entreprenørskolen"/></span>
             <span class="opt-desc"><b>Entreprenørskolen</b> — bygg selskap mens du tar en master</span>
-          </div>
-          <div class="opt opt--wide">
+          </a>
+          <a class="opt opt--wide" href="https://www.grunderbrakka.no" target="_blank" rel="noopener">
             <span class="opt-logo"><img width="500" height="113" loading="lazy" decoding="async" src="assets/logos/grunderbrakka.webp" alt="Gründerbrakka"/></span>
             <span class="opt-desc"><b>Gründerbrakka</b> — et kontorfellesskap i Trondheim for studenter fra NTNU som driver egne oppstartsbedrifter</span>
-          </div>
+          </a>
         </div>
       </div>
 
@@ -2737,6 +2741,7 @@ const sty=document.createElement('style'); sty.textContent='@keyframes pulseRing
   (function(){
     const memberLogo = document.getElementById('memberLogo');
     if (!memberLogo) return;
+    const memberLink = document.getElementById('memberLogoLink');
     // Kun logoer med god kontrast på hvit bakgrunn
     const members = [
       'ascend-ntnu.png','brain-ntnu.png','designhjelpen.png','driv-ntnu.png',
@@ -2744,12 +2749,29 @@ const sty=document.createElement('style'); sty.textContent='@keyframes pulseRing
       'nordlys.png','norstec.png','propulse-ntnu.webp','solanlinjeforeninglogo.webp',
       'studio-beta.png'
     ];
+    // Lenke til hver organisasjons egen side (samme kilder som miljoer)
+    const links = {
+      'ascend-ntnu.png':'https://www.ascendntnu.no',
+      'brain-ntnu.png':'https://www.brainntnu.no',
+      'designhjelpen.png':'https://www.designhjelpen.no',
+      'driv-ntnu.png':'https://www.instagram.com/drivntnu',
+      'fuel-fighter.png':'https://fuelfighter.no',
+      'ingeniorer-uten-grenser.png':'https://iug.no/om-oss/lokalavdelinger/iug-ntnu',
+      'make-ntnu.png':'https://makentnu.no',
+      'njord.png':'https://www.njordntnu.no',
+      'nordlys.png':'https://www.nordlysntnu.no',
+      'norstec.png':'https://www.norstec.no',
+      'propulse-ntnu.webp':'https://www.propulse.no',
+      'solanlinjeforeninglogo.webp':'https://www.instagram.com/solanlinjeforening',
+      'studio-beta.png':'https://www.instagram.com/studiobeta/'
+    };
     const big = new Set(['designhjelpen.png','njord.png','propulse-ntnu.webp','solanlinjeforeninglogo.webp','ascend-ntnu.png']);
     const setLogo = (name) => {
       memberLogo.src = 'assets/logoer/' + name;
       const isBig = big.has(name);
       memberLogo.style.maxHeight = isBig ? '54px' : '40px';
       memberLogo.style.maxWidth  = isBig ? '126px' : '104px';
+      if (memberLink && links[name]) memberLink.href = links[name];
     };
     let mi = 0;
     setLogo(members[0]);
