@@ -1153,6 +1153,10 @@
       +'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
   }
   btn.addEventListener('click', function(){
+    // Spor klikk i GoatCounter
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: 'add-to-calendar', title: 'Legg i kalender (Innovasjonsdagene)', event: true });
+    }
     // Dag 1: 19. august 2026 10:00–15:00 (Europe/Oslo = UTC+2 i august)
     var start1 = new Date(Date.UTC(2026, 7, 19, 8, 0, 0));
     var end1   = new Date(Date.UTC(2026, 7, 19, 13, 0, 0));

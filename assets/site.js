@@ -1,4 +1,22 @@
 /* ============================================================
+   FRAM NTNU · GoatCounter (personvernvennlig analyse)
+   Lastes på alle sider (site.js er inkludert overalt). Teller
+   sidevisninger + lar oss spore egendefinerte hendelser med
+   window.goatcounter.count({ path: '...', event: true }).
+   Ingen cookies → ingen samtykkebanner nødvendig. Teller ikke
+   på localhost som standard, så lokal testing forurenser ikke.
+   Dashboard: https://framntnu.goatcounter.com
+   ============================================================ */
+(function () {
+  window.goatcounter = window.goatcounter || {};
+  window.goatcounter.endpoint = 'https://framntnu.goatcounter.com/count';
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = '//gc.zgo.at/count.js';
+  document.head.appendChild(s);
+})();
+
+/* ============================================================
    FRAM NTNU · Delt navigasjons-script (mobilmeny / hamburger)
    Bygger hamburger-knappen og gjør dropdowns til trekkspill
    på små skjermer. Progressiv forbedring: uten JS vises
