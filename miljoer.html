@@ -1031,6 +1031,10 @@
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
       setTimeout(function(){ input.focus(); }, 60);
+      // Spor åpning i GoatCounter
+      if(window.goatcounter && window.goatcounter.count){
+        window.goatcounter.count({ path: 'framkompasset-open', title: 'Framkompasset – åpnet', event: true });
+      }
     }
     function closeModal(){
       modal.classList.remove('open');
@@ -1224,6 +1228,10 @@
       text = (text || '').trim();
       if(!text){ input.focus(); return; }
       if(pending) return;                            // hindrer dobbeltkall
+      // Spor kjøring i GoatCounter (ekte bruk – uansett cache/API)
+      if(window.goatcounter && window.goatcounter.count){
+        window.goatcounter.count({ path: 'framkompasset-run', title: 'Framkompasset – kjørt søk', event: true });
+      }
       if(CACHE[text]){ render(CACHE[text]); return; } // pre-cachede chip-svar
 
       var key = lsKey(text);
