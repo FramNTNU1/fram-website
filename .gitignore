@@ -8,3 +8,7 @@ Thumbs.db
 *.log
 .idea/
 .vscode/
+
+# Lokale testsider — skal aldri deployes (og aldri indekseres av Google)
+lokaler-test.html
+video-test*.html
