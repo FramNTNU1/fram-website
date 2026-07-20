@@ -284,6 +284,14 @@
     transition:gap .2s;
   }
   .rcard .more:hover{gap:11px;}
+  /* Klikkbart kort (Idégarasjen): enkel statisk hjørne-badge */
+  .rcard-link .go{
+    position:absolute; top:14px; right:14px; z-index:2;
+    background:var(--ink); color:#fff;
+    border-radius:100px; padding:9px 15px;
+    font-family:'Poppins','Poppins Fallback',sans-serif;
+    font-size:12.5px; font-weight:600; line-height:1; white-space:nowrap;
+  }
 
   /* ---------- SLIK BOOKER DU ---------- */
   .book{
@@ -697,8 +705,11 @@
           </div>
         </div>
       </article>
-      <a href="idegarasjen" class="rcard" style="text-decoration:none;color:inherit;">
-        <div class="ph"><img width="1080" height="1350" loading="lazy" decoding="async" src="assets/Idegarasjen.webp" alt="Idégarasjen — studentenes innovasjonsverksted"/></div>
+      <a href="idegarasjen" class="rcard rcard-link" style="text-decoration:none;color:inherit;">
+        <div class="ph">
+          <img width="1080" height="1350" loading="lazy" decoding="async" src="assets/Idegarasjen.webp" alt="Idégarasjen — studentenes innovasjonsverksted"/>
+          <span class="go" aria-hidden="true">Utforsk</span>
+        </div>
         <div class="body">
           <h3>Idégarasjen</h3>
           <p>Studentenes åpne innovasjonsverksted — med 3D-printere, laserkutter, loddestasjoner og alt du trenger til prototyping.</p>
