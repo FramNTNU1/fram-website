@@ -6,8 +6,6 @@
    Ingen cookies → ingen samtykkebanner nødvendig. Teller ikke
    på localhost som standard, så lokal testing forurenser ikke.
    Dashboard: https://framntnu.goatcounter.com
-
-   Nettside laget av Jonas Kloster Havnegjerde.
    ============================================================ */
 (function () {
   window.goatcounter = window.goatcounter || {};
@@ -243,33 +241,4 @@
   s.defer = true;
   s.src = '/_vercel/speed-insights/script.js';
   document.head.appendChild(s);
-})();
-
-/* Obfuskert e-post: bygg mailto ved runtime for å hindre spam-høsting og
-   "email privacy"-flagg (SEOptimer Usability). Adressen finnes aldri som
-   plain-tekst i HTML-kilden. */
-(function(){
-  function decodeEmails(){
-    var addr = ['fram','ntnu'].join('') + String.fromCharCode(64) + ['gmail','com'].join('.');
-    var links = document.querySelectorAll('a[data-eml]');
-    for (var i = 0; i < links.length; i++){
-      var a = links[i];
-      var subj = a.getAttribute('data-eml-subject');
-      a.setAttribute('href', 'mailto:' + addr + (subj ? ('?subject=' + subj) : ''));
-      if (a.getAttribute('data-eml-text') === 'full'){
-        var icon = a.querySelector('i');
-        a.textContent = '';
-        if (icon){ a.appendChild(icon); a.appendChild(document.createTextNode(' ')); }
-        a.appendChild(document.createTextNode(addr));
-      }
-      a.removeAttribute('data-eml');
-      a.removeAttribute('data-eml-subject');
-      a.removeAttribute('data-eml-text');
-    }
-  }
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', decodeEmails);
-  } else {
-    decodeEmails();
-  }
 })();
